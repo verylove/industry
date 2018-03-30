@@ -1,0 +1,58 @@
+<div class="ui-content">
+    <div class="ui-content-header">
+        <div class="ui-content-controlbar">
+            <button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+        </div>
+    </div>
+    <div class="ui-content-body">
+        <div class="ui-content-aside" style="top:40px;">
+            <form id="userManageDetail" class="ui-form" role="form">
+                <div class="ui-group">
+                    <div class="ui-group-header">查看</div>
+                    <div class="ui-group-body">
+                        <div class="ui-form-box">
+                            <table class="ui-form-grid wire">
+                                <tr>
+                                    <td type="label"><span class="required"></span>用户名称</td>
+                                    <td name="login"></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>用户姓名</td>
+                                    <td name="userName"></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>角色</td>
+                                    <td name="roleName"></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>单位信息</td>
+                                    <td name="comName"></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>联系电话</td>
+                                    <td name="telePhone"></td>
+                                </tr>
+                                <tr>
+                                    <td type="label">办公电话</td>
+                                    <td name="officePhone"></td>
+                                </tr>
+                                <tr>
+                                    <td type="label">邮箱地址</td>
+                                    <td name="email"></td>
+                                </tr>
+                            </table>
+                            <div class="ui-form-submitbar">
+                                <button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    require(["app/systemManage/userManage/userManageDetail"],function(app){
+        app.main();
+    });
+</script>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fable.industry.bussiness.mapper.resci.ResciCatalogMapper">
+
+	<select id="queryListCatalog" resultType="map" parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogBean">
+		SELECT c.ID AS id,c.CATALOG_NAME AS catalogName,c.TELE_PHONE AS telephone,c.CATALOG_CODE AS catalogCode,
+		o.COM_NAME AS comName,u.USER_NAME AS userName
+		FROM SYS_RESCI_CATALOG c
+		LEFT JOIN SYS_ORGANIZATION o ON o.COM_ID = c.COM_ID
+		LEFT JOIN SYS_USER u ON u.USER_ID = c.USER_ID
+		WHERE 1 = 1
+		<if test="fieldId != null and fieldId != '' and fieldId !=1">
+			AND c.FIELD_ID = #{fieldId}
+		</if>
+		<if test="comId != null and comId != '' ">
+			AND c.COM_ID = #{comId}
+		</if>
+		<if test="userId != null and userId != '' ">
+			AND c.USER_ID = #{userId}
+		</if>
+		<if test="catalogName != null and catalogName != '' ">
+			AND c.CATALOG_NAME LIKE CONCAT('%',#{catalogName},'%')
+		</if>
+		<if test="catalogCode != null and catalogCode != '' ">
+			AND c.CATALOG_CODE LIKE CONCAT('%',#{catalogCode},'%')
+		</if>
+		ORDER BY c.CATALOG_CODE DESC
+	</select>
+
+	<insert id="insertCatalog" parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogBean">
+		INSERT INTO SYS_RESCI_CATALOG VALUES (#{id},#{catalogCode},#{catalogName},#{comId}
+		,#{userId},#{telephone},#{parentId},#{index},#{fieldId})
+	</insert>
+
+	<update id="updateCatalog" parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogBean">
+		UPDATE SYS_RESCI_CATALOG SET
+		CATALOG_CODE = #{catalogCode},
+		CATALOG_NAME = #{catalogName},
+		COM_ID = #{comId},
+		USER_ID = #{userId},
+		TELE_PHONE = #{telephone}
+		WHERE ID = #{id}
+	</update>
+
+	<select id="getCataLogName" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT c.CATALOG_NAME AS cataLogName FROM SYS_RESCI_CATALOG c
+		LEFT JOIN SYS_RESCI_CATALOGUE ue ON c.ID = ue.CATALOG_ID
+		WHERE ue.CATALOG_ID IN (${ids}) GROUP BY c.ID
+	</select>
+
+	<delete id="deleteCatalog" parameterType="java.lang.String">
+		DELETE FROM SYS_RESCI_CATALOG WHERE ID in (${ids})
+	</delete>
+
+	<select id="queryCatalogById" parameterType="int" resultType="map">
+	  	SELECT c.ID AS id,c.CATALOG_NAME AS catalogName,c.TELE_PHONE AS telephone,c.CATALOG_CODE AS catalogCode,
+	  	c.COM_ID AS comId,c.USER_ID AS userId,
+		o.COM_NAME AS comName,u.USER_NAME AS userName
+		FROM SYS_RESCI_CATALOG c
+		LEFT JOIN SYS_ORGANIZATION o ON o.COM_ID = c.COM_ID
+		LEFT JOIN SYS_USER u ON u.USER_ID = c.USER_ID
+		WHERE c.ID = #{id}
+	</select>
+
+	<select id="catalogTree" resultType="com.fable.industry.api.page.TreeRsult">
+		SELECT ID AS id,FIELD_NAME AS `name`,FPARENT_ID AS pid FROM sys_resci_field
+	</select>
+
+</mapper>

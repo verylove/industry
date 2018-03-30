@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fable.industry.bussiness.mapper.excel.ExcelSolveMapper">
+    <select id="getCatalogData" resultType="map" parameterType="map">
+        SELECT c.CATALOG_NAME AS catalogName,c.TELE_PHONE AS telephone,o.COM_NAME AS comName,u.USER_NAME AS userName
+        FROM SYS_RESCI_CATALOG c
+        LEFT JOIN SYS_ORGANIZATION o ON o.COM_ID = c.COM_ID
+        LEFT JOIN SYS_USER u ON u.USER_ID = c.USER_ID
+        WHERE 1 = 1
+        <if test="ids != null and ids != ''">
+            AND c.ID IN (${ids})
+        </if>
+        <if test="fieldId != null and fieldId != '' and fieldId !=0 and fieldId !=1 ">
+            AND c.FIELD_ID = #{fieldId}
+        </if>
+        <if test="comId != null and comId != '' ">
+            AND c.COM_ID = #{comId}
+        </if>
+        <if test="userId != null and userId != '' ">
+            AND c.USER_ID = #{userId}
+        </if>
+        <if test="catalogName != null and catalogName != '' ">
+            AND c.CATALOG_NAME LIKE CONCAT('%',#{catalogName},'%')
+        </if>
+        <if test="catalogCode != null and catalogCode != '' ">
+            AND c.CATALOG_CODE LIKE CONCAT('%',#{catalogCode},'%')
+        </if>
+        ORDER BY c.ID DESC
+    </select>
+
+    <select id="getDataElementData" resultType="map" parameterType="map">
+        SELECT d.DATA_NAME AS dataName,d.DATA_ENAME AS dataEname,d.DATA_ANAME AS dataAname,
+        d.DATA_DEFINITION AS dataDefinition,d.DATA_TYPEID AS dataTypeId,d.ITEM_ID AS itemId,d.`CONSTRAINT` AS `constraint`,
+        d.DICTIONAR_ID AS dictionaryId,d.FREQUENCY_MAX AS frequencyMax,d.COM_ID AS comId,
+        d.USER_ID AS userId,DATE_FORMAT(d.VERSION_TIME ,'%Y-%m-%d') AS versionTime,d.VERSION_ID AS versionId,d.NOTE AS note,
+        i1.ITEM_NAME AS dataType,i2.ITEM_NAME AS itemName,i3.ITEM_NAME AS versionName,c.DICTIONAR_NAME AS dictionarName,
+        u.USER_NAME AS userName,o.COM_NAME AS comName
+        FROM SYS_DATA_ELEMENT d
+        LEFT JOIN SYS_DICTIONARY_ITEM i1 ON i1.ID = d.DATA_TYPEID
+        LEFT JOIN SYS_DICTIONARY_ITEM i2 ON i2.ID = d.ITEM_ID
+        LEFT JOIN SYS_DICTIONARY_ITEM i3 ON i3.ID = d.VERSION_ID
+        LEFT JOIN SYS_DICTIONARY_CLASS c ON c.ID = d.DICTIONAR_ID
+        LEFT JOIN SYS_USER u ON u.USER_ID = d.USER_ID
+        LEFT JOIN SYS_ORGANIZATION o ON o.COM_ID = d.COM_ID
+        WHERE 1 = 1 AND ESTABLISH_TYPE = 0
+        <if test="dataName != null and dataName != '' ">
+            AND d.DATA_NAME LIKE CONCAT('%',#{dataName},'%')
+        </if>
+        <if test="versionId != null and versionId != '' ">
+            AND d.VERSION_ID = #{versionId}
+        </if>
+        <if test="ids != null and ids != ''">
+            AND d.ID IN (${ids})
+        </if>
+        <if test="itemId != null and itemId != '' ">
+            AND d.ITEM_ID = #{itemId}
+        </if>
+        ORDER BY d.ID DESC
+    </select>
+
+    <select id="getServiceLogData" resultType="map" parameterType="map">
+        SELECT
+			ID id,
+			SERVICE_NAME serviceName,
+			REQUEST_DETAILS requestDetail,
+			MAINTENANCE maintenance,
+			DATE_FORMAT(REQUEST_TIME,'%Y-%c-%d %h:%i:%s') requestTime,
+			DATE_FORMAT(RESPONSE_TIME,'%Y-%c-%d %h:%i:%s') responseTime,
+			RESULT result,
+			URL url,
+			NOTE note,
+			IP ip
+ 		FROM sys_service_log
+        WHERE 1 = 1
+        <if test="ids != null and ids != ''">
+            AND ID IN (${ids})
+        </if>
+    </select>
+</mapper>

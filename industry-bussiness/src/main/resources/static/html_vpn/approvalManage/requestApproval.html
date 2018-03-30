@@ -1,0 +1,98 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">请求方申请信息</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	
+						 	<tr>
+						 		<td type="label">请求方名称</td>
+						 		<td name="name"></td>
+						 		<td type="label">请求方编码</td>
+						 		<td name="code"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">请求方网络属性</td>
+						 		<td name="networkName"></td>
+						 		<td type="label">管理单位名称</td>
+						 		<td name="companyName"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">管理单位机构代码</td>
+						 		<td name="companyCode"></td>
+						 		
+						 		<td type="label">请求方IP地址/端口</td>
+						 		<td name="ip"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">请求方接口类型</td>
+						 		<td name="typeName"></td>
+						 		<td type="label">联系人姓名</td>
+						 		<td name="linkName"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">联系人电话</td>
+						 		<td name="linkPhone"></td>
+						 		<td type="label">联系人身份证号</td>
+						 		<td name="linkCardId"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">联系人警号</td>
+						 		<td name="policeNumber"></td>
+						 		<td type="label">请求方描述</td>
+						 		<td name="description"></td>
+						 	</tr>
+						 	
+						</table>
+					</div>
+				</div>
+				
+				<div class="ui-group">
+					<div class="ui-group-header">审批信息</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label" width="15%"><span class="required"></span>审批结果</td>
+						 		<td width="35%">
+						 			<select name="approvalResult" id="approvalResult" class="form-control" role="{required:true}">
+						 				<option value="0">同意</option>
+						 				<option value="-1">不同意</option>
+						 			</select>
+						 		</td>
+						 		<td type="label" width="15%"><span class="required"></span>审批意见</td>
+						 		<td width="35%">
+						 			<textarea name="approvalOpinion" id="approvalOpinion" class="form-control" role="{required:true,length:200}"></textarea>
+						 		</td>
+						 	</tr>
+						 	
+						</table>
+						
+					</div>
+				</div>
+				
+				<div class="ui-form-submitbar">
+					<button class="btn btn-info blue submit" id="submit"><i class="fa fa-check"></i><span>提交</span></button>
+					<button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+				</div>
+			</form>
+			
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/approvalManage/requestApprovalApp"],function(app){
+		app.main();
+	});
+</script>

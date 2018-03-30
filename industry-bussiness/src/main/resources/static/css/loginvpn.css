@@ -1,0 +1,32 @@
+input{border-radius:2px;outline: none;height:36px;border:solid #D6D6D6 1px;background: none;color: #666;font-size: 14px;}
+#head {width: 100%;height: 13%;min-width: 1300px;position:relative;}
+#logo>div{display:inline-block;font-size:24px;margin-bottom:-3px;vertical-align:bottom;margin-left:22px;color:#1795E9;letter-spacing: 3px;font-weight: 500;}
+#logo {position:absolute;left:5%;float: left;}
+#logo img {vertical-align: middle;    margin-top: 4px;}
+#backBt {width: 120px;height: 38px;border: 1px solid #1F94E4;border-radius:6px;font-size: 14px;float: right;margin-right: 11%;margin-top: 40px;cursor: pointer;color: #56A8E0;text-align: center;line-height: 38px;}
+#main {padding-left:40px;padding-right:40px;border:1px solid #CDCED0;/*width: 374px;*/height: 348px;background-color:#FCFDFF;-moz-border-radius: 8px;-webkit-border-radius: 8px;border-radius: 8px;position:absolute;top:50%;margin-top:-174px;left:50%;margin-left:200px;}
+#main h3{letter-spacing:2px;text-align: center;font-family:微软雅黑;font-size: 20px; color:#787878;margin:20px 0 15px auto;}
+#main img {cursor: pointer;}
+#main input{padding-left: 10px;padding-right:10px;}
+#main>div {/*margin-left: 50px;*/margin-bottom:17px;}
+#foot {width: 100%;height:13%;text-align:center;color: #637aaa;position:absolute;bottom:0;font-size: 14px;}
+#foot .f_top{margin-bottom:25px;}
+
+#main input::-webkit-input-placeholder{color: #aaa;}
+#main input:-moz-placeholder{color: #aaa;}
+#main input::-moz-placeholder{color: #aaa;}
+#main input:-ms-input-placeholder{color: #aaa;}
+
+
+.f_top span:first-child{margin-right: 126px;}
+#loginName, #passWord {width:215px;}
+label {color: #787878;font-size: 14px;width:50px;line-height: 40px;display:inline-block;}
+#code {width: 128px;/*margin-bottom: 45px;*/background: none;color: #666;font-size: 14px;}
+#main .codeSpan{height: 40px;display: inline-block;vertical-align: top;}
+#main .captcha_img{width:80px;height:100%;margin-left: 7px}
+#main .errorInfo{letter-spacing: 1px;width:100%;height:16px;text-align: center;font-size: 12px;color: #FF3605;margin-bottom: 10px;margin-top: -10px}
+#login_button {/*border:1px solid #FA9C42;*/width: 100%;height: 45px;margin-top:22px;line-height: 45px;color: white;background-color: #ffa652;text-align: center;font-weight: bold;cursor: pointer;-moz-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;}
+#dialog {width: 320px;height: 0px;line-height: 40px;display: none;font-weight: bold;text-align: center;background-color: #30cdae;position: absolute;top: 0;left: 50%;margin-left: -160px;color: white;-moz-border-radius: 12px;border-radius: 12px;}
+#photo {position:relative;height: 100%}
+#photo>img {position: absolute;}
+#mainBody {width: 100%;height:74%;background-image:url("../images/bg00845.jpg");background-size:100% 100% ;}

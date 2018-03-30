@@ -1,0 +1,271 @@
+<style type="text/css">
+	.form-control{
+		width: 100%;
+	}
+	.ui-form table.ui-grid th,
+	.ui-form1 table.ui-grid th:nth-child(1),
+	.ui-form1 table.ui-grid th:nth-child(2),
+	.ui-form1 table.ui-grid th:nth-child(3){
+		width: 15%;
+	}
+</style>
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<!--<form id="form" class="ui-form" role="form">-->
+				<!--放置步骤组件-->
+				<div class="ui-steps blue" id="ui-steps" style="width:1000px;"></div>
+				<div id="content1" class="hidden">
+					<div class="ui-group">
+						<div class="ui-group-header">请求方信息</div>
+						<div class="ui-group-body">
+							<table class="ui-form-grid wire requestInfo" >
+							 	<tr>
+							 		<td type="label">请求方名称</td>
+							 		<td name="name"></td>
+							 		<td type="label">请求方编码</td>
+							 		<td name="code"></td>
+							 	</tr>
+							 	<tr>
+							 		<td type="label">请求方网络属性</td>
+							 		<td name="networkName"></td>
+							 		<td type="label">管理单位名称</td>
+							 		<td name="companyName"></td>
+							 	</tr>
+							 	<tr>
+							 		<td type="label">管理单位机构代码</td>
+							 		<td name="companyCode"></td>
+							 		<td type="label">请求方IP地址</td>
+							 		<td name="ip"></td>
+							 	</tr>
+							 	<tr>
+							 		<td type="label">请求方接口类型</td>
+							 		<td name="typeName"></td>
+							 		<td type="label">申请人姓名</td>
+							 		<td name="linkName"></td>
+							 	</tr>
+							 	<tr>
+							 		<td type="label">申请人电话</td>
+							 		<td name="linkPhone"></td>
+							 		<td type="label">申请时间</td>
+							 		<td name="updateTime"></td>
+							 	</tr>
+							</table>
+						</div>
+					</div>
+					<div class="ui-group">
+						<div class="ui-group-header">服务方信息</div>
+						<div class="ui-group-body">
+							<table class="ui-form-grid wire serviceInfo">
+							 	<tr>
+							 		<td type="label">服务方信息</td>
+							 		<td name="resName"></td>
+							 		<td type="label">资源编码</td>
+							 		<td name="resCode"></td>
+							 	</tr>
+							 	<tr>
+							 		<td type="label">数据来源</td>
+							 		<td name="apiSource"></td>
+							 		<td type="label">服务类别</td>
+							 		<td name="serviceTypeName"></td>
+							 	</tr>
+							 	<tr>
+							 		<td type="label">服务API接口类型</td>
+							 		<td name="apiType"></td>
+							 		<td type="label">方法</td>
+							 		<td name="methods"></td>
+							 	</tr>
+							 	<tr>
+							 		<td type="label">报文格式</td>
+							 		<td name="messageFormat"></td>
+							 		
+							 		<td type="label">服务接口地址</td>
+							 		<td name="address"></td>
+							 	</tr>
+							 	<tr>
+							 		<td type="label">管理单位名称</td>
+							 		<td name="companyName"></td>
+							 		<td type="label">管理单位机构代码</td>
+							 		<td name="companyCode"></td>
+							 	</tr>
+							 	<tr>
+							 		<td type="label">联系人姓名</td>
+							 		<td name="linkman"></td>
+							 		<td type="label">联系人电话</td>
+							 		<td name="phone"></td>
+							 	</tr>
+							</table>
+						</div>
+					</div>
+					<div class="ui-group">
+						<div class="ui-group-header">审批信息</div>
+						<div class="ui-group-body">
+							<form class="approvalInfo">
+								<table class="ui-form-grid wire">
+								 	<tr>
+								 		<td type="label"><span class="required"></span>审批结果</td>
+								 		<td>
+								 			<select name="approvalResult" class="form-control approvalResult">
+								 				<option value="0">同意</option>
+								 				<option value="-1">拒绝</option>
+								 			</select>
+								 		</td>
+								 		<td type="label" ><span class="required"></span>审批意见</td>
+								 		<td><input type="text" name="approvalOpinion" class="form-control approvalOpinion" role="{required:true,length:200}"/></td>
+								 	</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+				<div id="content2" class="hidden">
+					<form class="ui-form form2" role="form">
+						<table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label">请求时段</td>
+						 		<td>
+						 			<input type="text" name="requestStartTime" style="width: 47%;display: inline-block;" class="form-control requestStartTime" />
+						 			<span style="display: inline-block;">至</span>
+						 			<input type="text" name="requestEndTime" style="width: 47%;display: inline-block;" class="form-control requestEndTime" />
+						 		</td>
+						 		<td type="label">每日最大请求次数</td>
+						 		<td><input type="text" name="requestNumber" class="form-control" role="{custom:/^[1-9]\d*$/,errorText:'只能是正整数',number:[0,1000]}"/></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">结果最大返回条数</td>
+						 		<td><input type="text" name="resultNumber" class="form-control" role="{custom:/^[1-9]\d*$/,errorText:'只能是正整数',number:[0,1000]}"/></td>
+						 		<td type="label"></td>
+						 		<td></td>
+						 	</tr>
+						</table>
+					</form>
+				</div>
+				
+				<div id="content3" class="hidden">
+					<form class="ui-form" role="form">
+						<div class="ui-group">
+							<div class="ui-group-header">敏感词过滤
+								<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+							</div>
+							<div class="ui-group-body">
+								<table class="ui-grid sensitive_word_filter" id="sensitive_word_filter" >
+									<thead>
+										<tr>
+											<th>服务名称</th>
+											<th>参数名称</th>
+											<th>参数类型</th>
+											<th>策略名称</th>
+											<th>内容</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+								<div class="left" style="text-align: left;">敏感词过滤规则即满足策略条件的数据过滤掉，不做入参处理参数。</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				
+				<div id="content4" class="hidden">
+					<form class="ui-form1" role="form">
+						<div class="ui-group">
+							<div class="ui-group-header">敏感词过滤
+								<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+							</div>
+							<div class="ui-group-body">
+								<table class="ui-grid sensitive_word_filter" id="sensitive_word_filter_1" >
+									<thead>
+										<tr>
+											<th>服务名称</th>
+											<th>参数名称</th>
+											<th>参数类型</th>
+											<th>策略名称</th>
+											<th>内容</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+								<div class="left" style="text-align: left;">敏感词过滤规则即满足策略条件的数据过滤掉，不做出参参数显示。</div>
+							</div>
+						</div>
+						<div class="ui-group">
+							<div class="ui-group-header">数据过滤
+								<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+							</div>
+							<div class="ui-group-body">
+								<table class="ui-grid sensitive_word_filter" id="data_filter" >
+									<thead>
+										<tr>
+											<th>服务名称</th>
+											<th>参数名称</th>
+											<th>参数类型</th>
+											<th>比较符</th>
+											<th>比较值</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+								<div class="left" style="text-align: left;">数据过滤规则即满足比较符合条件的数据过滤掉，不做出参参数显示。</div>
+							</div>
+						</div>
+						<div class="ui-group">
+							<div class="ui-group-header">数据脱敏
+								<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+							</div>
+							<div class="ui-group-body">
+								<table class="ui-grid sensitive_word_filter" id="data_desensitization" >
+									<thead>
+										<tr>
+											<th>服务名称</th>
+											<th>参数名称</th>
+											<th>参数类型</th>
+											<th>展示规则</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+								<div class="left" style="text-align: left;">数据脱敏规则即满足展示规则条件的数据做数据脱敏。</div>
+							</div>
+						</div>
+						<div class="ui-group">
+							<div class="ui-group-header">数据转换
+								<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+							</div>
+							<div class="ui-group-body">
+								<table class="ui-grid sensitive_word_filter" id="data_transform" >
+									<thead>
+										<tr>
+											<th>服务名称</th>
+											<th>参数名称</th>
+											<th>参数类型</th>
+											<th>内容</th>
+											<th>替换为</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+								<div class="left" style="text-align: left;">数据转换规则即满足内容条件的数据替换成替换为的数据。</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			<!--</form>-->
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/approvalManage/resourceApprovalApp"],function(app){
+		app.main();
+	});
+</script>

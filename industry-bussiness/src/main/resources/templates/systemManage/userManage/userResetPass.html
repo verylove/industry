@@ -1,0 +1,43 @@
+<div class="ui-content">
+    <div class="ui-content-header">
+        <div class="ui-content-controlbar">
+            <button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+        </div>
+    </div>
+    <div class="ui-content-body">
+        <div class="ui-content-aside" style="top:40px;">
+            <form id="userResetPass" class="ui-form" role="form">
+                <div class="ui-group">
+                    <div class="ui-group-header">重置密码</div>
+                    <div class="ui-group-body">
+                        <div class="ui-form-box">
+                            <table class="ui-form-grid wire">
+                                <tr>
+                                    <td type="label"><span class="required"></span>旧密码</td>
+                                    <td><input type="password" id="oldPassword" class="form-control" role="{required:true}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>新密码</td>
+                                    <td><input type="password" id="password" class="form-control" role="{required:true,custom:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/,errorText:'密码格式不正确，至少1个字母和数字且8-16个字符'}" /></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>确认密码</td>
+                                    <td><input type="password" id="passwords" class="form-control" role="{required:true,custom:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/,errorText:'密码格式不正确，至少1个字母和数字且8-16个字符'}" /></td>
+                                </tr>
+                            </table>
+                            <div class="ui-form-submitbar">
+                                <button class="btn btn-info blue submit" id="requestSubmit"><i class="fa fa-check"></i><span>提交</span></button>
+                                <button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    require(["app/systemManage/userManage/userResetPass"],function(app){
+        app.main();
+    });
+</script>

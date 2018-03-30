@@ -1,0 +1,26 @@
+<style>
+    .modalTxt{
+        width:135px;
+        text-align:right;
+        height:30px;
+        line-height: 30px;
+    }
+</style>
+<div style="padding: 40px;">
+    <form id="form" class="ui-form" role="form">
+        <div>
+            <label class="modalTxt">数据元模板下载：</label>
+            <button class="btn btn-info blue" id="download"><i class="fa fa-arrow-down"></i><span>下载</span></button>
+        </div>
+        <div>
+            <label class="modalTxt"><span class="required"></span>文件：</label>
+            <input type="file" name="file" id="file" class="form-control" placeholder="选择文件" style="display: inline-block;margin-right:10px;"><button class="btn btn-info blue" id="importModal"><i class="fa fa-arrow-down"></i><span>导入</span></button>
+        </div>
+    </form>
+</div>
+<script>
+    require(["app/metadataManage/dataElementManage/dataElementImport"],function(app){
+        app.main();
+    });
+
+</script>

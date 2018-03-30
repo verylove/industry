@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fable.industry.bussiness.mapper.dictionary.DictionaryClassMapper">
+    <resultMap id="BaseResultMap" type="com.fable.industry.bussiness.model.bean.DictionaryClassBean">
+        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="INDEX" property="index" jdbcType="INTEGER"/>
+        <result column="DICTIONAR_NAME" property="dictionarName" jdbcType="VARCHAR"/>
+        <result column="DICTIONAR_CODE" property="dictionarCode" jdbcType="VARCHAR"/>
+        <result column="DICTIONAR_CONTENT" property="dictionarContent" jdbcType="VARCHAR"/>
+        <result column="DICTIONAR_TYPE" property="dictionarType" jdbcType="VARCHAR"/>
+        <result column="PARENT_ID" property="parentId" jdbcType="INTEGER"/>
+        <result column="DICTIONAR_ALIAS" property="dictionarAlias" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryDictionarTree" resultType="map">
+        SELECT
+        ID AS id,
+        DICTIONAR_NAME AS `name`,
+        PARENT_ID as pid
+        FROM SYS_DICTIONARY_CLASS
+    </select>
+
+    <select id="getDictionarByName" resultType="int" parameterType="com.fable.industry.bussiness.model.bean.DictionaryClassBean">
+        SELECT COUNT(1) FROM SYS_DICTIONARY_CLASS WHERE DICTIONAR_NAME = #{dictionarName}
+    </select>
+
+    <select id="queryDictionarSelect" resultType="map">
+        SELECT
+        ID AS id,
+        DICTIONAR_NAME AS `name`,
+        PARENT_ID as pid
+        FROM SYS_DICTIONARY_CLASS WHERE ID != 0
+    </select>
+
+    <insert id="insertDictionar" parameterType="com.fable.industry.bussiness.model.bean.DictionaryClassBean">
+        INSERT INTO SYS_DICTIONARY_CLASS
+        VALUES (#{id},#{index},#{dictionarName},#{dictionarCode},#{dictionarContent},#{dictionarType},#{parentId},#{dictionarAlias})
+    </insert>
+
+    <update id="updateDictionar" parameterType="com.fable.industry.bussiness.model.bean.DictionaryClassBean">
+        UPDATE SYS_DICTIONARY_CLASS SET
+        DICTIONAR_NAME = #{dictionarName},
+        DICTIONAR_CONTENT = #{dictionarContent},
+        DICTIONAR_TYPE = #{dictionarType},
+        DICTIONAR_ALIAS = #{dictionarAlias}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteDictionar" parameterType="java.lang.String">
+      DELETE FROM SYS_DICTIONARY_CLASS WHERE ID IN (${ids})
+    </delete>
+
+    <select id="getItemByClassId" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT c.DICTIONAR_NAME FROM SYS_DICTIONARY_CLASS c
+        LEFT JOIN SYS_DICTIONARY_ITEM i on c.ID = i.CLASS_ID
+        WHERE i.CLASS_ID IN (${ids}) GROUP BY c.ID
+    </select>
+
+    <select id="queryDictionarById" parameterType="int" resultType="map">
+        SELECT
+        ID as id,
+       IFNULL(DICTIONAR_NAME,'') AS dictionarName,
+       IFNULL(DICTIONAR_CONTENT,'') AS dictionarContent,
+       IFNULL(DICTIONAR_ALIAS,'') AS dictionarAlias,
+       DICTIONAR_TYPE AS dictionarType
+        FROM SYS_DICTIONARY_CLASS
+        WHERE ID = #{id}
+    </select>
+    
+    <select id="getDictType" resultType="int" parameterType="java.lang.String">
+        SELECT DICTIONAR_TYPE FROM SYS_DICTIONARY_CLASS WHERE ID IN (#{ids})
+    </select>
+</mapper>

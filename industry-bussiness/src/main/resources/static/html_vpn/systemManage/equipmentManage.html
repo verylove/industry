@@ -1,0 +1,38 @@
+<div class="ui-content">
+	<div class="ui-aside left" id="treeAside">
+		<ul class="ztree ui-treebar" id="treebar"  style="margin-top:6px;"></ul>
+	</div>
+	<div class="ui-aside right" id="rightPage">
+		<div class="ui-content-body">
+			<div class="ui-content-toolsbar">
+				<div class="ui-content-buttonbar" id="buttonbar">
+					<button class="btn btn-info blue export" type="role" name="证书上传" title="证书上传"><i class="fa fa-upload"></i><span>证书上传</span></button>
+				</div>
+			</div>
+			<div class="ui-content-aside" style="top: 50px;">
+				<table id="grid" class="ui-grid" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>设备名称</th>
+							<th>所属网络</th>
+							<th>设备序列号</th>
+							<th>设备地址</th>
+							<th>设备角色</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<form id="uploadForm" enctype="multipart/form-data">
+				<input type="file" name="file" id="file" style="display: none;"/>
+			</form>
+			<input type="hidden" id="currentTreeId"/>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/systemManage/equipmentManage"],function(app){
+		app.main();
+	});
+</script>

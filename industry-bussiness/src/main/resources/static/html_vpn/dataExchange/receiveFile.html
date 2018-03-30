@@ -1,0 +1,140 @@
+<style type="text/css">
+	table input[type='text'],select{
+		width: 100% !important;
+	}
+</style>
+<link href="../css/need/select2.min.css" rel="stylesheet" type="text/css">
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<div class="ui-group">
+				<div class="ui-group-header">接收任务</div>
+				<div class="ui-group-body">
+					<div class="localRes">
+						<!--放置步骤组件--文件-->
+						<div class="ui-steps blue" id="ui-steps" style="width:1000px;"></div>
+						<div id="content1" class="hidden">
+							<div class="ui-group">
+								<div class="ui-group-body">
+									<form id="form1" class="ui-form" role="form" style="float: none;">
+										<table class="ui-form-grid wire">
+										 	<tr>
+										 		<td type="label"><span class="required"></span>联系人姓名</td>
+										 		<td>
+										 			<input type="text" name="linkman" class="form-control" placeholder="请输入" role="{required:true,length:[2,20],filterCN:true}"/>
+										 		</td>
+										 		<td type="label"><span class="required"></span>联系人电话</td>
+										 		<td>
+										 			<input type="text" name="phone" class="form-control" placeholder="请输入" role="{required:true,mobile_telephone:true}"/>
+										 		</td>
+										 	</tr>
+										 	<tr>
+										 		<td type="label"><span class="required"></span>联系人身份证号</td>
+										 		<td>
+										 			<input type="text" name="linkmanCard" class="form-control" placeholder="请输入" role="{required:true,identityCard:true}"/>
+										 		</td>
+										 		<td type="label"><span class="required"></span>联系人警号</td>
+										 		<td>
+										 			<input type="text" name="linkmanCode" class="form-control" placeholder="请输入" role="{required:true,number:true,length:[1,10]}"/>
+										 		</td>
+										 	</tr>
+										 	<tr>
+										 		<td type="label"><span class="required"></span>是否清除源表数据</td>
+										 		<td style="text-align:left">
+										 			<label><input name="isclear" type="radio" value="1" /> 是 </label>
+						 			                <label><input name="isclear" type="radio" value="2" /> 否 </label>
+										 		</td>
+										 		<td type="label"><span class="required targetFile"></span><span class="targetFile">目标文件</span></td>
+										 		<td>
+										 			<select name="targetFile" class="form-control targetFile" style="width: 100%;"  role="{required:true}">
+										 				<option value="cover">覆盖重名文件</option>
+										 				<option value="skip">跳过重名文件</option>
+										 			</select>
+										 		</td>
+										 	</tr>
+										</table>
+									</form>
+								</div>
+							</div>
+							
+						</div>
+						
+						<div id="content2" class="hidden">
+							<div class="ui-group">
+								<div class="ui-group-header">源设置</div>
+								<div class="ui-group-body">
+									<table class="ui-grid" cellspacing="0" width="100%">
+									 	<thead>
+									 		<th>数据源</th>
+									 		<th>数据源类型</th>
+									 		<th>文件路径</th>
+									 	</thead>
+									 	<tbody class="resourceTab">
+										 	
+									 	</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="ui-group">
+								<div class="ui-group-header">目标设置
+									<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+								</div>
+								<div class="ui-group-body">
+									<table class="ui-grid" cellspacing="0" width="100%">
+										<thead>
+											<th style="width: 31%;">目标源</th>
+											<th style="width: 31%;">目标源类型</th>
+											<th style="width: 31%;">文件路径</th>
+											<th style="width: 9%;">操作</th>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<select name="" id="" class="form-control">
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+													</select>
+												</td>
+												<td>FTP</td>
+												<td>/</td>
+												<td><div style="text-align:center"><button class="btn btn-link delete" title="删除"><i class="fa fa-trash-o"></i></button></div></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						<div id="content3" class="hidden">
+							<div class="ui-group">
+								<div class="ui-group-body">
+									<!--表单填写区-->
+									 <table id="grid2" class="ui-grid" cellspacing="0" width="100%">
+									 	<thead>
+									 		<th>目录名称</th>
+									 		<th>目录大小</th>
+									 		<th>最近修改日期</th>
+									 	</thead>
+									 	<tbody> </tbody>
+									</table>
+								</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/dataExchange/receiveFile"],function(app){
+		app.main();
+	});
+</script>

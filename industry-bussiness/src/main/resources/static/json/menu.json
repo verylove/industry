@@ -1,0 +1,33 @@
+{
+    "success": true,
+    "code": "0",
+    "message": "success",
+    "data":
+		[
+			{"label":"首页","labelEN":"Home","id":"0","pid":"-1","icon":"ion-android-home","url":"../index/home"},
+			
+			{"label":"元数据管理","labelEN":"Register","id":"1","pid":"-1","icon":"ion-compose"},
+				{"label":"目录管理","labelEN":"Request","id":"1-1","pid":"1","url":"../catalogManager/catalogManage"},
+				{"label":"资源编目","labelEN":"Service","id":"1-2","pid":"1","url":"../catalogingManager/resourceCatalog"},
+				{"label":"审核编目","labelEN":"Request","id":"1-3","pid":"1","url":"../catalogingManager/examineCatalog"},
+				{"label":"数据元管理","labelEN":"Service","id":"1-4","pid":"1","url":"../dataManager/dataElementManager"},
+				{"label":"数据字典管理","labelEN":"Request","id":"1-5","pid":"1","url":"../dictionarManager/dataDictionary"},
+			
+			{"label":"异构互联管理","labelEN":"Approval","id":"2","pid":"-1","icon":"ion-android-checkmark-circle"},
+				{"label":"资源发布","labelEN":"Request","id":"2-1","pid":"2","url":"../resciPublish/resciPublishView"},
+				{"label":"域管理","labelEN":"Service","id":"2-2","pid":"2","url":"../fieldManager/regionManage"},
+				{"label":"资源登记","labelEN":"Resource application","id":"2-3","pid":"2","url":"../resciRegister/resciRegisterView"},
+			
+			{"label":"系统管理","labelEN":"Resource","id":"3","pid":"-1","icon":"ion-beaker"},
+				{"label":"用户管理","labelEN":"Directory","id":"3-1","pid":"3","url":"../userManager/userView"},
+				{"label":"角色管理","labelEN":"Application","id":"3-2","pid":"3","url":"../roleManager/roleView"},
+				{"label":"单位信息管理","labelEN":"My Resource","id":"3-3","pid":"3","url":"../organizationManager/organizationView"},
+			
+			{"label":"统计分析","labelEN":"Metadata","id":"4","pid":"-1","icon":"ion-android-share-alt"},
+				{"label":"元数据统计分析","labelEN":"Classify","id":"4-1","pid":"4","url":"../jsp/statisticalAnalysis/dataStatisticalAnalysis/dataStatisticalAnalysis.jsp"},
+
+			{"label":"日志审计","labelEN":"Log audit","id":"5","pid":"-1","icon":"ion-android-list"},
+				{"label":"操作日志","labelEN":"Operate","id":"5-1","pid":"5","url":"../operationManager/operationLogView"},
+				{"label":"服务日志","labelEN":"Service","id":"5-2","pid":"5","url":"../serviceManager/serviceLogView"}
+		]
+}

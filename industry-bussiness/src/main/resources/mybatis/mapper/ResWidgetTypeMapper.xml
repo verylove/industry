@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fable.industry.bussiness.mapper.dynamicform.reswidgettype.ResWidgetTypeMapper">
+	<select id="queryWidgetType" resultType="resWidgetType" parameterType="resWidgetType">
+		  SELECT * FROM  ResWidgetType
+		  <where>
+			  <if test="widgetId !=null and widgetId != '' ">
+				  WidgetId=#{widgetId}
+			  </if>
+		  </where>
+	</select>
+
+</mapper>

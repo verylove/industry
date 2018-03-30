@@ -1,0 +1,66 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">查看用户</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label">用户名</td>
+						 		<td name="loginName"></td>
+						 		<td type="label">姓名</td>
+						 		<td name="userName"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">角色</td>
+						 		<td name="roleName"></td>
+						 		<td type="label">所属单位</td>
+						 		<td name="companyName"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">身份证号</td>
+						 		<td name="idCard"></td>
+						 		<td type="label">警号</td>
+						 		<td name="policeNumber"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">手机</td>
+						 		<td name="cellPhoneNumber"></td>
+						 		<td type="label">办公电话</td>
+						 		<td name="telphone"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">邮箱</td>
+						 		<td name="email"></td>
+						 		<td type="label">用户状态</td>
+						 		<td name="state"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">创建时间</td>
+						 		<td name="createTime"></td>
+						 		<td type="label"></td>
+						 		<td ></td>
+						 	</tr>
+						</table>
+					</div>
+				</div>
+				<!--<div class="ui-form-submitbar">
+					<button class="btn btn-info blue submit" id="requestSubmit"><i class="fa fa-check"></i><span>提交</span></button>
+					<button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+				</div>-->
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/userManage/userInfo"],function(app){
+		app.main();
+	});
+</script>

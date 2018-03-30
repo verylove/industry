@@ -1,0 +1,62 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">日志详细信息</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire" id="operateDiaryTab">
+						 	<tr>
+						 		<td type="label">模块</td>
+						 		<td name="moduleName"></td>
+						 		
+						 		<td type="label">操作类型</td>
+						 		<td name="operateName"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">用户名</td>
+						 		<td name="operateUserName"></td>
+						 		<td type="label">用户标识</td>
+						 		<td name="operateUserCode"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">单位名称</td>
+						 		<td name="companyName"></td>
+						 		<td type="label">单位机构代码</td>
+						 		<td name="companyCode"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">所属网络</td>
+						 		<td name="networkName"></td>
+						 		<td type="label">终端标识</td>
+						 		<td name="deviceIdentification"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">操作时间</td>
+						 		<td name="operateTime"></td>
+						 		<td type="label">操作结果</td>
+						 		<td name="result"></td>
+						 	</tr>
+						 	<!--<tr>
+						 		<td type="label">失败原因代码</td>
+						 		<td></td>
+						 		<td type="label"></td>
+						 		<td></td>
+						 	</tr>-->
+						</table>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/diaryAudit/operateDiaryInfo"],function(app){
+		app.main();
+	});
+</script>

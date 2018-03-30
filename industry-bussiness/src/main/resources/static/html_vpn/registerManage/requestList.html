@@ -1,0 +1,50 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div id="tab1"></div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-toolsbar">
+			<div class="ui-content-buttonbar" id="buttonbar">
+				<button class="btn btn-info blue" id="registerBtn" type="role" name="注册" title="注册"><i class="ion-plus"></i><span>注册</span></button>
+			</div>
+			
+			<div class="ui-content-searchbar" id="searchbar">
+				<form class="form-inline" id="gridForm">
+					<div class="form-group">
+						<label for="name">请求方名称/编码</label>
+						<input type="text" name="name" class="form-control" placeholder="请输入请求方名称/编码" autocomplete="off">
+					</div>
+					
+					<div class="form-group">
+						<button class="btn btn-info blue" id="search"><i class="ion-ios-search-strong"></i><span>查询</span></button></button>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		
+		<div class="ui-content-aside">
+			<table id="grid" class="ui-grid" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>请求方名称</th>
+						<th>请求方编码</th>
+						<th>联系人姓名</th>
+						<th>注册申请时间</th>
+						<th>已申请资源</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+<input type="hidden" id="rowId"/>
+<input type="hidden" id="companyId"/>
+<input type="hidden" id="typeId"/>
+<script>
+	require(["app/registerManage/requestListApp"],function(app){
+		app.main();
+	});
+</script>

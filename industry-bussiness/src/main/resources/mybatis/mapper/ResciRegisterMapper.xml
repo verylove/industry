@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fable.industry.bussiness.mapper.resciRegister.ResciRegisterMapper">
+    <resultMap id="ResciWidgetBean" type="com.fable.industry.bussiness.model.bean.ResciWidgetBean">
+        <id column="ID" property="id" jdbcType="INTEGER"></id>
+        <result column="AttributeId" property="attributeId" jdbcType="INTEGER"></result>
+        <result column="AttributeName" property="attributeName" jdbcType="VARCHAR"></result>
+        <result column="ColumnName" property="columnName" jdbcType="VARCHAR"></result>
+        <result column="IsTableDisplay" property="isTableDisplay" jdbcType="INTEGER"></result>
+        <result column="IsDeletable" property="isDeletable" jdbcType="INTEGER"></result>
+        <result column="WidgetId" property="widgetId" jdbcType="INTEGER"></result>
+        <result column="ValidateRule" property="validateRule" jdbcType="INTEGER"></result>
+        <result column="Required" property="required" jdbcType="INTEGER"></result>
+        <result column="isShow" property="isShow" jdbcType="INTEGER"></result>
+        <result column="isQuery" property="isQuery" jdbcType="INTEGER"></result>
+        <result column="elementId" property="elementId" jdbcType="INTEGER"></result>
+        <result column="AttributeIndex" property="attributeIndex" jdbcType="INTEGER"></result>
+        <result column="TableName" property="tableName" jdbcType="VARCHAR"></result>
+        <result column="WidgetValue" property="widgetValue" jdbcType="VARCHAR"></result>
+        <result column="WidgetName" property="widgetName" jdbcType="VARCHAR"></result>
+        <result column="DataType" property="dataType" jdbcType="VARCHAR"></result>
+        <result column="WidgetIcon" property="widgetIcon" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <!--查询资源控件-->
+    <select id="getResciWidgetById" parameterType="Integer" resultMap="ResciWidgetBean">
+        SELECT
+        s.ID,
+        ra.AttributeId,
+        ra.AttributeName,
+        ra.ColumnName,
+        ra.IsTableDisplay,
+        ra.IsDeletable,
+        ra.WidgetId,
+        ra.ValidateRule,
+        ra.Required,
+        ra.isQuery,
+        ra.elementId,
+        rc.AttributeIndex,
+        rc.TableName,
+        rw.WidgetValue,
+        rw.WidgetName,
+        rw.DataType,
+        rw.WidgetIcon
+        FROM
+        SYS_RESCI_CATALOGUE s
+        LEFT JOIN ResCiTypeAttribute rc ON rc.CatalogueId = s.ID
+        LEFT JOIN ResAttributes ra ON ra.AttributeId = rc.AttributeId
+        LEFT JOIN ResWidgetType rw ON rw.WidgetId = ra.WidgetId
+        WHERE s.ID=#{CatalogueId}
+        ORDER BY rc.AttributeIndex ASC
+    </select>
+
+    <!--查询资源登记列表完全共享-->
+    <select id="findResciRegisterAll" resultType="java.util.Map" >
+        SELECT s.*,sr.CATALOGUE_ID,sr.USER_ID,sr.COM_ID,sr.CREATE_TIME,sr.UPDATE_TIME FROM
+        ${tableName} s
+        LEFT JOIN sys_resci sr ON sr.ID=s.CiId
+        WHERE 1=1
+        <if test="ids != null and ids != ''">
+            AND s.CiId IN (${ids})
+        </if>
+        <foreach collection="list" item="item">
+            AND ${item}
+        </foreach>
+    </select>
+
+    <!--查询资源登记列表部分共享-->
+    <select id="findResciRegister" resultType="java.util.Map" >
+        SELECT s.*,sr.CATALOGUE_ID,sr.USER_ID,sr.COM_ID,sr.CREATE_TIME,sr.UPDATE_TIME FROM
+        ${tableName} s
+        LEFT JOIN sys_resci sr ON sr.ID=s.CiId
+        WHERE 1=1 AND sr.COM_ID=#{comId}
+        <if test="ids != null and ids != ''">
+            AND s.CiId IN (${ids})
+        </if>
+        <foreach collection="list" item="item">
+            AND ${item}
+        </foreach>
+    </select>
+
+    <!--新增资源登记表数据-->
+    <insert id="addSysResci" parameterType="com.fable.industry.bussiness.model.bean.SysResciBean" useGeneratedKeys="true" keyProperty="ID">
+        INSERT INTO SYS_RESCI (CATALOGUE_ID,USER_ID,COM_ID,CREATE_TIME) VALUES
+        (#{catalogueId},#{userId},#{comId},NOW())
+    </insert>
+
+    <!--查询动态表名-->
+    <select id="getTableName" parameterType="Integer" resultType="String">
+       SELECT DISTINCT TableName FROM ResCiTypeAttribute WHERE CatalogueId=#{catalogueId}
+    </select>
+
+    <!--新增资源登记到动态表-->
+    <insert id="addResciRegister">
+        INSERT INTO ${tableName}(${names})VALUES (${values})
+    </insert>
+
+    <!--根据id查看资源登记-->
+    <select id="queryResciRegisterById" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT s.*,sr.CATALOGUE_ID,sr.USER_ID,sr.COM_ID,sr.CREATE_TIME,sr.UPDATE_TIME FROM
+        ${tableName} s
+        LEFT JOIN sys_resci sr ON sr.ID=s.CiId
+        WHERE s.CiId=#{id}
+    </select>
+
+    <!--修改资源登记表数据-->
+    <update id="updateSysResci" parameterType="com.fable.industry.bussiness.model.bean.SysResciBean">
+        UPDATE SYS_RESCI SET CATALOGUE_ID=#{catalogueId},UPDATE_TIME=NOW()
+        WHERE ID=#{ID}
+    </update>
+
+    <!--修改动态表-->
+    <update id="updateResciRegister">
+        UPDATE ${tableName} SET ${sets} WHERE CiId=#{id}
+    </update>
+
+    <!--删除资源登记表数据-->
+    <delete id="deleteSysResci">
+        DELETE FROM SYS_RESCI WHERE ID IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--删除动态表-->
+    <delete id="deleteResciRegister">
+        DELETE FROM ${tableName} WHERE CiId IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--根据编目Id查找单位Id-->
+    <select id="queryComId"  resultType="Integer">
+        SELECT DISTINCT COM_ID FROM SYS_RESCI WHERE ID IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+          #{id}
+        </foreach>
+    </select>
+
+    <!--资源登记树-->
+    <select id="queryResciRegisteTree" resultType="com.fable.industry.api.page.TreeRsult">
+        SELECT ID id,FIELD_NAME name,FPARENT_ID pid FROM SYS_RESCI_FIELD
+        UNION ALL
+        SELECT ID id,CATALOG_NAME name,FIELD_ID pid FROM SYS_RESCI_CATALOG
+        UNION ALL
+        SELECT ID id,RESCI_NAME name,CATALOG_ID pid FROM SYS_RESCI_CATALOGUE
+        WHERE RESCI_STATE=4
+    </select>
+
+    <delete id="deleteByCataLogUEId" parameterType="int" >
+        DELETE FROM SYS_RESCI WHERE CATALOGUE_ID = #{catoLogUEId}
+    </delete>
+
+    <!--根据ColName查询该列是什么控件-->
+    <select id="queryWidgetValueByColName" resultType="java.util.Map">
+        SELECT rs.WidgetValue widgetValue  FROM resattributes r
+        LEFT JOIN reswidgettype rs ON r.WidgetId=rs.WidgetId
+          WHERE r.ColumnName=#{colName} GROUP BY r.ColumnName
+    </select>
+
+    <!--根据编目ID查找编目联系人-->
+    <select id="queryByCatalogueID" resultType="integer">
+        SELECT USER_ID userId FROM sys_resci_catalogue WHERE ID=#{catalogueId}
+    </select>
+</mapper>

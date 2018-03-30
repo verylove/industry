@@ -1,0 +1,84 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">服务描述</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label">服务名称</td>
+						 		<td name="serviceName">></td>
+						 		
+						 		<td type="label">服务描述</td>
+						 		<td name="serviceDescription"></td>
+						 	</tr>
+						</table>
+					</div>
+				</div>
+				<div class="ui-group">
+					<div class="ui-group-header">监听设备配置</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label">监听设备</td>
+						 		<td name="monitorEquipment"></td>
+						 		<td type="label">转发协议</td>
+						 		<td name="type"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">监听网卡</td>
+						 		<td name="monitorNetworkcard"></td>
+						 		<td type="label">监听IP</td>
+						 		<td name="monitorAddr"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">监听端口</td>
+						 		<td name="monitorPort"></td>
+						 		<td type="label">监听网络属性</td>
+						 		<td name="monitorNetwork"></td>
+						 	</tr>
+						</table>
+					</div>
+				</div>
+				<div class="ui-group">
+					<div class="ui-group-header">出口设备配置</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label">目标IP</td>
+						 		<td name="targetAddr"></td>
+						 		<td type="label">目标端口</td>
+						 		<td name="targetPort"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">出口设备</td>
+						 		<td name="targetEquipment"></td>
+						 		<td type="label">出口网络属性</td>
+						 		<td name="targetNetwork"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">出口网卡</td>
+						 		<td name="outNetworkcard"></td>
+						 		
+						 		<td type="label">出口IP</td>
+						 		<td name="outAddrip"></td>
+						 	</tr>
+						</table>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/systemManage/portForwardInfo"],function(app){
+		app.main();
+	});
+</script>

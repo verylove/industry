@@ -1,0 +1,61 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" id="form" style="top:40px;">
+			<div class="ui-group">
+				<div class="ui-group-header">设置IP信息</div>
+				<div class="ui-group-body">
+					 <table class="ui-form-grid wire">
+				 		<tr>
+							<td type="label" >设备序列号</td>
+							<td name="identifyication"  ></td>
+							<td type="label" >设备角色</td>
+							<td name="centerFlag"></td>
+						</tr>
+						<tr>
+							<td type="label" >设备外网地址</td>
+							<td name="publicIp"></td>
+							<td type="label" >设备内网地址</td>
+							<td name="innerIp"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-group">
+				<div class="ui-group-header">设备单位信息</div>
+				<div class="ui-group-body">
+					 <table class="ui-form-grid wire">
+					 	<tr>
+							<td type="label" >设备名称</td>
+							<td name="name" ></td>
+							<td type="label" >所属网络</td>
+							<td name="networkName" ></td>
+						</tr>
+						<tr>
+							<td type="label" >单位名称</td>
+							<td name="company" ></td>
+							<td type="label" >联系人</td>
+							<td name="contacts"></td>
+							
+						</tr>
+						<tr>
+							<td type="label" >联系电话</td>
+							<td name="telphone"></td>
+							<td type="label" >联系邮箱</td>
+							<td name="email"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/resourceManage/resourceCatalogAdd"],function(app){
+		app.main();
+	});
+</script>

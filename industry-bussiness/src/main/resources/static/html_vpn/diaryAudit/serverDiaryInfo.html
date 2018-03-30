@@ -1,0 +1,89 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">日志详细信息</div>
+					<div class="ui-group-body">
+						<p style="text-align: left;">服务方基本信息</p>
+						<table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label">资源名称</td>
+						 		<td name="serviceName"></td>
+						 		<td type="label">资源编码</td>
+						 		<td name="resCode"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">服务方网络</td>
+						 		<td name="networkName"></td>
+						 		<td type="label">服务方单位名称</td>
+						 		<td name="companyName"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">服务方单位机构代码</td>
+						 		<td name="companyCode"></td>
+						 		<td type="label"></td>
+						 		<td></td>
+						 	</tr>
+						</table>
+						<br />
+						<p style="text-align: left;">请求方基本信息</p>
+						<table class="ui-form-grid wire">
+							<tr>
+								<td type="label">请求方名称</td>
+						 		<td name="requestEequipmentName"></td>
+						 		<td type="label">请求方编码</td>
+						 		<td name="requestEequipmentCode"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">请求方网络</td>
+						 		<td name="requestNetworkName"></td>
+						 		<td type="label">请求方IP地址</td>
+						 		<td name="requestNetworkIP"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">请求方单位名称</td>
+						 		<td name="requestCompanyName"></td>
+						 		<td type="label">请求方单位机构代码</td>
+						 		<td name="requestCompanyCode"></td>
+						 	</tr>
+						</table>
+						<br />
+						<p style="text-align: left;">请求详情</p>
+						<table class="ui-form-grid wire" id="serverDiaryTab">
+							<tr>
+						 		<td type="label">请求编码</td>
+						 		<td name="requestCode"></td>
+						 		<td type="label">请求时间</td>
+						 		<td name="requestTime"></td>
+						 		
+						 	</tr>
+						 	<tr>
+						 		<td type="label">响应时间</td>
+						 		<td name="responseTime"></td>
+						 		<td type="label">请求结果</td>
+						 		<td name="requestResult"></td>
+						 	</tr>
+						 	<!--<tr>
+						 		<td type="label">失败原因代码</td>
+						 		<td></td>
+						 		<td type="label">失败原因</td>
+						 		<td></td>
+						 	</tr>-->
+						</table>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/diaryAudit/serverDiaryInfo"],function(app){
+		app.main();
+	});
+</script>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fable.industry.bussiness.mapper.dynamicform.resattributes.ResAttributesMapper">
+
+	<insert id="insertResAttributes" parameterType="resAttributesBean">
+		INSERT INTO ResAttributes(
+			AttributeId,
+			AttributeName,
+			ColumnName,
+			IsTableDisplay,
+			IsDeletable,
+			WidgetId,
+			DataInitValue,
+			DataInitCondition,
+			ValidateRule,
+			Required,
+			isQuery,
+			elementId
+			)
+			VALUES
+			(#{attributeId},#{attributeName},#{columnName},#{isTableDisplay},#{isDeletable},
+			#{widgetId},#{dataInitValue},#{dataInitCondition},
+			#{validateRule},#{required},#{isQuery},
+			#{elementId});
+	</insert>
+
+	<delete id="delByTblName" parameterType="String">
+		DELETE FROM #{tableName}
+	</delete>
+
+	<select id="queryResAttributes" parameterType="resAttributesBean"
+			resultType="resAttributesBean">
+		SELECT * FROM ResAttributes
+		<where>
+			<if test="attributeId !=null and attributeId != '' ">
+				AttributeId=#{attributeId}
+			</if>
+		</where>
+	</select>
+
+	<select id="chkAttrName" parameterType="resAttributesBean"
+			resultType="int">
+		SELECT count(1) FROM ResAttributes t,ResCiTypeAttribute t1
+			WHERE t.AttributeId = t1.AttributeId
+				AND t1.TypeId=#{resTypeId}
+				AND t.ColumnName=#{columnName};
+	</select>
+
+	<update id="update" parameterType="resAttributesBean">
+		UPDATE ResAttributes SET
+			AttributeName = #{attributeName},
+			ColumnName = #{columnName},
+			IsRecordChange = #{isRecordChange},
+			IsTableDisplay = #{isTableDisplay},
+			IsDeletable = #{isDeletable},
+			WidgetId = #{widgetId},
+			DataInitValue = #{dataInitValue},
+			DataInitCondition = #{dataInitCondition},
+			ValidateRule = #{validateRule},
+			Required = #{required},
+			isShow = #{isShow},
+			GroupId = #{groupId},
+			isAttributes = #{isAttributes}
+			WHERE
+			AttributeId = #{attributeId};
+	</update>
+
+	<delete id="deleteById" parameterType="int">
+		DELETE FROM  ResAttributes WHERE  AttributeId = #{attributeId}
+	</delete>
+
+	<delete id="deleteBatchIds" parameterType="java.lang.StringBuilder">
+		DELETE FROM ResAttributes WHERE AttributeId IN (${attrIds})
+	</delete>
+
+	<select id="getByDataElementId" parameterType="java.lang.String" resultType="int">
+		SELECT COUNT(1) FROM ResAttributes WHERE elementId IN (${ids})
+	</select>
+
+</mapper>

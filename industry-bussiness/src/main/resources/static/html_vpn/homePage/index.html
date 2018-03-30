@@ -1,0 +1,162 @@
+<style>
+	.num{
+		font-size:22px;
+		font-weight: 700;
+		line-height:22px;
+		text-align: left;
+		vertical-align: top;
+	}
+	#requestRegisterForm .ui-pool i{
+		background-image: url("../images/index/publicResource.png");
+		background-size: 100% 100%;
+		line-height: 25px;
+		height: 22px;
+		width: 22px;
+		display: inline-block;
+	}
+	#requestRegisterForm .ui-pool:nth-child(2) i{
+		background-image: url("../images/index/request.png");
+	}
+	#requestRegisterForm .ui-pool:nth-child(3) i{
+		background-image: url("../images/index/service.png");
+	}
+	#requestRegisterForm .ui-pool:nth-child(4) i{
+		background-image: url("../images/index/flow.png");
+	}
+</style>
+<div class="ui-content transparent" id="indexDiv">
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top: 0;">
+			<div class="ui-box-abs col-xs-12" style="width:100%;">
+				
+				<div class="ui-panel" style="background: #fff;">
+					<div class="ui-panel-header border">
+						<div class="ui-panel-label">
+							<i class="fa fa-thumbs-o-up"></i>
+							<span>汇总数据</span>
+						</div>
+					</div>
+					
+					<div class="ui-panel-body">
+						<form id="requestRegisterForm">
+							<div class="centerOrGateway">
+								<ul class="ui-pool" style="width:20%">
+									<li>发布资源数</li>
+									<li><i class=""></i><span class="num" name="publicResouceNum"></span></li>
+								</ul>
+								
+								<ul class="ui-pool" style="width:20%">
+									<li>请求方数</li>
+									<li><i class=""></i><span class="num" name="requstNum"></span></li>
+								</ul>
+								<div class="centerContent">
+									<ul class="ui-pool" style="width:20%">
+										<li>总服务次数</li>
+										<li><i class=""></i><span class="num" name="totalServiceNum"></span></li>
+									</ul>
+									
+									<ul class="ui-pool" style="width:20%">
+										<li>总服务流量</li>
+										<li><i class=""></i><span class="num" name="totalCountValue"></span></li>
+									</ul>
+								</div>
+								<div class="gatewayContent" style="display:none;">
+									<ul class="ui-pool" style="width:20%">
+										<li>申请资源数</li>
+										<li><i class=""></i><span class="num" name="applyResourceNum"></span></li>
+									</ul>
+									
+									<ul class="ui-pool" style="width:20%">
+										<li>提供服务次数</li>
+										<li><i class=""></i><span class="num" name="serviceProvidedNum"></span></li>
+									</ul>
+									
+									<ul class="ui-pool" style="width:20%">
+										<li>调用服务次数</li>
+										<li><i class=""></i><span class="num" name="serviceInvokingNum"></span></li>
+									</ul>
+								</div>
+						    </div>	
+							
+						</form>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+			<div class="ui-box-abs left col-xs-6" style="height:300px;">
+				<div class="ui-panel" style="background: #fff;">
+					<div class="ui-panel-header border">
+						<div class="ui-panel-label">
+							<i class="fa fa-line-chart"></i>
+							<span>实时流量</span>
+						</div>
+					</div>
+					<div class="ui-panel-body">
+						<div class="ui-chartbar" id="chart1">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ui-box-abs right col-xs-6" style="height:300px">
+				<div class="ui-panel" style="background: #fff;">
+					<div class="ui-panel-header border">
+						<div class="ui-panel-label">
+							<i class="fa ion-stats-bars"></i>
+							<span>设备占用率</span>
+						</div>
+					</div>
+					<div class="ui-panel-body">
+						<div class="ui-chartbar" id="chart3">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ui-box-abs left col-xs-6" style="height:300px;">
+				<div class="ui-panel" style="background: #fff;">
+					<div class="ui-panel-header border">
+						<div class="ui-panel-label">
+							<i class="fa ion-drag"></i>
+							<span>申请资源Top5</span>
+						</div>
+					</div>
+					<div class="ui-panel-body">
+						<table id="grid" class="ui-grid" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>资源名称</th>
+									<th>本月调用次数</th>
+									<th>今日调用次数</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="ui-box-abs right col-xs-6" style="height:300px;">
+				<div class="ui-panel" style="background: #fff;">
+					<div class="ui-panel-header border">
+						<div class="ui-panel-label">
+							<i class="fa fa-pie-chart"></i>
+							<span>请求方调用次数Top5</span>
+						</div>
+						<ul class="ui-panel-buttonbar" id="p2">
+							<li class="active" type="today">今日</li>
+							<li type="week">本周</li>
+						</ul>
+					</div>
+					<div class="ui-panel-body">
+						<div class="ui-chartbar" id="chart2">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/index"],function(app){
+		app.main();
+	});
+</script>

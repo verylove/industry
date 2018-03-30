@@ -1,0 +1,87 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">新增数据元</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label"><span class="required"></span>数据元名称</td>
+						 		<td><input type="text" class="form-control" role="{required:true}"/></td>
+						 		<td type="label"><span class="required"></span>数据元英文名称</td>
+						 		<td><input type="text" class="form-control" role="{required:true}"/></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label"><span class="required"></span>数据元编码</td>
+						 		<td><input type="text" class="form-control"  role="{required:true}"/></td>
+						 		<td type="label"><span class="required"></span>数据元分类</td>
+						 		<td>
+						 			<select name="" id="" class="form-control">
+						 				<option value="">机械</option>
+						 				<option value="">水利</option>
+						 			</select>
+						 		</td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label"><span class="required"></span>数据类型</td>
+						 		<td>
+						 			<select name="" id="" class="form-control">
+						 				<option value="">文本</option>
+						 				<option value="">数值</option>
+						 				<option value="">日期</option>
+						 			</select>
+						 		</td>
+						 		<td type="label"> <span class="required"></span>数据长度</td>
+						 		<td><input type="text" class="form-control" role="{required:true}"/></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label"><span class="required"></span>是否字典项</td>
+						 		<td>
+						 			<select name="" id="" class="form-control">
+						 				<option value="">是</option>
+						 				<option value="">否</option>
+						 			</select>
+						 		</td>
+						 		<td type="label"><span class="required"></span>用户字典</td>
+						 		<td><input type="text" class="form-control" role="{required:true}"/></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">值域</td>
+						 		<td><input type="text" class="form-control"/></td>
+						 		<td type="label"><span class="required"></span>提交单位</td>
+						 		<td><input type="text" class="form-control" role="{required:true}"/></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label"><span class="required"></span> 提交人</td>
+						 		<td><input type="text" class="form-control" role="{required:true}"/></td>
+						 		<td type="label"><span class="required"></span> 版本日期</td>
+						 		<td><input type="text" class="form-control" role="{required:true}"/></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label"><span class="required"></span>版本号</td>
+						 		<td><input type="text" class="form-control" role="{required:true}"/></td>
+						 		<td type="label"></td>
+						 		<td></td>
+						 	</tr>
+						</table>
+					</div>
+				</div>
+				<div class="ui-form-submitbar">
+					<button class="btn btn-info blue submit" id="requestSubmit"><i class="fa fa-check"></i><span>提交</span></button>
+					<button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/metadataManage/metaDataAdd"],function(app){
+		app.main();
+	});
+</script>

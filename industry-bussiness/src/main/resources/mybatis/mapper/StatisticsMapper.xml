@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fable.industry.bussiness.mapper.resci.StatisticsMapper">
+	<select id="getIndustryData" resultType="map">
+        select count(1) AS `value`,i.ITEM_NAME AS `name`,c.INDUSTRY_ID AS industryId FROM sys_resci_catalogue c
+        LEFT JOIN sys_dictionary_item i ON i.ID = c.INDUSTRY_ID
+        WHERE RESCI_STATE = 4
+        GROUP BY c.INDUSTRY_ID
+	</select>
+	<select id="getTopicData" resultType="map">
+        select count(1) AS `value`,i.ITEM_NAME AS `name`,c.TOPIC_ID AS topicId FROM sys_resci_catalogue c
+        LEFT JOIN sys_dictionary_item i ON i.ID = c.TOPIC_ID
+        WHERE RESCI_STATE = 4
+        GROUP BY c.TOPIC_ID
+    </select>
+	<select id="getReleaseData" resultType="map" parameterType="java.lang.String">
+        SELECT a.count,b.time2 from
+        (select count(c.RELEASE_TIME) as count,FROM_UNIXTIME( UNIX_TIMESTAMP(c.RELEASE_TIME),'%m' ) as mon,RESCI_STATE AS state
+        from sys_resci_catalogue c where RESCI_STATE = 4 AND FROM_UNIXTIME( UNIX_TIMESTAMP(c.RELEASE_TIME),'%Y' ) = #{year} GROUP BY mon) a
+        RIGHT JOIN (SELECT '01' as time2 from  DUAL UNION ALL
+        SELECT '02' as time2 from  DUAL UNION ALL
+        SELECT '03' as time2 from  DUAL UNION ALL
+        SELECT '04' as time2 from  DUAL UNION ALL
+        SELECT '05' as time2 from  DUAL UNION ALL
+        SELECT '06' as time2 from  DUAL UNION ALL
+        SELECT '07' as time2 from  DUAL UNION ALL
+        SELECT '08' as time2 from  DUAL UNION ALL
+        SELECT '09' as time2 from  DUAL UNION ALL
+        SELECT '10' as time2 from  DUAL UNION ALL
+        SELECT '11' as time2 from  DUAL UNION ALL
+        SELECT '12' as time2 from  DUAL )b on a.mon = b.time2
+    </select>
+	<select id="getRevokeData" resultType="map" parameterType="java.lang.String">
+        SELECT a.count,b.time2 from
+        (select count(c.REVOKE_TIME) as count,FROM_UNIXTIME( UNIX_TIMESTAMP(c.REVOKE_TIME),'%m' ) as mon,RESCI_STATE AS state
+        from sys_resci_catalogue c where RESCI_STATE = 5 AND FROM_UNIXTIME( UNIX_TIMESTAMP(c.REVOKE_TIME),'%Y' ) = #{year} GROUP BY mon) a
+        RIGHT JOIN (SELECT '01' as time2 from  DUAL UNION ALL
+        SELECT '02' as time2 from  DUAL UNION ALL
+        SELECT '03' as time2 from  DUAL UNION ALL
+        SELECT '04' as time2 from  DUAL UNION ALL
+        SELECT '05' as time2 from  DUAL UNION ALL
+        SELECT '06' as time2 from  DUAL UNION ALL
+        SELECT '07' as time2 from  DUAL UNION ALL
+        SELECT '08' as time2 from  DUAL UNION ALL
+        SELECT '09' as time2 from  DUAL UNION ALL
+        SELECT '10' as time2 from  DUAL UNION ALL
+        SELECT '11' as time2 from  DUAL UNION ALL
+        SELECT '12' as time2 from  DUAL )b on a.mon = b.time2
+    </select>
+</mapper>

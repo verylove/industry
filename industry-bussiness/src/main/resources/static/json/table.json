@@ -1,0 +1,57 @@
+{
+  "success": true,
+  "code": "0",
+  "message": "success",
+  "data": {
+    "content": [
+      {
+        "id": "e5f15785300b4577b4c305280ee8460a",
+        "name": "sav",
+        "code": "M",
+        "isLast": "-1",
+        "pcode": "CATALOG-TYPE-LEVEL-ONE-000000",
+        "description": "zdv"
+      },
+      {
+        "id": "0312d2c1db5e44b5b9096548e3a48098",
+        "name": "李家",
+        "code": "A",
+        "isLast": "-1",
+        "pcode": "CATALOG-TYPE-LEVEL-ONE-000000",
+        "description": "ASD"
+      },
+      {
+        "id": "39ef8e2c90b54b8f98239aa16d6b5c31",
+        "name": "删除用不要选1",
+        "code": "B",
+        "isLast": "-1",
+        "pcode": "CATALOG-TYPE-LEVEL-ONE-000000",
+        "description": "删除用不要选"
+      },
+      {
+        "id": "14a336cb0b1c4d5ba8009a40e4dc0752",
+        "name": "百家姓",
+        "code": "bjx",
+        "isLast": "-1",
+        "pcode": "CATALOG-TYPE-LEVEL-ONE-000000",
+        "description": "百家姓"
+      },
+      {
+        "id": "191089fd1afd4cbcac24be79f1afe262",
+        "name": "点点点",
+        "code": "45",
+        "isLast": "-1",
+        "pcode": "CATALOG-TYPE-LEVEL-ONE-000000",
+        "description": ""
+      }
+    ],
+    "last": true,
+    "totalElements": "5",
+    "totalPages": "1",
+    "sort": null,
+    "numberOfElements": "5",
+    "first": true,
+    "size": "20",
+    "number": "0"
+  }
+}

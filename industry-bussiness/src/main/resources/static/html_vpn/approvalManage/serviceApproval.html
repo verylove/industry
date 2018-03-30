@@ -1,0 +1,135 @@
+<style>
+	#networkName2,#unitsName2{
+		padding:0px;
+		background: url(../images/arrowDown.png) no-repeat 102% center!important;
+	}
+</style>
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">服务方注册申请</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	
+						 	<tr>
+						 		<td type="label">资源名称</td>
+						 		<td name="resName"></td>
+						 		
+						 		<td type="label">资源编码</td>
+						 		<td name="resCode"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">数据来源</td>
+						 		<td name="apiSource"></td>
+						 		<td type="label">服务类别</td>
+						 		<td name="serviceTypeName"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">所属网络</td>
+						 		<td name="networkName"></td>
+						 		<td type="label">服务API接口类型</td>
+						 		<td name="apiType"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">方法</td>
+						 		<td name="methods"></td>
+						 		<td type="label">报文格式</td>
+						 		<td name="messageFormat"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">服务接口地址</td>
+						 		<td name="address"></td>
+						 		<td type="label">管理单位名称</td>
+						 		<td name="companyName"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">管理单位机构代码</td>
+						 		<td name="companyCode"></td>
+						 		<td type="label">联系人姓名</td>
+						 		<td name="linkman"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">联系人电话</td>
+						 		<td name="phone"></td>
+						 		<td type="label">联系人身份证号码</td>
+						 		<td name="linkmanCard"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">联系人警号</td>
+						 		<td name="linkmanCode"></td>
+						 		<td type="label">服务方描述</td>
+						 		<td name="remark"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">接口文档</td>
+						 		<td id="documentName"></td>
+						 		<td type="label"></td>
+						 		<td ></td>
+						 	</tr>
+						</table>
+					</div>
+				</div>
+				
+				<div class="ui-group">
+					<div class="ui-group-header">审批信息</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label" width="15%"><span class="required"></span>审批结果</td>
+						 		<td width="35%">
+						 			<select name="result" id="result" class="form-control" role="{required:true}">
+						 				<option value="0">同意</option>
+						 				<option value="-1">不同意</option>
+						 			</select>
+						 		</td>
+						 		<td type="label" width="15%"><span class="required"></span>审批意见</td>
+						 		<td width="35%"><textarea name="reviewDesc" id="reviewDesc" class="form-control" role="{required:true,length:200}"></textarea></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label" width="15%">允许请求网络/单位</td>
+					 			<td width="35%" style="text-align:left;">
+					 				<span style="width:26%;text-align:center;display:inline-block;">
+					 				   <label><input name="networkOrUnits" type="radio" value="1" checked/> 网络 </label>
+						 			   <label><input name="networkOrUnits" type="radio" value="2" /> 单位 </label>	
+					 				</span>
+						 			<div class="networkOrUnits">
+						 				<input id="networkName2" name="networkName2" class="form-control" />
+						 			    <input type="hidden" id="networkId2" name="networkId2" value="" />
+						 			</div>
+						 		</td>
+						 		<td type="label"></td>
+						 		<td></td>
+						 	</tr>
+						</table>
+						
+					</div>
+				</div>
+				
+				<div class="ui-form-submitbar">
+					<button class="btn btn-info blue submit" id="submit"><i class="fa fa-check"></i><span>提交</span></button>
+					<button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+				</div>
+			</form>
+			
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/approvalManage/serviceApprovalApp"],function(app){
+		app.main();
+	});
+</script>

@@ -1,0 +1,79 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="form" class="ui-form" role="form">
+				  	<div class="ui-group">
+						<div class="ui-group-header">数据源详情</div>
+						<div class="ui-group-body">
+							<table class="ui-form-grid wire">
+								<tbody>
+									<tr>
+										<td type="label" >数据源名称</td>
+										<td class='name'></td>
+										<td type="label" >数据源类型</td>
+										<td class="type"></td>
+									</tr>
+								</tbody>
+								<tbody class="database-box">
+									<tr>
+										<td type="label" >数据库类型</td>
+										<td class="dbType"></td>
+										<td type="label" >数据库实例名称</td>
+										<td class="dbInstanceName"></td>
+									</tr>
+									<tr>
+										<td type="label" >服务器IP地址</td>
+										<td class="ip"></td>
+										<td type="label" >服务器端口</td>
+										<td class="port"></td>
+									</tr>
+									<tr>
+										<td type="label" >用户名</td>
+										<td class="username"></td>
+										<td type="label" >密码</td>
+										<td class="password"></td>
+									</tr>
+								</tbody>
+								<tbody class="file-box">
+									<tr>
+										<td type="label" >传输协议</td>
+										<td class="ftpType"></td>
+										<td type="label" >文件服务器编码</td>
+										<td class="unicode "></td>
+									</tr>
+									<tr>
+										<td type="label" >服务器IP地址</td>
+										<td class="ip"></td>
+										<td type="label" >服务器端口</td>
+										<td class="port"></td>
+									</tr>
+									<tr>
+										<td type="label" >用户名</td>
+										<td class="username"></td>
+										<td type="label" >密码</td>
+										<td class="password"></td>
+									</tr>
+									<tr>
+										<td type="label" >文件路径</td>
+										<td class="ftpAddress "></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/commonApp"],function(common){
+		common.init();
+	});
+</script>
+
+

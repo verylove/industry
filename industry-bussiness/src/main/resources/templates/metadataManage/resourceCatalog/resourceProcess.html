@@ -1,0 +1,109 @@
+<div class="ui-content">
+    <div class="ui-content-header">
+        <div class="ui-content-controlbar">
+            <button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+        </div>
+    </div>
+    <div class="ui-content-body">
+        <div class="ui-content-aside" style="top:40px;">
+            <form id="form2" class="ui-form" role="form">
+                <div class="ui-group">
+                    <div class="ui-group-header">查看流程</div>
+                    <div class="ui-group-body">
+                        <div class="ui-steps blue" id="ui-steps" style="width:1000px;">
+                            <div class="ui-steps-header" style="height: 90px;">
+                                <ul class="ui-steps-stepbar" id="steps">
+                                    <li class="active" style="width: 250px;position: relative">
+                                        <div type="label">提交资源编目</div>
+                                        <div type="tip" style="width: 30px; height: 30px; line-height: 30px; font-size: 20px;">1</div>
+                                        <div style="position: absolute;left: 0;right: 0;font-size:10px" class="submitTime"></div>
+                                    </li>
+                                    <li class="active" style="width: 250px;position: relative">
+                                        <div type="label">审批资源编目</div>
+                                        <div type="tip" style="width: 30px; height: 30px; line-height: 30px; font-size: 20px;">2</div>
+                                        <div style="position: absolute;left: 0;right: 0;font-size:10px" class="updateTime"></div>
+                                    </li>
+                                    <li class="active" style="width: 250px;position: relative">
+                                        <div type="label">发布资源编目</div>
+                                        <div type="tip" style="width: 30px; height: 30px; line-height: 30px; font-size: 20px;">3</div>
+                                        <div style="position: absolute;left: 0;right: 0;font-size:10px" class="releaseTime"></div>
+                                    </li>
+                                    <li class="active" style="width: 250px;position: relative">
+                                        <div type="label">撤销资源编目</div>
+                                        <div type="tip" style="width: 30px; height: 30px; line-height: 30px; font-size: 20px;">4</div>
+                                        <div style="position: absolute;left: 0;right: 0;font-size:10px" class="revokeTime"></div>
+                                    </li>
+                                </ul>
+                                <div class="ui-steps-linebar" style="width: 755px; margin-left: 125px; height: 10px; top: -20px;background:orange">
+                                    <div class="ui-steps-line" style="width: 0px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-form-box" style="width: 700px;">
+                            <div class="ui-title">
+                                <span style="margin-top: 20px">查看编目申请</span>
+                                <span style="margin-top: 20px"></span>
+                            </div>
+                            <table class="ui-form-grid wire" id="table1">
+                                <tr>
+                                    <td type="label">资源编码</td>
+                                    <td name="resciCode"></td>
+                                    <td type="label">资源英文名称</td>
+                                    <td name="resciEname"></td>
+                                </tr>
+                                <tr>
+                                    <td type="label">资源名称</td>
+                                    <td name="resciName"></td>
+                                    <td type="label">资源等级</td>
+                                    <td name="resciLevel"></td>
+                                </tr>
+                                <tr>
+                                    <td type="label">主题分类</td>
+                                    <td name="topicName"></td>
+                                    <td type="label">行业分类</td>
+                                    <td name="industryName"></td>
+                                </tr>
+                                <tr>
+                                    <td type="label">发布目录</td>
+                                    <td name="catalogName"></td>
+                                    <td type="label">OID标识</td>
+                                    <td name="oid"></td>
+                                </tr>
+                            </table>
+                            <div class="ui-title">
+                                <span>编目审批信息</span>
+                                <span></span>
+                            </div>
+                            <table class="ui-form-grid wire" id="table2">
+                                <tr>
+                                    <td type="label">审批单位</td>
+                                    <td name="comName"></td>
+                                    <td type="label">审批人</td>
+                                    <td name="userName"></td>
+                                </tr>
+                                <tr>
+                                    <td type="label">审批结果</td>
+                                    <td name="examineState"></td>
+                                    <td type="label">审批意见</td>
+                                    <td name="examineContent"></td>
+                                </tr>
+                                <tr>
+                                    <td type="label">审批时间</td>
+                                    <td name="updateTime"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="ui-form-submitbar">
+                            <button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    require(["app/metadataManage/resourceCatalog/resourceProcess"],function(app){
+        app.main();
+    });
+</script>

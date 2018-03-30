@@ -1,0 +1,141 @@
+<div class="ui-content">
+    <div class="ui-content-header">
+        <div class="ui-content-controlbar">
+            <button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+        </div>
+    </div>
+    <div class="ui-content-body">
+        <div class="ui-content-aside" style="top:40px;">
+            <!--<form id="form" class="ui-form" role="form">-->
+            <div class="ui-group">
+                <div class="ui-group-header">资源编目审核</div>
+                <div class="ui-group-body">
+                    <div class="localRes">
+                        <!--放置步骤组件--本地API-->
+                        <div class="ui-steps blue" id="ui-steps" style="width:1000px;"></div>
+                        <div id="content1" class="hidden">
+                            <form id="form1" class="ui-form" role="form">
+                                <div class="ui-form-box" style="width:700px;">
+                                    <table class="ui-form-grid wire">
+                                        <tr>
+                                            <td type="label">资源编码</td>
+                                            <td name="resciCode"></td>
+                                            <td type="label">资源英文名称</td>
+                                            <td name="resciEname"></td>
+                                        </tr>
+                                        <tr>
+                                            <td type="label">资源名称</td>
+                                            <td name="resciName"></td>
+                                            <td type="label">资源等级</td>
+                                            <td name="resciLevel"></td>
+                                        </tr>
+                                        <tr>
+                                            <td type="label">主题分类</td>
+                                            <td name="topicName"></td>
+                                            <td type="label">行业分类</td>
+                                            <td name="industryName"></td>
+                                        </tr>
+                                        <tr>
+                                            <td type="label">发布目录</td>
+                                            <td name="catalogName"></td>
+                                            <td type="label">OID标识</td>
+                                            <td name="oid"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="content2" class="hidden">
+                            <form id="form2" class="ui-form" role="form">
+                                <div class="ui-title">
+                                    <span>元数据信息</span>
+                                    <span></span>
+                                </div>
+                                <div class="ui-data-centent">
+                                    <img src="../images/0.png" alt="">
+                                    <div class="ui-data-table-box">
+                                        <h4 name="resciName"></h4>
+                                        <div name="resciContent"></div>
+                                        <div class="ui-form-box" style="margin:10px 0;width:570px;">
+                                            <table class="ui-form-grid wire">
+                                                <tr>
+                                                    <td type="label">资源编码</td>
+                                                    <td name="resciCode"></td>
+                                                    <td type="label">资源英文名称</td>
+                                                    <td name="resciEname"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td type="label">资源名称</td>
+                                                    <td name="resciName"></td>
+                                                    <td type="label">资源等级</td>
+                                                    <td name="resciLevel"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td type="label">主题分类</td>
+                                                    <td name="topicName"></td>
+                                                    <td type="label">行业分类</td>
+                                                    <td name="industryName"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td type="label">发布目录</td>
+                                                    <td name="catalogName"></td>
+                                                    <td type="label">OID标识</td>
+                                                    <td name="oid"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui-title">
+                                    <span>数据项信息</span>
+                                    <span></span>
+                                </div>
+                                <table id="grid" class="ui-grid" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>数据项名称</th>
+                                        <th>数据项英文名称</th>
+                                        <th>数据项编码</th>
+                                        <th>数据项类型</th>
+                                        <th>数据项长度</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div id="content3" class="hidden">
+                            <form class="ui-form" role="form" id="form3">
+                                <div class="ui-form-box">
+                                    <table class="ui-form-grid wire">
+                                        <tr>
+                                            <td type="label">审批结果</td>
+                                            <td>
+                                                <select name="examineState" class="form-control" id="">
+                                                    <option value="1">同意发布</option>
+                                                    <option value="0">拒绝发布</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td type="label">审批意见</td>
+                                            <td><input type="text" name="examineContent" class="form-control" placeholder="请输入" role="{length:200}"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--</form>-->
+        </div>
+    </div>
+</div>
+<script>
+    require(["app/metadataManage/examineCatalog/catalogExamine"],function(app){
+        app.main();
+    });
+</script>

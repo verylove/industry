@@ -1,0 +1,73 @@
+<style type="text/css">
+	#registerGridForm input,#registerGridForm select{
+		width: 140px;
+	}
+</style>
+<div class="ui-content">
+	<div class="ui-content-body">
+		<div class="ui-content-toolsbar">
+			<div class="ui-content-searchbar  left">
+				<form class="form-inline" id="registerGridForm">
+					<input type="hidden" name="rowId" value="" id="rowId"/>
+					<div class="form-group">
+						<label for="name">模块</label>
+						<select name="moduleCode" id="" class="form-control" >
+							<option value="*">全部</option>
+					    	<option value="LOGIN_MANAGE">登录</option>
+					    	<option value="REGISTER_MANAGE">注册管理</option>
+					    	<option value="REVIEW_MANAGE">审批管理</option>
+					    	<option value="RESOURCE_MANAGE">资源管理</option>
+					    	<option value="METADATA_MANAGEMENT">元数据管理</option>
+					    	<option value="LOG_AUDIT">日志审计</option>
+					    	<option value="BUSINESS_ANALYSIS">业务分析</option>
+					    	<option value="USER_MANAGE">用户管理</option>
+					    	<option value="SYSTEM_MANAGE">系统管理</option>
+					    	<option value="DATA_INTERCHANGE">数据交换 </option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="name">所属网络</label>
+						<input type="text" id="networkName" name="networkName" class="form-control" />
+					</div>
+					<div class="form-group">
+						<label for="name">时间范围</label>
+						<input type="text" name="updateTime" class="form-control ui-form-date" autocomplete="off" readonly="readonly">
+					</div>
+					<div class="form-group">
+						<label for="name">操作结果</label>
+						<select name="operateReult" class="form-control" >
+							<option value="">全部</option>
+							<option value="0">成功</option>
+							<option value="1">失败</option>
+						</select>
+					</div>	
+					<div class="form-group">
+						<button class="btn btn-info blue" id="search"><i class="ion-ios-search-strong"></i><span>查询</span></button>
+						<button class="btn btn-info blue" id="export"><span>导出EXCEL</span></button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="ui-content-aside" style="top: 50px;">
+			<table id="grid" class="ui-grid" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>模块</th>
+						<th>操作类型</th>
+						<th>用户名</th>
+						<th>所属网络</th>
+						<th>终端标识</th>
+						<th>操作时间</th>
+						<th>操作结果</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/diaryAudit/operateDiary"],function(app){
+		app.main();
+	});
+</script>

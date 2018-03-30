@@ -1,0 +1,111 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">服务描述</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label"><span class="required"></span>服务名称</td>
+						 		<td><input type="text" name="serviceName" class="form-control" role="{required:true,length:50}"/></td>
+						 		
+						 		<td type="label">服务描述</td>
+						 		<td><input name="serviceDescription" type="text" class="form-control" role="{length:200}"/></td>
+						 	</tr>
+						</table>
+					</div>
+				</div>
+				<div class="ui-group">
+					<div class="ui-group-header">监听设备配置</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label"><span class="required"></span>监听设备</td>
+						 		<td>
+						 		    <input type="text" id="monitorEquipment" name="monitorEquipment" class="form-control" />
+						 			<input type="hidden" id="monitorEquipmentId" name="monitorEquipmentId" value="" role="{required:true}"/>
+						 		</td>
+						 		<td type="label"><span class="required"></span>转发协议</td>
+						 		<td>
+						 			<select name="type" id="" class="form-control" role="{required:true}">
+						 				<option value="">请选择</option>
+						 				<option value="0">TCP</option>
+						 				<option value="1">UDP</option>
+						 			</select>
+						 		</td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label"><span class="required"></span>监听网卡</td>
+						 		<td>
+						 			<select type="text" id="monitorNetworkcard" name="monitorNetworkcard" class="form-control" role="{required:true}" ></select>
+						 		</td>
+						 		<td type="label"><span class="required"></span>监听IP</td>
+						 		<td><input type="text" id="monitorAddr" name="monitorAddr" class="form-control" value="" role="{required:true,ip:true}"/></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label"><span class="required"></span>监听端口</td>
+						 		<td><input type="text" name="monitorPort" class="form-control" role="{required:true,port:true}"/></td>
+						 		<td type="label"></td>
+						 		<td></td>
+						 	</tr>
+						</table>
+					</div>
+				</div>
+				<div class="ui-group">
+					<div class="ui-group-header">出口设备配置</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label"><span class="required"></span>目标IP</td>
+						 		<td>
+						 		    <input type="text" name="targetAddr" class="form-control" value="" role="{required:true,ip:true}"/>
+						 		</td>
+						 		
+						 		<td type="label"><span class="required"></span>目标端口</td>
+						 		<td><input type="text" name="targetPort" class="form-control" value="" role="{required:true,port:true}"/></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label"><span class="required"></span>出口设备</td>
+						 		<td>
+						 		    <input type="text" id="targetEquipment" name="targetEquipment" class="form-control" />
+						 			<input type="hidden" id="targetEquipmentId" name="targetEquipmentId" value="" role="{required:true}"/>
+						 		</td>
+						 		
+						 		<!--<td type="label"><span class="required"></span>出口网络属性</td>
+						 		<td><input type="text" name="targetNetwork" class="form-control" value="" role="{required:true}"/></td>-->
+						 	
+						 	    <td type="label">出口网卡</td>
+						 		<td>
+						 			<select type="text" id="targetNetwork" name="outNetworkcard" class="form-control" ></select>
+						 		</td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">出口IP</td>
+						 		<td><input type="text" id="outAddrip" name="outAddrip" class="form-control" value="" role="{ip:true}"/></td>
+						 		<td type="label"></td>
+						 		<td></td>
+						 		
+						 	</tr>
+						</table>
+					</div>
+				</div>
+				<div class="ui-form-submitbar">
+					<button class="btn btn-info blue submit" id="requestSubmit"><i class="fa fa-check"></i><span>提交</span></button>
+					<button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/systemManage/portForwardAdd"],function(app){
+		app.main();
+	});
+</script>

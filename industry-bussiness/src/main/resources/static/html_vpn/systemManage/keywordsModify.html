@@ -1,0 +1,51 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" id="form" style="top:40px;">
+			<form class="ui-form" role="form" id="requestRegisterForm">
+				<div class="ui-group">
+					<div class="ui-group-header">编辑</div>
+					<div class="ui-group-body">
+						<div class="ui-form-box">
+							<table class="ui-form-grid wire">
+								<tbody>
+									<tr>
+										<td type="label"><span class="required"></span>策略名称</td>
+										<td>
+											<input type="text" name="name" class="form-control" placeholder="请输入策略名称" role="{required:true,length:50}"/>
+										</td>
+									</tr>
+									<tr>
+										<td type="label"><span class="required"></span>内容</td>
+										<td>
+											<textarea type="text" name="content" class="form-control" placeholder="请输入内容" role="{required:true,length:200}"></textarea>
+										</td>
+									</tr>
+									<tr>
+										<td type="label">描述</td>
+										<td>
+											<textarea type="text" name="description" class="form-control" placeholder="描述..." role="{length:200}"></textarea>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="ui-form-submitbar">
+								<button class="btn btn-info blue submit" id="requestSubmit"><i class="fa fa-check"></i><span>提交</span></button>
+								<button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/systemManage/keywordsModify"],function(app){
+		app.main();
+	});
+</script>

@@ -1,0 +1,59 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">资源编目信息</div>
+					<div class="ui-group-body">
+						
+						<!--表单填写区-->
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label">主题分类</td>
+						 		<td name="themeTypeName"></td>
+						 		
+						 		<td type="label">行业分类</td>
+						 		<td name="industryTypeName"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">所属目录</td>
+						 		<td name="catalogTypeName"></td>
+						 		
+						 		<td type="label">资源摘要</td>
+						 		<td name="abstracts"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">联系人姓名</td>
+						 		<td name="linkman"></td>
+						 		
+						 		<td type="label">联系人电话</td>
+						 		<td name="phone"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">联系人身份证</td>
+						 		<td name="linkmanCard"></td>
+						 		
+						 		<td type="label">联系人警号</td>
+						 		<td name="linkmanCode">
+						 		</td>
+						 	</tr>
+						</table>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/resourceManage/resourceCatalogViewInfo"],function(app){
+		app.main();
+	});
+</script>

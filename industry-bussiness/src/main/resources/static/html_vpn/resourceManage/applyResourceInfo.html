@@ -1,0 +1,149 @@
+<style>
+	.ui-grid thead th{
+		width:25%;
+	}
+</style>
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form  id="requestRegisterForm">
+			<div class="ui-group">
+				<div class="ui-group-header">请求方信息</div>
+				<div class="ui-group-body">
+					 <table class="ui-form-grid wire" id="reqTab">
+					 	<tr>
+					 		<td type="label">请求方名称</td>
+					 		<td name="name"></td>
+					 		
+					 		<td type="label">请求方编码(SenderID)</td>
+					 		<td name="code"></td>
+					 	</tr>
+					 	<tr>
+					 		<td type="label">请求方网络属性</td>
+					 		<td name="networkName"></td>
+					 		<td type="label">管理单位名称</td>
+					 		<td name="companyName"></td>
+					 	</tr>
+					 	<tr>
+					 		<td type="label">管理单位机构代码</td>
+					 		<td name="companyCode"></td>
+					 		
+					 		<td type="label">请求方IP地址</td>
+					 		<td name="ip"></td>
+					 	</tr>
+					 	
+					 	<tr>
+					 		<td type="label">请求方接口类型</td>
+					 		<td name="typeName"></td>
+					 		<td type="label">申请人姓名</td>
+					 		<td name="linkName"></td>
+					 	</tr>
+					 	<tr>
+					 		<td type="label">申请人电话</td>
+					 		<td name="linkPhone"></td>
+					 		<td type="label"></td>
+					 		<td></td>
+					 	</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-group">
+				<div class="ui-group-header">服务方信息</div>
+				<div class="ui-group-body">
+					 <table class="ui-form-grid wire" id="serTab">
+					 	<tr>
+					 		<td type="label">资源名称</td>
+					 		<td name="resName"></td>
+					 		<td type="label">资源编码(ServiceID)</td>
+					 		<td name="resCode"></td>
+					 	</tr>
+					 	<tr>
+					 		<td type="label">数据来源</td>
+					 		<td name="apiSource"></td>
+					 		<td type="label">服务类别</td>
+					 		<td name="serviceTypeName"></td>
+					 	</tr>
+					 	
+					 	<tr>
+					 		<td type="label">服务API接口类型</td>
+					 		<td name="apiType"></td>
+					 		<td type="label">方法</td>
+					 		<td name="methods"></td>
+					 	</tr>
+					 	
+					 	<tr>
+					 		<td type="label">报文格式</td>
+					 		<td name="messageFormat"></td>
+					 		<td type="label">服务接口地址</td>
+					 		<td name="apiUrl"></td>
+					 	</tr>
+					 	<tr>
+					 		<td type="label">管理单位名称</td>
+					 		<td name="companyName"></td>
+					 		<td type="label">管理单位机构代码</td>
+					 		<td name="companyCode"></td>
+					 	</tr>
+					 	<tr>
+					 		<td type="label"> 联系人姓名</td>
+					 		<td name="linkman"></td>
+					 		<td type="label">联系人电话</td>
+					 		<td name="phone"></td>
+					 	</tr>
+					 	<tr>
+					 		<td type="label">接口文档</td>
+					 		<td name="documentName" id="documentName"></td>
+					 		<td type="label"></td>
+					 		<td></td>
+					 	</tr>
+					</table>
+				</div>
+			</div>
+			<div class="ui-group">
+				<div class="ui-group-header">申请信息</div>
+				<div class="ui-group-body">
+					 <table class="ui-form-grid wire" id="appTab">
+					 	<tr>
+					 		<td type="label">申请原因</td>
+					 		<td name="applyReason"></td>
+					 		<td type="label">申请编码(RequestID)</td>
+					 		<td name="taskCode"></td>
+					 	</tr>
+					</table>
+				</div>
+			</div>
+			</form>
+			<div class="ui-group">
+					<div class="ui-group-header">审批流程信息</div>
+					<div class="ui-group-body">
+						<!--表单填写区-->
+						 <table id="grid11" class="ui-grid" cellspacing="0" width="100%">
+						 	<thead>
+						 		<th>处理时间</th>
+						 		<th>处理环节</th>
+						 		<th>处理结果</th>
+						 		<th>停留时间</th>
+						 	</thead>
+						 	<tbody>
+							 	<tr>
+							 		<td>2017-10-20 13:20:45</td>
+							 		<td>注册申请</td>
+							 		<td>--</td>
+							 		<td>--</td>
+							 	</tr>
+						 	</tbody>
+						</table>
+					</div>
+				</div>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/resourceManage/applyResourceInfo"],function(app){
+		app.main();
+	});
+</script>

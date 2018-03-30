@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <title>登陆</title>
+    <link href="../css/style.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/resourceStyle.min.css" rel="stylesheet" type="text/css">
+    <script src="../js/lib/require.js"></script>
+    <script src="../js/lib/config.js"></script>
+    <link href="../css/loginvpn.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="head">
+    <div id="logo">
+        <img src="../images/h501.png" />
+    </div>
+</div>
+<div id="mainBody">
+    <div id="photo">
+        <img src="../images/32431-18.png" />
+    </div>
+    <div id="main">
+        <h3>用户登录</h3>
+        <div class="errorInfo"></div>
+        <div><label id="loginTitle">用户名</label><input type="text" placeholder="请输入用户名..." id="loginName"/></div>
+        <div><label id="passTitle">密&nbsp;&nbsp;&nbsp;码</label><input type="password" placeholder="请输入密码..." id="passWord" /></div>
+        <div><label id="codeTitle">验证码</label><input type="text" placeholder="请输入验证码..." id="code"/><span class="codeSpan"><img class="captcha_img" src="/index/code" /></span></div>
+        <div id="login_button">登&nbsp;&nbsp;&nbsp;录</div>
+    </div>
+</div>
+<div class="foot_version_text">Copyright©2016-2017 fablesoft.cn 版权所有 江苏飞搏软件股份有限公司</div>
+<script type="text/javascript">
+    require(["app/loginApp"],function(app){
+        app.main();
+    });
+</script>
+</body>
+</html>
+

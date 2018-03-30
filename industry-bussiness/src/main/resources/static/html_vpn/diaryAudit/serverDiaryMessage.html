@@ -1,0 +1,30 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<div class="ui-group">
+				<div class="ui-group-header">请求数据</div>
+				<div class="ui-group-body">
+					<div id="requestData" style="overflow: auto;text-align:left;width: 100%;border:none;">
+					</div>
+				</div>
+			</div>
+			<div class="ui-group">
+				<div class="ui-group-header">响应数据</div>
+				<div class="ui-group-body">
+					<div id="responseData" style="overflow: auto;text-align:left;width: 100%;border:none;">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/diaryAudit/serverDiaryMessage"],function(app){
+		app.main();
+	});
+</script>

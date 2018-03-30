@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fable.industry.bussiness.mapper.dictionary.DictionaryItemMapper">
+	<resultMap type="com.fable.industry.bussiness.model.bean.DictionaryItemBean" id="BaseResultMap">
+		<id column="ID" property="id" jdbcType="INTEGER"/>
+		<result column="INDEX" property="index" jdbcType="INTEGER"/>
+		<result column="ITEM_NAME" property="itemName" jdbcType="VARCHAR"/>
+		<result column="ITEM_COMTENT" property="itemContent" jdbcType="VARCHAR"/>
+		<result column="CLASS_ID" property="classId" jdbcType="INTEGER"/>
+		<result column="ITEM_ALIAS" property="itemAlias" jdbcType="VARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,
+		`INDEX`,
+		ITEM_NAME,
+		ITEM_COMTENT,
+		CLASS_ID,
+		ITEM_ALIAS
+	</sql>
+
+	<select id="listDictionar" parameterType="com.fable.industry.bussiness.model.bean.DictionaryItemBean" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM SYS_DICTIONARY_ITEM
+		WHERE 1 = 1
+		<if test="classId != 0">
+		 AND CLASS_ID = #{classId}
+		</if>
+		<if test="itemName != null and itemName !='' ">
+			AND ITEM_NAME LIKE CONCAT('%',#{itemName},'%')
+		</if>
+		<if test="itemAlias != null and itemAlias != ''">
+			AND ITEM_ALIAS LIKE CONCAT('%',#{itemAlias},'%')
+		</if>
+	</select>
+
+	<select id="getByNameAndDictId" resultType="int" parameterType="com.fable.industry.bussiness.model.bean.DictionaryItemBean">
+		SELECT COUNT(1) FROM SYS_DICTIONARY_ITEM
+		WHERE ITEM_NAME = #{itemName}
+		AND CLASS_ID = #{classId}
+	</select>
+
+	<insert id="insertItem" parameterType="com.fable.industry.bussiness.model.bean.DictionaryItemBean">
+		INSERT INTO SYS_DICTIONARY_ITEM
+		VALUES (#{id},#{index},#{itemName},#{itemContent},#{classId},#{itemAlias},0)
+	</insert>
+
+	<update id="updateItem" parameterType="com.fable.industry.bussiness.model.bean.DictionaryItemBean">
+		UPDATE SYS_DICTIONARY_ITEM SET
+		ITEM_NAME = #{itemName},
+		ITEM_COMTENT = #{itemContent},
+		CLASS_ID = #{classId},
+		ITEM_ALIAS = #{itemAlias}
+		WHERE ID = #{id}
+	</update>
+
+	<select id="getItemByState" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT ITEM_NAME FROM sys_dictionary_item WHERE ITEM_STATE = 1 AND ID IN (${ids})
+	</select>
+
+	<delete id="deleteItem" parameterType="java.lang.String">
+		DELETE FROM SYS_DICTIONARY_ITEM WHERE ID IN (${ids})
+	</delete>
+
+	<select id="queryItemById" parameterType="int" resultType="map">
+		SELECT i.ID AS id,i.ITEM_NAME AS itemName,i.ITEM_COMTENT AS itemContent,i.ITEM_ALIAS AS itemAlias,
+		c.DICTIONAR_NAME AS dictionarName,c.ID AS dictionarId FROM SYS_DICTIONARY_ITEM i
+		LEFT JOIN SYS_DICTIONARY_CLASS c ON i.CLASS_ID = c.ID
+		WHERE i.ID = #{id}
+	</select>
+
+	<select id="dict" parameterType="int" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM SYS_DICTIONARY_ITEM
+		WHERE CLASS_ID = #{classId}
+	</select>
+
+	<select id="queryIdByName"  resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM SYS_DICTIONARY_ITEM
+		WHERE CLASS_ID = #{classId} AND ITEM_NAME=#{itemName}
+	</select>
+
+</mapper>

@@ -1,0 +1,505 @@
+<style type="text/css">
+	table input[type='text'],select{
+		width: 100% !important;
+	}
+</style>
+<link href="../css/need/select2.min.css" rel="stylesheet" type="text/css">
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<div class="ui-group">
+				<div class="ui-group-header">接收任务</div>
+				<div class="ui-group-body">
+					<div class="localRes">
+						<!--放置步骤组件--数据库-->
+						<div class="ui-steps blue" id="ui-steps" style="width:1000px;"></div>
+						<div id="content1" class="hidden">
+							<div class="ui-group">
+								<div class="ui-group-body">
+									<form id="form1" class="ui-form" role="form" style="float: none;">
+										<table class="ui-form-grid wire">
+										 	<tr>
+										 		<td type="label"><span class="required"></span>同步方式</td>
+										 		<td>
+										 			<select name="SynchronizationMode" class="form-control changeType" style="width: 100%;"  role="{required:true}">
+										 				<option value="mapping">映射模式</option>
+										 				<option value="synchronization">完全同步模式</option>
+										 			</select>
+										 		</td>
+										 		<td type="label"><span class="required"></span>联系人姓名</td>
+										 		<td>
+										 			<input type="text" name="linkman" class="form-control" placeholder="请输入" role="{required:true,length:[2,20],filterCN:true}"/>
+										 		</td>
+										 	</tr>
+										 	<tr>
+										 		<td type="label"><span class="required"></span>联系人电话</td>
+										 		<td>
+										 			<input type="text" name="phone" class="form-control" placeholder="请输入" role="{required:true,mobile_telephone:true}"/>
+										 		</td>
+										 		
+										 		<td type="label"><span class="required"></span>联系人身份证号</td>
+										 		<td>
+										 			<input type="text" name="linkmanCard" class="form-control" placeholder="请输入" role="{required:true,identityCard:true}"/>
+										 		</td>
+										 	</tr>
+										 	<tr>
+										 		<td type="label"><span class="required"></span>联系人警号</td>
+										 		<td>
+										 			<input type="text" name="linkmanCode" class="form-control" placeholder="请输入" role="{required:true,number:true,length:[1,10]}"/>
+										 		</td>
+										 		<td type="label"><span class="required"></span>是否清除源表数据</td>
+										 		<td style="text-align:left">
+										 			<label><input name="isclear" type="radio" value="1" checked/> 是 </label>
+						 			                <label><input name="isclear" type="radio" value="2" /> 否 </label>
+										 		</td>
+										 	</tr>
+										</table>
+									</form>
+								</div>
+							</div>
+							
+						</div>
+						
+						<div id="content2" class="hidden">
+							<div class="ui-group">
+								<div class="ui-group-header">源设置</div>
+								<div class="ui-group-body">
+									<table class="ui-grid" cellspacing="0" width="100%">
+										<thead>
+											<th style="width: 50%;">数据源</th>
+											<th>数据表</th>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<select name="" id="" class="form-control">
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+													</select>
+												</td>
+												<td>
+													<select name="" id="sel_Table" class="form-control" multiple="true">
+														<option value="">a</option>
+														<option value="">b</option>
+														<option value="">c</option>
+														<option value="">d</option>
+													</select>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="ui-group">
+								<div class="ui-group-header">目标设置
+									<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+								</div>
+								<div class="ui-group-body">
+									<table class="ui-grid" cellspacing="0" width="100%">
+										<thead>
+											<th style="width: 50%;">目标单位</th>
+											<th></th>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<select name="" id="" class="form-control">
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+													</select>
+												</td>
+												<td> </td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						<div id="content3" class="hidden">
+							<div class="ui-group">
+								<div class="ui-group-header">配置更新策略</div>
+								<div class="ui-group-body">
+									<table class="ui-grid-wire sensitive_word_filter" >
+										<tr>
+											<td class="title" width="25%">调度模式</td>
+											<td width="25%">
+												<select name="dispatchType" id="" class="form-control dispatchType">
+													<option value="1">周期模式</option>
+													<option value="2">定期模式</option>
+												</select>
+											</td>
+										</tr>
+										<tr class="periodicMode">
+											<td class="title" width="25%">开始时间</td>
+											<td width="25%"><input class="form-control beginTime" type="text" name="beginTime" role="{required:true,length:'50'}"/></td>
+										</tr>
+										<tr class="periodicMode">
+											<td class="title" width="25%">间隔周期</td>
+											<td width="25%">
+												<div style="width: 70%;float: left;">
+													<input class="form-control cycle" type="text" name="cycle" role="{required:true,length:'50'}"/>
+												</div>
+												<div style="width: 30%;float: left;">
+													<select name="dateTypeMin" id="" class="form-control dateTypeMin">
+														<option value="1">时</option>
+														<option value="2">分</option>
+														<option value="3">秒</option>
+													</select>
+												</div>
+											</td>
+										</tr>
+										<tr class="regularMode" style="display: none;">
+											<td class="title" width="25%">间隔周期</td>
+											<td width="25%">
+												<div style="width: 40%;float: left;">
+													<select name="dateTypeMax" id="" class="form-control dateTypeMax">
+														<option value="1">每月</option>
+														<option value="2">每周</option>
+														<option value="3">每日</option>
+													</select>
+												</div>
+												<div style="width: 60%;float: left;">
+													<div style="width: 33.3%;float: left;">
+														<div style="width: 60%;float: left;">
+															<input type="text" name="day" class="form-control day" role="{required:true,length:'50'}"/>
+														</div>
+														<div style="width: 40%;float: left;line-height: 28px;">天</div>
+													</div>
+													<div style="width: 33.3%;float: left;">
+														<div style="width: 60%;float: left;">
+															<input name="hour" type="text" class="form-control hour" role="{required:true,length:'50'}"/>
+														</div>
+														<div style="width: 40%;float: left;line-height: 28px;">时</div>
+													</div>
+													<div style="width: 33.3%;float: left;">
+														<div style="width: 60%;float: left;">
+															<input name="second" type="text" class="form-control second" role="{required:true,length:'50'}"/>
+														</div>
+														<div style="width: 40%;float: left;line-height: 28px;">分</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</table>
+									<div style="margin-top: 10px;float: left;" class="showNotes">
+										<p key="1" >说明：周期模式从一个指定时间开始，按照指定的时间间隔更新数据（如每隔5分钟更新一次数据）</p>
+										<p key="2" style="display: none;">说明：定期模式指从一个指定时间开始，按照指定周期（日、周、月）更新数据的策略（如每月1日0时定期更新数据）</p>
+									</div>
+								</div>
+							</div>
+						</div>	
+						<div id="content4" class="hidden">
+							<form class="ui-form" role="form">
+								<div class="ui-group">
+									<div class="ui-group-header">敏感词过滤
+										<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+									</div>
+									<div class="ui-group-body">
+										<table class="ui-grid-wire sensitive_word_filter" id="sensitive_word_filter_1" >
+											<thead>
+												<tr>
+													<th>源表名称</th>
+													<th>源表字段名称</th>
+													<th>源表字段类型</th>
+													<th>源表字段长度</th>
+													<th>策略名称</th>
+													<th>内容</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+										<div class="left" style="text-align: left;">敏感词过滤规则即满足策略条件的数据过滤掉，不做出参参数显示。</div>
+									</div>
+								</div>
+								<div class="ui-group">
+									<div class="ui-group-header">数据过滤
+										<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+									</div>
+									<div class="ui-group-body">
+										<table class="ui-grid-wire sensitive_word_filter" id="data_filter" >
+											<thead>
+												<tr>
+													<th>源表名称</th>
+													<th>源表字段名称</th>
+													<th>源表字段类型</th>
+													<th>源表字段长度</th>
+													<th>比较符</th>
+													<th>比较值</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+										<div class="left" style="text-align: left;">数据过滤规则即满足比较符合条件的数据过滤掉，不做出参参数显示。</div>
+									</div>
+								</div>
+								<div class="ui-group">
+									<div class="ui-group-header">数据脱敏
+										<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+									</div>
+									<div class="ui-group-body">
+										<table class="ui-grid-wire sensitive_word_filter" id="data_desensitization" >
+											<thead>
+												<tr>
+													<th>源表名称</th>
+													<th>源表字段名称</th>
+													<th>源表字段类型</th>
+													<th>源表字段长度</th>
+													<th>展示规则</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+										<div class="left" style="text-align: left;">数据脱敏规则即满足展示规则条件的数据做数据脱敏。</div>
+									</div>
+								</div>
+								<div class="ui-group">
+									<div class="ui-group-header">数据转换
+										<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+									</div>
+									<div class="ui-group-body">
+										<table class="ui-grid-wire sensitive_word_filter" id="data_transform" >
+											<thead>
+												<tr>
+													<th>源表名称</th>
+													<th>源表字段名称</th>
+													<th>源表字段类型</th>
+													<th>源表字段长度</th>
+													<th>内容</th>
+													<th>替换为</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+										<div class="left" style="text-align: left;">数据转换规则即满足内容条件的数据替换成替换为的数据。</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<!--放置步骤组件--第三方API-->
+						<div class="ui-steps blue" id="ui-steps2" style="width:1000px;"></div>
+						<div id="content11" class="hidden">
+							<div class="ui-group">
+								<div class="ui-group-body">
+									<form id="form2" class="ui-form" role="form" style="float: none;">
+										<table class="ui-form-grid wire">
+										 	<tr>
+										 		<td type="label"><span class="required"></span>任务名称</td>
+										 		<td>
+										 			<input type="text" name="resName" class="form-control resName" placeholder="请输入" role="{required:true,length:50}"/>
+										 		</td>
+										 		<td type="label"><span class="required"></span>任务类型</td>
+										 		<td>
+										 			<select name="resourceOrigin" class="form-control changeType" style="width: 100%;"  role="{required:true}">
+										 				<option value="data">数据库</option>
+										 				<option value="file">文件</option>
+										 			</select>
+										 		</td>
+										 	</tr>
+										 	<tr>
+										 		<td type="label"><span class="required"></span>同步类型</td>
+										 		<td>
+										 			<select name="serviceType" class="form-control dataSource" style="width: 100%;"  role="{required:true}">
+										 				<option value="*">请选择</option>
+										 				<option value="dashfhafh">全量同步</option>
+										 				<option value="dashfhafh">增量同步</option>
+										 				<option value="dashfhafh">触发器同步</option>
+										 				<option value="dashfhafh">时间戳同步</option>
+										 			</select>
+										 		</td>
+										 		<td type="label"><span class="required"></span>联系人姓名</td>
+										 		<td>
+										 			<input type="text" name="linkman" class="form-control" placeholder="请输入" role="{required:true,length:[2,20],filterCN:true}"/>
+										 		</td>
+										 	</tr>
+										 	<tr>
+										 		<td type="label"><span class="required"></span>联系人电话</td>
+										 		<td>
+										 			<input type="text" name="phone" class="form-control" placeholder="请输入" role="{required:true,mobile_telephone:true}"/>
+										 		</td>
+										 		
+										 		<td type="label"><span class="required"></span>联系人身份证号</td>
+										 		<td>
+										 			<input type="text" name="linkmanCard" class="form-control" placeholder="请输入" role="{required:true,identityCard:true}"/>
+										 		</td>
+										 	</tr>
+										 	<tr>
+										 		<td type="label"><span class="required"></span>联系人警号</td>
+										 		<td>
+										 			<input type="text" name="linkmanCode" class="form-control" placeholder="请输入" role="{required:true,number:true,length:[1,10]}"/>
+										 		</td>
+										 		<td type="label">任务描述</td>
+										 		<td>
+										 			<textarea type="text" name="remark" class="form-control" placeholder="请输入" role="{length:200}"></textarea>
+										 		</td>
+										 	</tr>
+										</table>
+									</form>
+								</div>
+							</div>
+							
+							<div class="ui-group">
+								<div class="ui-group-header">源设置</div>
+								<div class="ui-group-body">
+									<table class="ui-grid" cellspacing="0" width="100%">
+										<thead>
+											<th style="width: 50%;">数据源</th>
+											<th>文件路径</th>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<select name="" id="" class="form-control">
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+													</select>
+												</td>
+												<td>
+													<input type="text"  class="form-control"/>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="ui-group">
+								<div class="ui-group-header">目标设置
+									<button class='btn btn-link blue add' style="float: right;margin-right: 10px;" title='添加'><i class='fa fa-plus'></i></button>
+								</div>
+								<div class="ui-group-body">
+									<table class="ui-grid" cellspacing="0" width="100%">
+										<thead>
+											<th style="width: 50%;">目标单位</th>
+											<th></th>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<select name="" id="" class="form-control">
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+														<option value="">aaaaa</option>
+													</select>
+												</td>
+												<td> </td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="content21" class="hidden">
+							<div class="part1 mb-25">
+								<table class="ui-grid fileTable">
+									<thead>
+										<tr>
+											<th><input type="checkbox" /></th>
+											<th>目录名称</th>
+											<th>目录大小</th>
+											<th>最近修改日期</th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+						</div>
+						<div id="content31" class="hidden">
+							<div class="ui-group">
+								<div class="ui-group-header">配置更新策略</div>
+								<div class="ui-group-body">
+									<table class="ui-grid-wire sensitive_word_filter" >
+										<tr>
+											<td class="title" width="25%">调度模式</td>
+											<td width="25%">
+												<select name="dispatchType" id="" class="form-control dispatchType">
+													<option value="1">周期模式</option>
+													<option value="2">定期模式</option>
+												</select>
+											</td>
+										</tr>
+										<tr class="periodicMode">
+											<td class="title" width="25%">开始时间</td>
+											<td width="25%"><input class="form-control beginTime" type="text" name="beginTime" role="{required:true,length:'50'}"/></td>
+										</tr>
+										<tr class="periodicMode">
+											<td class="title" width="25%">间隔周期</td>
+											<td width="25%">
+												<div style="width: 70%;float: left;">
+													<input class="form-control cycle" type="text" name="cycle" role="{required:true,length:'50'}"/>
+												</div>
+												<div style="width: 30%;float: left;">
+													<select name="dateTypeMin" id="" class="form-control dateTypeMin">
+														<option value="1">时</option>
+														<option value="2">分</option>
+														<option value="3">秒</option>
+													</select>
+												</div>
+											</td>
+										</tr>
+										<tr class="regularMode" style="display: none;">
+											<td class="title" width="25%">间隔周期</td>
+											<td width="25%">
+												<div style="width: 40%;float: left;">
+													<select name="dateTypeMax" id="" class="form-control dateTypeMax">
+														<option value="1">每月</option>
+														<option value="2">每周</option>
+														<option value="3">每日</option>
+													</select>
+												</div>
+												<div style="width: 60%;float: left;">
+													<div style="width: 33.3%;float: left;">
+														<div style="width: 60%;float: left;">
+															<input type="text" name="day" class="form-control day" role="{required:true,length:'50'}"/>
+														</div>
+														<div style="width: 40%;float: left;line-height: 28px;">天</div>
+													</div>
+													<div style="width: 33.3%;float: left;">
+														<div style="width: 60%;float: left;">
+															<input name="hour" type="text" class="form-control hour" role="{required:true,length:'50'}"/>
+														</div>
+														<div style="width: 40%;float: left;line-height: 28px;">时</div>
+													</div>
+													<div style="width: 33.3%;float: left;">
+														<div style="width: 60%;float: left;">
+															<input name="second" type="text" class="form-control second" role="{required:true,length:'50'}"/>
+														</div>
+														<div style="width: 40%;float: left;line-height: 28px;">分</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</table>
+									<div style="margin-top: 10px;float: left;" class="showNotes">
+										<p key="1" >说明：周期模式从一个指定时间开始，按照指定的时间间隔更新数据（如每隔5分钟更新一次数据）</p>
+										<p key="2" style="display: none;">说明：定期模式指从一个指定时间开始，按照指定周期（日、周、月）更新数据的策略（如每月1日0时定期更新数据）</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/dataExchange/receiveDatabase"],function(app){
+		app.main();
+	});
+</script>

@@ -1,0 +1,89 @@
+<div class="ui-content">
+	<div class="ui-aside left" id="treeAside">
+		<div class="search-box input-group" style="margin: 10px;">
+			<input type="text" class="form-control" id="unitsName" placeholder="请输入单位名称" autocomplete="off">
+			<div class="input-group-addon handCursor" id="search"><i class="fa fa-search"></i></div>
+		</div>
+		<ul class="ztree ui-treebar" id="treebar"  style="margin-top:6px;"></ul>
+	</div>
+	<div class="ui-aside right" id="rightPage">
+		<div class="ui-content-body unitTable">
+		    <div class="ui-content-toolsbar">
+		    	<form id="gridForm">
+					<input type="hidden" name="treeId" id="treeId"/>
+					<input type="hidden" name="rowId" value="" id="rowId"/>
+			    	<div class="ui-content-searchbar">
+						<div class="ui-content-buttonbar">
+						</div>
+					</div>
+					<div class="ui-content-buttonbar">
+						<button class="btn btn-info blue" type="role" name="新增" id="add"><i class="ion-plus"></i><span>新增</span></button>
+						<button class="btn btn-info blue" type="role" name="删除" id="deleteBatch"><i class="fa fa-trash-o"></i><span>删除</span></button>
+						<button class="btn btn-info blue" type="role" name="导入" id="import"><i class="fa fa-arrow-down"></i><span>导入</span></button>
+						<button class="btn btn-info blue" type="role" name="导出" id="export"><i class="fa fa-arrow-up"></i><span>导出</span></button>
+					</div>
+				</form>
+			</div>
+			<div class="ui-content-aside" style="top: 50px;">
+				<table id="grid" class="ui-grid" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>单位名称</th>
+							<th>单位机构代码</th>
+							<th>所属网络</th>
+							<th>联系人</th>
+							<th>联系电话</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<form id="uploadForm" enctype="multipart/form-data">
+				<input type="file" name="file" id="file" style="display: none;"/>
+			</form>
+		</div>
+		<div class="ui-content-body unitInfo" style="display:none;">
+			<form id="unitInfoForm" class="ui-form" role="form">
+				<table class="ui-form-grid wire" style="margin:100px auto;width:80%;">
+					<tr>
+					    <td type="label">单位名称</td>
+					 	<td name="name"></td>
+					</tr>
+					<tr>
+					    <td type="label">单位机构代码</td>
+					 	<td name="code"></td>
+					</tr>
+					<tr>
+					    <td type="label">所属网络</td>
+					 	<td name="networkName"></td>
+					</tr>
+					<tr>
+					    <td type="label">联系人</td>
+					 	<td name="contacts"></td>
+					</tr>
+					<tr>
+					    <td type="label">联系电话</td>
+					 	<td name="telnumber"></td>
+					</tr>
+					<tr>
+					 	<td type="label">邮箱</td>
+					 	<td name="email"></td>
+					</tr>
+					<tr>
+					 	<td type="label">单位地址</td>
+					 	<td name="address"></td>
+					</tr>
+					<tr>
+					 	<td type="label">描述</td>
+					 	<td name="description"></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/metadataManage/unitsManage"],function(app){
+		app.main();
+	});
+</script>

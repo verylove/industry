@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fable.industry.bussiness.mapper.dataElement.DataElementMapper">
+    <resultMap id="BaseResultMap" type="com.fable.industry.bussiness.model.bean.DataElementBean">
+        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="DATA_NAME" property="dataName" jdbcType="VARCHAR"/>
+        <result column="DATA_ENAME" property="dataEname" jdbcType="VARCHAR"/>
+        <result column="DATA_ANAME" property="dataAname" jdbcType="VARCHAR"/>
+        <result column="DATA_DEFINITION" property="dataDefinition" jdbcType="VARCHAR"/>
+        <result column="DATA_CODE" property="dataCode" jdbcType="VARCHAR"/>
+        <result column="ITEM_ID" property="itemId" jdbcType="INTEGER"/>
+        <result column="DATA_TYPEID" property="dataTypeId" jdbcType="INTEGER"/>
+        <result column="DATA_LENGTH" property="dataLength" jdbcType="VARCHAR"/>
+        <result column="CONSTRAINT" property="constraint" jdbcType="VARCHAR"/>
+        <result column="IS_DICTIONARY" property="isDictionary" jdbcType="VARCHAR"/>
+        <result column="DICTIONAR_ID" property="dictionaryId" jdbcType="INTEGER"/>
+        <result column="FREQUENCY_MAX" property="frequencyMax" jdbcType="VARCHAR"/>
+        <result column="COM_ID" property="comId" jdbcType="INTEGER"/>
+        <result column="USER_ID" property="userId" jdbcType="INTEGER"/>
+        <result column="VERSION_ID" property="versionId" jdbcType="INTEGER"/>
+        <result column="VERSION_TIME" property="versionTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="ENABLED_STATE" property="enabledState" jdbcType="VARCHAR"/>
+        <result column="ESTABLISH_TYPE" property="establishType" jdbcType="VARCHAR"/>
+        <result column="NOTE" property="note" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="listData" resultType="map" parameterType="com.fable.industry.bussiness.model.bean.DataElementBean">
+        SELECT d.ID AS id,d.CONSTRAINT AS `constraint`,d.DATA_NAME AS dataName,d.DATA_ENAME AS dataEname,d.DATA_CODE AS dataCode,d.DATA_LENGTH
+        AS dataLength,d.ENABLED_STATE AS enabledState,d.DICTIONAR_ID AS dictionarId,
+        i1.ITEM_NAME AS dataType,i1.ID AS dataTypeId,i2.ITEM_NAME AS itemName,i3.ITEM_NAME AS versionName,
+        c.DICTIONAR_NAME AS dictionarName
+        FROM SYS_DATA_ELEMENT d
+        LEFT JOIN sys_dictionary_item i1 ON i1.ID = d.DATA_TYPEID
+        LEFT JOIN sys_dictionary_item i2 ON i2.ID = d.ITEM_ID
+        LEFT JOIN sys_dictionary_item i3 ON i3.ID = d.VERSION_ID
+        LEFT JOIN sys_dictionary_class c ON c.ID = d.DICTIONAR_ID
+        WHERE 1 = 1 AND ESTABLISH_TYPE = 0
+        <if test="itemId != null and itemId != '' ">
+          AND d.ITEM_ID = #{itemId}
+        </if>
+        <if test="dataName != null and dataName != '' ">
+          AND d.DATA_NAME LIKE CONCAT('%',#{dataName},'%')
+        </if>
+        <if test="versionId != null and versionId != '' ">
+            AND d.VERSION_ID = #{versionId}
+        </if>
+        <if test="enabledState != null and enabledState != '' ">
+            AND ENABLED_STATE = '0'
+        </if>
+        <if test="establishType != null and establishType != '' ">
+            AND ESTABLISH_TYPE = '0'
+        </if>
+        <if test="constraint != null and constraint != ''">
+            AND `CONSTRAINT` = #{constraint}
+        </if>
+        ORDER BY d.ID DESC
+    </select>
+
+    <select id="getDataByNameAndVersion" resultType="int" parameterType="com.fable.industry.bussiness.model.bean.DataElementBean">
+        SELECT count(1) FROM SYS_DATA_ELEMENT
+        WHERE DATA_NAME = #{dataName}
+        AND VERSION_ID = #{versionId} AND ESTABLISH_TYPE = 0
+    </select>
+
+    <insert id="insertData" parameterType="com.fable.industry.bussiness.model.bean.DataElementBean">
+        INSERT INTO SYS_DATA_ELEMENT VALUES
+        (#{id},#{dataName},#{dataEname},#{dataAname},#{dataDefinition},#{dataCode},#{itemId},#{dataTypeId},
+        #{dataLength},#{constraint},#{isDictionary},#{dictionaryId},#{frequencyMax},#{comId},#{userId},#{versionId},
+        #{versionTime},#{updateTime},#{enabledState},#{establishType},#{note})
+    </insert>
+
+    <update id="updateData" parameterType="com.fable.industry.bussiness.model.bean.DataElementBean">
+        UPDATE SYS_DATA_ELEMENT SET
+        DATA_NAME = #{dataName},
+        DATA_ENAME = #{dataEname},
+        DATA_ANAME = #{dataAname},
+        DATA_DEFINITION = #{dataDefinition},
+        DATA_TYPEID = #{dataTypeId},
+        ITEM_ID = #{itemId},
+        `CONSTRAINT` = #{constraint},
+        DICTIONAR_ID = #{dictionaryId},
+        FREQUENCY_MAX = #{frequencyMax},
+        COM_ID = #{comId},
+        USER_ID = #{userId},
+        VERSION_ID = #{versionId},
+        VERSION_TIME = #{versionTime},
+        NOTE = #{note}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteData" parameterType="java.lang.String">
+        DELETE FROM SYS_DATA_ELEMENT WHERE ID IN (${ids})
+    </delete>
+
+    <select id="queryDataById" parameterType="int" resultType="map">
+        SELECT d.DATA_NAME AS dataName,d.DATA_ENAME AS dataEname,d.DATA_ANAME AS dataAname,
+        d.DATA_DEFINITION AS dataDefinition,d.DATA_TYPEID AS dataTypeId,d.ITEM_ID AS itemId,d.`CONSTRAINT` AS `constraint`,
+        d.DICTIONAR_ID AS dictionaryId,d.FREQUENCY_MAX AS frequencyMax,d.COM_ID AS comId,
+        d.USER_ID AS userId,DATE_FORMAT(d.VERSION_TIME ,'%Y-%m-%d') AS versionTime,d.VERSION_ID AS versionId,d.NOTE AS note,
+        i1.ITEM_NAME AS dataType,i2.ITEM_NAME AS itemName,i3.ITEM_NAME AS versionName,c.DICTIONAR_NAME AS dictionarName,
+        u.USER_NAME AS userName,o.COM_NAME AS comName
+        FROM SYS_DATA_ELEMENT d
+        LEFT JOIN SYS_DICTIONARY_ITEM i1 ON i1.ID = d.DATA_TYPEID
+        LEFT JOIN SYS_DICTIONARY_ITEM i2 ON i2.ID = d.ITEM_ID
+        LEFT JOIN SYS_DICTIONARY_ITEM i3 ON i3.ID = d.VERSION_ID
+        LEFT JOIN SYS_DICTIONARY_CLASS c ON c.ID = d.DICTIONAR_ID
+        LEFT JOIN SYS_USER u ON u.USER_ID = d.USER_ID
+        LEFT JOIN SYS_ORGANIZATION o ON o.COM_ID = d.COM_ID
+        WHERE d.ID = #{id}
+    </select>
+
+    <select id="queryDataByM" resultType="map">
+        SELECT d.ID AS id,d.CONSTRAINT AS `constraint`,d.DATA_NAME AS dataName,d.DATA_ENAME AS dataEname,d.DATA_TYPEID AS dataTypeId,d.DATA_LENGTH AS dataLength,
+        d.DATA_CODE AS dataCode,d.DICTIONAR_ID AS dictionarId,i1.ITEM_NAME AS dataType
+        FROM SYS_DATA_ELEMENT d
+        LEFT JOIN SYS_DICTIONARY_ITEM i1 ON i1.ID = d.DATA_TYPEID
+        WHERE d.CONSTRAINT = 'M' AND d.ENABLED_STATE = 0
+    </select>
+
+    <update id="updateState" parameterType="com.fable.industry.bussiness.model.bean.DataElementBean">
+        UPDATE SYS_DATA_ELEMENT SET ENABLED_STATE = #{enabledState}
+        WHERE ID = #{id}
+    </update>
+</mapper>

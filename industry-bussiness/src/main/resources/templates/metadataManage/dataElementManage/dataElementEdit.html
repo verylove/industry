@@ -1,0 +1,92 @@
+<div class="ui-content">
+    <div class="ui-content-header">
+        <div class="ui-content-controlbar">
+            <button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+        </div>
+    </div>
+    <div class="ui-content-body">
+        <div class="ui-content-aside" style="top:40px;">
+            <form id="dataElement" class="ui-form" role="form">
+                <div class="ui-group">
+                    <div class="ui-group-header">修改</div>
+                    <div class="ui-group-body">
+                        <div class="ui-form-box" style="width:850px">
+                            <table class="ui-form-grid wire">
+                                <tr>
+                                    <td type="label"><span class="required"></span>数据元名称</td>
+                                    <td><input type="text" name="dataName" class="form-control"  role="{required:true,length:50,filterCN:true}"/></td>
+                                    <td type="label"><span class="required"></span>数据元英文名称</td>
+                                    <td><input type="text" name="dataEname" class="form-control" role="{required:true,length:50,filter:true}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>数据元缩写名</td>
+                                    <td><input type="text" name="dataAname" class="form-control" role="{required:true,length:50,filter:true}"/></td>
+                                    <td type="label"><span class="required"></span>数据元定义</td>
+                                    <td><input type="text" name="dataDefinition" class="form-control" role="{required:true,length:50,filterCN:true}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>数据类型</td>
+                                    <td>
+                                        <select name="dataTypeId" class="form-control" id="dataType" role="{required:true}">
+                                        </select>
+                                    </td>
+                                    <td type="label"><span class="required"></span>数据元分类</td>
+                                    <td>
+                                        <select name="itemId" class="form-control" id="itemName" role="{required:true}">
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>约束条件</td>
+                                    <td>
+                                        <select name="constraint" class="form-control" id="" role="{required:true}">
+                                            <option value="M">必填</option>
+                                            <option value="O">非必填</option>
+                                        </select>
+                                    </td>
+                                    <td type="label"><span class="required"></span>最大出现次数</td>
+                                    <td><input type="text" name="frequencyMax" class="form-control" role="{required:true,length:50,filterCN:true}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>提交单位</td>
+                                    <td>
+                                        <input type="text" id="comName" name="comName" class="form-control" />
+                                        <input type="hidden" id="comId" name="comId" value="" role="{required:true}"/>
+                                    </td>
+                                    <td type="label"><span class="required"></span>提交人</td>
+                                    <td>
+                                        <select name="userId" id="userId" class="form-control" role="{required:true}">
+
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>版本号</td>
+                                    <td>
+                                        <select name="versionId" class="form-control" id="versionName" role="{required:true}">
+                                        </select>
+                                    </td>
+                                    <td type="label"><span class="required"></span>版本日期</td>
+                                    <td><input type="text" name="versionTime" class="form-control ui-form-date" role="{required:true}"/></td>
+                                </tr>
+                                <tr id="dictionaryCentent">
+                                    <td type="label">备注</td>
+                                    <td><input type="text" name="note" class="form-control" role="{length:200}"/></td>
+                                </tr>
+                            </table>
+                            <div class="ui-form-submitbar">
+                                <button class="btn btn-info blue submit" id="requestSubmit"><i class="fa fa-check"></i><span>提交</span></button>
+                                <button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    require(["app/metadataManage/dataElementManage/dataElementEdit"],function(app){
+        app.main();
+    });
+</script>

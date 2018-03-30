@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fable.industry.bussiness.mapper.resciPublish.ResciPublishMapper">
+    <resultMap id="ResciCatalogUEBean" type="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean">
+        <id column="ID" property="id" jdbcType="INTEGER"></id>
+        <result column="USER_ID" property="userId" jdbcType="INTEGER"></result>
+        <result column="TELE_PHONE" property="telephone" jdbcType="VARCHAR"></result>
+        <result column="DATA_SOURCES" property="dataSource" jdbcType="VARCHAR"></result>
+        <result column="RESCI_TYPE" property="resciType" jdbcType="VARCHAR"></result>
+        <result column="CATALOG_ID" property="catalogId" jdbcType="INTEGER"></result>
+        <result column="CATALOGUE_STATE" property="catalogUEState" jdbcType="INTEGER"></result>
+        <result column="RESCI_NAME" property="resciName" jdbcType="VARCHAR"></result>
+        <result column="RESCI_ENAME" property="resciEname" jdbcType="VARCHAR"></result>
+        <result column="RESCI_CODE" property="resciCode" jdbcType="VARCHAR"></result>
+        <result column="RESCI_CONTENT" property="resciContent" jdbcType="VARCHAR"></result>
+        <result column="IMAGE" property="image" jdbcType="VARCHAR"></result>
+        <result column="IMAGE_PATH" property="imagePath" jdbcType="VARCHAR"></result>
+        <result column="OID" property="oid" jdbcType="VARCHAR"></result>
+        <result column="TOPIC_ID" property="topicId" jdbcType="INTEGER"></result>
+        <result column="INDUSTRY_ID" property="industryId" jdbcType="INTEGER"></result>
+        <result column="RESCI_LEVEL" property="resciLevel" jdbcType="VARCHAR"></result>
+        <result column="RESCI_STATE" property="resciState" jdbcType="VARCHAR"></result>
+        <result column="SUBMIT_TIME" property="submitTime" jdbcType="TIMESTAMP"></result>
+        <result column="RELEASE_TIME" property="releaseTime" jdbcType="TIMESTAMP"></result>
+        <result column="REVOKE_TIME" property="revokeTime" jdbcType="TIMESTAMP"></result>
+        <result column="COM_NAME" property="comName" jdbcType="VARCHAR"></result>
+        <result column="topicName" property="topicName" jdbcType="VARCHAR"></result>
+        <result column="industryName" property="industryName" jdbcType="VARCHAR"></result>
+        <result column="catalogName" property="catalogName" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <resultMap id="dataElementBean" type="com.fable.industry.bussiness.model.bean.DataElementBean">
+        <result column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="DATA_NAME" property="dataName" jdbcType="VARCHAR"/>
+        <result column="DATA_ENAME" property="dataEname" jdbcType="VARCHAR"/>
+        <result column="DATA_ANAME" property="dataAname" jdbcType="VARCHAR"/>
+        <result column="DATA_DEFINITION" property="dataDefinition" jdbcType="VARCHAR"/>
+        <result column="DATA_CODE" property="dataCode" jdbcType="VARCHAR"/>
+        <result column="ITEM_ID" property="itemId" jdbcType="INTEGER"/>
+        <result column="DATA_TYPEID" property="dataTypeId" jdbcType="INTEGER"/>
+        <result column="DATA_LENGTH" property="dataLength" jdbcType="VARCHAR"/>
+        <result column="CONSTRAINT" property="constraint" jdbcType="VARCHAR"/>
+        <result column="IS_DICTIONARY" property="isDictionary" jdbcType="VARCHAR"/>
+        <result column="DICTIONAR_ID" property="dictionaryId" jdbcType="INTEGER"/>
+        <result column="FREQUENCY_MAX" property="frequencyMax" jdbcType="INTEGER"/>
+        <result column="COM_ID" property="comId" jdbcType="INTEGER"/>
+        <result column="USER_ID" property="userId" jdbcType="INTEGER"/>
+        <result column="VERSION_ID" property="versionId" jdbcType="INTEGER"/>
+        <result column="VERSION_TIME" property="versionTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="ENABLED_STATE" property="enabledState" jdbcType="VARCHAR"/>
+        <result column="ESTABLISH_TYPE" property="establishType" jdbcType="VARCHAR"/>
+        <result column="NOTE" property="note" jdbcType="VARCHAR"/>
+        <result column="widgetName" property="widgetName" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <!--资源发布列表查询-->
+    <select id="listResciCatalogue" resultMap="ResciCatalogUEBean"
+            parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean">
+        SELECT sc.*,so.COM_NAME,sd.ITEM_NAME topicName,sdi.ITEM_NAME industryName FROM sys_resci_catalogue sc
+        LEFT JOIN SYS_USER su ON su.USER_ID=sc.USER_ID
+        LEFT JOIN SYS_ORGANIZATION so ON so.COM_ID=su.COM_ID
+        LEFT JOIN sys_dictionary_item sd ON sd.ID=sc.TOPIC_ID
+        LEFT JOIN sys_dictionary_item sdi ON sdi.ID=sc.INDUSTRY_ID
+        WHERE 1=1
+        AND sc.RESCI_STATE=4
+        <if test="resciName!=null and resciName!=''">
+            AND sc.RESCI_NAME LIKE concat("%",#{resciName},"%") OR sc.RESCI_CODE LIKE concat("%",#{resciName},"%")
+        </if>
+        <if test="industryId!=null and industryId!=''">
+            AND sc.INDUSTRY_ID=#{industryId}
+        </if>
+        <if test="comName!=null and comName!=''">
+            AND so.COM_NAME=#{comName}
+        </if>
+        <if test="oid!=null and oid!=''">
+            AND sc.OID=#{oid}
+        </if>
+        <if test="topicId!=null and topicId!=''">
+            AND sc.TOPIC_ID=#{topicId}
+        </if>
+    </select>
+
+    <!--根据资源编目Id查询资源-->
+    <select id="queryResciCatalogueByCatalogueId" parameterType="Integer" resultMap="ResciCatalogUEBean">
+        SELECT sc.*,sd.ITEM_NAME topicName,sdi.ITEM_NAME industryName,src.CATALOG_NAME catalogName FROM sys_resci_catalogue sc
+        LEFT JOIN sys_dictionary_item sd ON sd.ID=sc.TOPIC_ID
+        LEFT JOIN sys_dictionary_item sdi ON sdi.ID=sc.INDUSTRY_ID
+        LEFT JOIN sys_resci_catalog src ON  src.ID=sc.CATALOG_ID
+        WHERE
+         sc.ID=#{id}
+    </select>
+
+    <!--根据资源编目Id查询数据项信息-->
+    <select id="queryDataElementByCatalogueId" resultMap="dataElementBean">
+        SELECT
+        sd.*, r.WidgetName widgetName
+        FROM
+        SYS_RESCI_CATALOGUE s
+        LEFT JOIN ResCiTypeAttribute rc ON rc.CatalogueId = s.ID
+        LEFT JOIN ResAttributes ra ON ra.AttributeId = rc.AttributeId
+        LEFT JOIN ResWidgetType rw ON rw.WidgetId = ra.WidgetId
+        LEFT JOIN SYS_DATA_ELEMENT sd ON sd.ID = ra.elementId
+        LEFT JOIN reswidgettype r ON r.WidgetId = sd.DATA_TYPEID
+        WHERE
+        s.ID = #{catalogueId}
+        ORDER BY rc.AttributeIndex ASC
+    </select>
+
+    <!--查询OID-->
+    <select id="queryOID" resultType="map">
+        SELECT * FROM oid_check
+    </select>
+
+    <!--根据资源编目Id查询资源登记时间-->
+    <select id="queryCreateTime" resultType="string">
+        SELECT DATE_FORMAT(MAX(CREATE_TIME),'%Y-%m-%d %H:%i:%s') createTime FROM sys_resci WHERE CATALOGUE_ID=#{catalogId}
+    </select>
+</mapper>

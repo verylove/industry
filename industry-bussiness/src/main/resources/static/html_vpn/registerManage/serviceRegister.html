@@ -1,0 +1,335 @@
+<style type="text/css">
+	table input[type='text'],select{
+		width: 100% !important;
+	}
+	.selectDataTableName{
+		width: 200px !important;
+	}
+</style>
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<!--<form id="form" class="ui-form" role="form">-->
+				<div class="ui-group">
+					<div class="ui-group-header">服务方注册信息</div>
+					<div class="ui-group-body">
+						<div class="localRes">
+							<!--放置步骤组件--本地API-->
+							<div class="ui-steps blue" id="ui-steps" style="width:1000px;"></div>
+							<div id="content1" class="hidden">
+								<form id="form1" class="ui-form" role="form">
+									<table class="ui-form-grid wire">
+									 	<tr>
+									 		<td type="label"><span class="required"></span>资源名称</td>
+									 		<td>
+									 			<input type="text" name="resName" class="form-control resName" placeholder="请输入" role="{required:true,length:50}"/>
+									 		</td>
+									 		<td type="label"><span class="required"></span>数据来源</td>
+									 		<td>
+									 			<select name="resourceOrigin" class="form-control changeType" style="width: 100%;"  role="{required:true}">
+									 				<option value="local">本地数据库</option>
+									 				<option value="3d">第三方API</option>
+									 			</select>
+									 		</td>
+									 	</tr>
+									 	<tr>
+									 		<td type="label"><span class="required"></span>服务类别</td>
+									 		<td>
+									 			<select name="serviceType" class="form-control dataSource" style="width: 100%;"  role="{required:true}">
+									 				<option value="*">请选择</option>
+									 				<option value="dashfhafh">数据查询服务</option>
+									 			</select>
+									 		</td>
+									 		<td type="label"><span class="required"></span>服务API接口类型</td>
+									 		<td>
+									 			<select name="serviceApiType" class="form-control serviceApiType" style="width: 100%;"  role="{required:true}">
+									 				<option value="webservice">Webservice</option>
+									 				<option value="rest">Rest</option>
+									 			</select>
+									 		</td>
+									 	</tr>
+									 	<tr>
+									 		<td type="label"><span class="required"></span>管理单位名称</td>
+									 		<td>
+									 			<input type="text" name="companyName" class="form-control companyName" role="{required:true}" />
+									 		</td>
+									 		<td type="label"><span class="required"></span>联系人姓名</td>
+									 		<td>
+									 			<input type="text" name="linkman" class="form-control" placeholder="请输入" role="{required:true,length:[2,20],filterCN:true}"/>
+									 		</td>
+									 	</tr>
+									 	<tr>
+									 		<td type="label"><span class="required"></span>联系人电话</td>
+									 		<td>
+									 			<input type="text" name="phone" class="form-control" placeholder="请输入" role="{required:true,mobile_telephone:true}"/>
+									 		</td>
+									 		
+									 		<td type="label"><span class="required"></span>联系人身份证号</td>
+									 		<td>
+									 			<input type="text" name="linkmanCard" class="form-control" placeholder="请输入" role="{required:true,identityCard:true}"/>
+									 		</td>
+									 	</tr>
+									 	<tr>
+									 		<td type="label"><span class="required"></span>联系人警号</td>
+									 		<td>
+									 			<input type="text" name="linkmanCode" class="form-control" placeholder="请输入" role="{required:true,number:true,length:[1,10]}"/>
+									 		</td>
+									 		<td type="label">服务方描述</td>
+									 		<td>
+									 			<textarea type="text" name="remark" class="form-control" placeholder="请输入" role="{length:200}"></textarea>
+									 		</td>
+									 	</tr>
+									</table>
+								</form>
+							</div>
+							
+							<div id="content2" class="hidden">
+								<table id="publishResource" class="ui-grid" cellspacing="0" width="100%">
+									<thead>
+										<tr>
+											<th></th>
+											<th>数据源名称</th>
+											<th>IP地址</th>
+											<th>端口</th>
+											<th>数据源类型</th>
+										</tr>
+									</thead>
+								</table>
+							</div>
+							
+							<div id="content3" class="hidden">
+								<div class="showDatasourceTable" style="width: 97%;margin: 20px 0;overflow: auto;">
+									<div class="ui-grid-buttonbar diary">
+										<ul class="ui-grid-linkGroup">
+											<li class="active showDataTable" key="0" >选择表模式</li>
+											<li key="1" class="selectSQL">创建SQL</li>
+										</ul>
+									</div>
+									<!--图形编辑界面-->
+									<div class="graphicsEditor" style="top:90px;text-align: center;">
+										<button class="btn btn-info selectResource" style="margin-top:10px">选择数据表</button>
+										<!--<div class="showContent" ></div>-->
+									</div>
+									<!--SQL脚本模式-->
+									<div class="sqlScriptMode" style="display:none;">
+										<textarea class="sqlContent" name="" style="width: 100%;height: 80px;"></textarea>
+										<div class="">
+											<button class="btn btn-info checkSQL" style="float: right;">应用SQL</button>
+										</div>
+									</div>
+								</div>
+								<table class="ui-grid showDatasourceTable showTable " cellspacing="0" style="width: 97%" >
+									<thead>
+										<tr>
+											<th>字段名称</th>
+											<th>字段类型</th>
+											<th>数据来源</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody><tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">数据为空</td></tr></tbody>
+								</table>
+							</div>
+							
+							<div id="content4" class="hidden">
+								<div class="part1 mb-25">
+									<div>
+										<div><button class="btn btn-link blue add" title="申请"><i class="fa fa-plus"></i></button></div>
+										<form class="inputParams">
+											<table class="ui-grid-wire sensitive_word_filter ">
+												<thead>
+													<tr>
+														<th>参数名称</th>
+														<th>参数类型</th>
+														<th>查询字段</th>
+														<th>比较符</th>
+														<th>是否必填</th>
+														<th>示例</th>
+														<th>说明</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="odd"><td valign="top" colspan="8" class="dataTables_empty">数据为空</td></tr>
+												</tbody>
+											</table>
+										</form>
+									</div>
+								</div>
+							</div>
+							
+							<div id="content5" class="hidden">
+								<div class="part1 mb-25">
+									<div>
+										<div><button class="btn btn-link blue add" title="申请"><i class="fa fa-plus"></i></button></div>
+										<form class="outputParams">
+											<table class="ui-grid-wire sensitive_word_filter ">
+												<thead>
+													<tr>
+														<th>参数名称</th>
+														<th>参数类型</th>
+														<th>查询字段</th>
+														<th>是否可为空</th>
+														<th>示例</th>
+														<th>说明</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="odd"><td valign="top" colspan="7" class="dataTables_empty">数据为空</td></tr>
+												</tbody>
+											</table>
+										</form>
+									</div>
+								</div>
+							</div>
+							<!--放置步骤组件--第三方API-->
+							<div class="ui-steps blue" id="ui-steps2" style="width:1000px;"></div>
+							<div id="content11" class="hidden">
+								<form id="form2" class="ui-form" role="form">
+									<table class="ui-form-grid wire">
+									 	<tr>
+									 		<td type="label"><span class="required"></span>资源名称</td>
+									 		<td>
+									 			<input type="text" name="resName" class="form-control resName" placeholder="请输入" role="{required:true,length:50}"/>
+									 		</td>
+									 		<td type="label"><span class="required"></span>数据来源</td>
+									 		<td>
+									 			<select name="resourceOrigin" class="form-control changeType" style="width: 100%;"  role="{required:true}">
+									 				<option value="3d">第三方API</option>
+									 				<option value="local">本地数据库</option>
+									 			</select>
+									 		</td>
+									 	</tr>
+									 	<tr>
+									 		<td type="label"><span class="required"></span>服务类别</td>
+									 		<td>
+									 			<select name="serviceType" class="form-control dataSource" style="width: 100%;"  role="{required:true}">
+									 				<option value="*">请选择</option>
+									 				<option value="dashfhafh">数据查询服务</option>
+									 			</select>
+									 		</td>
+									 		<td type="label"><span class="required"></span>服务API接口类型</td>
+									 		<td>
+									 			<select name="serviceApiType" class="form-control serviceApiType" style="width: 100%;"  role="{required:true}">
+									 				<option value="webservice">Webservice</option>
+									 				<option value="rest">Rest</option>
+									 			</select>
+									 		</td>
+									 	</tr>
+									 	<tr>
+									 		<td type="label"><span class="required"></span>管理单位名称</td>
+									 		<td>
+									 			<input type="text" name="companyName" class="form-control companyName" role="{required:true}" />
+									 		</td>
+									 		<td type="label"><span class="required"></span>联系人姓名</td>
+									 		<td>
+									 			<input type="text" name="linkman" class="form-control" placeholder="请输入" role="{required:true}"/>
+									 		</td>
+									 	</tr>
+									 	<tr>
+									 		<td type="label"><span class="required"></span>联系人电话</td>
+									 		<td>
+									 			<input type="text" name="phone" class="form-control" placeholder="请输入" role="{required:true,mobile_telephone:true}"/>
+									 		</td>
+									 		
+									 		<td type="label"><span class="required"></span>联系人身份证号</td>
+									 		<td>
+									 			<input type="text" name="linkmanCard" class="form-control" placeholder="请输入" role="{required:true,identityCard:true}"/>
+									 		</td>
+									 	</tr>
+									 	<tr>
+									 		<td type="label"><span class="required"></span>联系人警号</td>
+									 		<td>
+									 			<input type="text" name="linkmanCode" class="form-control" placeholder="请输入" role="{required:true}"/>
+									 		</td>
+									 		<td type="label">服务方描述</td>
+									 		<td>
+									 			<textarea type="text" name="remark" class="form-control" placeholder="请输入" role="{length:200}"></textarea>
+									 		</td>
+									 	</tr>
+									 	<tr class="threeResource" >
+									 		<td type="label"><span class="required"></span>服务接口地址</td>
+									 		<td>
+									 			<input type="text" name="apiUrl" class="form-control checkServies" placeholder="请输入" role="{required:true}"/>
+									 		</td>
+									 		<td type="label"><span class="required"></span>服务API接口文档</td>
+									 		<td class="interfaceDoc" style="text-align:left;">
+									 			<div class="ui-form-inputGroup check_button_group">
+													<button class="btn btn-info" onclick="return false"  id="imageBtn"><i class="fa fa-folder-open" style="margin-right:4px;"></i>选择...</button>
+													<span class="apiDocId" style="display: inline-block;"></span>
+												</div>
+									 		</td>
+									 	</tr>
+									</table>
+								</form>
+								<form  id="uploadForm" enctype="multipart/form-data" style="display: none;">				
+									<input name="file" style="display:none" class="form-control file" type="file" role="{required:true,fileSize:1024}">
+								</form>
+							</div>
+							<div id="content21" class="hidden">
+								<div class="part1 mb-25">
+									<div>
+										<div><button class="btn btn-link blue add" title="申请"><i class="fa fa-plus"></i></button></div>
+										<form class="inputParams">
+											<table class="ui-grid-wire sensitive_word_filter ">
+												<thead>
+													<tr>
+														<th>参数名称</th>
+														<th>参数类型</th>
+														<th>是否必填</th>
+														<th>示例</th>
+														<th>说明</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
+										</form>
+									</div>
+								</div>
+							</div>
+							
+							<div id="content31" class="hidden">
+								<div class="part1 mb-25">
+									<div>
+										<div><button class="btn btn-link blue add" title="申请"><i class="fa fa-plus"></i></button></div>
+										<form class="outputParams">
+											<table class="ui-grid-wire sensitive_word_filter">
+												<thead>
+													<tr>
+														<th>参数名称</th>
+														<th>参数类型</th>
+														<th>是否可为空</th>
+														<th>示例</th>
+														<th>说明</th>
+														<th>操作</th>
+													</tr>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!--</form>-->
+		</div>
+	</div>
+</div>
+<input type="hidden" class="company"/>
+<input type="hidden" class="sqltables" />
+<script>
+	require(["app/registerManage/serviceRegisterApp"],function(app){
+		app.main();
+	});
+</script>

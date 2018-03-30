@@ -1,0 +1,53 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div id="tab1"></div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-toolsbar">
+			<div class="ui-content-searchbar left" id="searchbar">
+				<form class="form-inline" id="gridForm">
+					<div class="form-group">
+						<label for="name">请求方名称/编码</label>
+						<input type="text" name="reqNameOrCode" class="form-control" placeholder="请输入请求方名称/编码" autocomplete="off"/>
+					</div>
+					<div class="form-group">
+						<label for="name">资源名称/编码</label>
+						<input type="text" name="resNameOrCode" class="form-control" placeholder="请输入资源名称/编码" autocomplete="off"/>
+					</div>
+					<div class="form-group">
+						<label for="name">申请时间</label>
+						<input type="text" name="date" class="form-control ui-form-date" autocomplete="off"/>
+					</div>
+					
+					<div class="form-group">
+						<button class="btn btn-info blue" id="search"><i class="ion-ios-search-strong"></i><span>查询</span></button>
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		
+		<div class="ui-content-aside">
+			<table id="grid" class="ui-grid" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>请求方名称</th>
+						<th>请求方编码</th>
+						<th>请求方网络</th>
+						<th>资源名称</th>
+						<th>资源编码</th>
+						<th>申请时间</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+<input type="hidden" id="rowId"/>
+<script>
+	require(["app/approvalManage/resourceList"],function(app){
+		app.main();
+	});
+</script>

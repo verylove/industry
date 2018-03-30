@@ -1,0 +1,128 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+				<div class="ui-group">
+					<div class="ui-group-header">服务方注册信息</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire" id="requestRegisterForm">
+						 	<tr>
+						 		<td type="label">资源名称</td>
+						 		<td name="resName"></td>
+						 		<td type="label">资源编码</td>
+						 		<td name="resCode"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">数据来源</td>
+						 		<td name="apiSource"></td>
+						 		<td type="label">服务类别</td>
+						 		<td name="serviceTypeName"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">所属网络</td>
+						 		<td name="networkName"></td>
+						 		<td type="label">服务API接口类型</td>
+						 		<td name="apiType"></td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">方法</td>
+						 		<td name="methods"></td>
+						 		<td type="label">报文格式</td>
+						 		<td name="messageFormat"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">服务接口地址</td>
+						 		<td name="address"></td>
+						 		<td type="label">管理单位名称</td>
+						 		<td name="companyName"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">管理单位机构代码</td>
+						 		<td name="companyCode"></td>
+						 		<td type="label"> 联系人姓名</td>
+						 		<td name="linkman"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">联系人电话</td>
+						 		<td name="phone"></td>
+						 		<td type="label">联系人身份证号</td>
+						 		<td name="linkmanCard"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">联系人警号</td>
+						 		<td name="linkmanCode"></td>
+						 		<td type="label">服务方描述</td>
+						 		<td name="remark"></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">接口文档</td>
+						 		<td name="documentName" id="documentName"></td>
+						 		<td type="label"></td>
+						 		<td></td>
+						 	</tr>
+						</table>
+					</div>
+				</div>
+			<div class="ui-group">
+				<div class="ui-group-header">接口调用说明</div>
+				<div class="ui-group-body">
+					<!--表单填写区-->
+					 <table class="ui-grid" cellspacing="0" width="100%">
+					 	<thead>
+					 		<th>参数名称</th>
+					 		<th>参数类型</th>
+					 		<th>是否必填</th>
+					 		<th>说明</th>
+					 	</thead>
+					 	<tbody class="requestParamsTab">
+						 	
+					 	</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="ui-group">
+				<div class="ui-group-header">接口返回说明</div>
+				<div class="ui-group-body">
+					<!--表单填写区-->
+					 <table class="ui-grid" cellspacing="0" width="100%">
+					 	<thead>
+					 		<th>参数名称</th>
+					 		<th>参数类型</th>
+					 		<th>是否可为空</th>
+					 		<th>说明</th>
+					 	</thead>
+					 	<tbody class="responseStructTab">
+						 	
+					 	</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="ui-group">
+					<div class="ui-group-header">服务方注册-审批信息</div>
+					<div class="ui-group-body">
+						<!--表单填写区-->
+						 <table id="grid11" class="ui-grid" cellspacing="0" width="100%">
+						 	<thead>
+						 		<th>处理时间</th>
+						 		<th>处理环节</th>
+						 		<th>处理结果</th>
+						 		<th>停留时间</th>
+						 	</thead>
+						 	<tbody> </tbody>
+						</table>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/approvalManage/serviceDetail"],function(app){
+		app.main();
+	});
+</script>

@@ -1,0 +1,69 @@
+<style>
+    .form-group input,.form-group select{
+        min-width: 150px!important;
+        width:150px!important;
+    }
+    .form-group label{
+        width:60px;
+        text-align:right;
+    }
+</style>
+<div class="ui-content">
+    <div class="ui-aside left" id="treeAside">
+        <ul class="ztree ui-treebar" id="treebar"  style="margin-top:6px;"></ul>
+    </div>
+    <div class="ui-aside right" id="rightPage">
+        <div class="ui-content-body catalogTable">
+            <div class="ui-content-toolsbar" style="height:100px;">
+                <div class="ui-content-searchbar">
+                    <form id="gridForm" class="form-inline">
+                        <div class="form-group">
+                            <label for="comName">单位名称</label>
+                            <input type="text" name="comName" class="form-control" placeholder="" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact">联系人</label>
+                            <input type="text" name="contact" class="form-control" placeholder="" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPhone">联系电话</label>
+                            <input type="text" name="contactPhone" class="form-control" placeholder="" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-info blue" id="search"><i class="fa fa-search"></i><span>查询</span></button>
+                            <button class="btn btn-info blue" id="reset"><i class="fa fa-undo"></i><span>重置</span></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="ui-content-buttonbar">
+                    <input type="hidden" id="rowId">
+                    <input type="hidden" id="treeId">
+                    <button class="btn btn-info blue" id="add"><i class="fa fa-plus"></i><span>新增</span></button>
+                    <button class="btn btn-info blue" id="edit" disabled><i class="fa fa fa-pencil"></i><span>修改</span></button>
+                    <button class="btn btn-info blue" id="view" disabled><i class="fa fa-search"></i><span>查看</span></button>
+                    <button class="btn btn-info blue" id="delete" disabled><i class="fa fa-trash-o"></i><span>删除</span></button>
+                </div>
+            </div>
+            <div class="ui-content-aside" style="top:100px;">
+                <table id="grid" class="ui-grid" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>单位名称</th>
+                        <th>上级单位</th>
+                        <th>单位描述</th>
+                        <th>联系人</th>
+                        <th>联系电话</th>
+                        <th>地址</th>
+                        <th>邮箱</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require(["app/systemManage/unitInforManage/unitInforManage"],function(app){
+        app.main();
+    });
+</script>

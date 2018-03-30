@@ -1,0 +1,72 @@
+<div class="ui-content">
+    <div class="ui-content-header">
+        <div class="ui-content-controlbar">
+            <button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+        </div>
+    </div>
+    <div class="ui-content-body">
+        <div class="ui-content-aside" style="top:40px;">
+            <form id="userManageAdd" class="ui-form" role="form">
+                <div class="ui-group">
+                    <div class="ui-group-header">新增</div>
+                    <div class="ui-group-body">
+                        <div class="ui-form-box">
+                            <table class="ui-form-grid wire">
+                                <tr>
+                                    <td type="label"><span class="required"></span>用户名称</td>
+                                    <td><input type="text" name="login"  class="form-control" role="{required:true,length:50,filterCN:true}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>用户密码</td>
+                                    <td><input type="password" name="password"  class="form-control" role="{required:true,custom:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/,errorText:'密码格式不正确，至少1个字母和数字且8-16个字符'}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>确认密码</td>
+                                    <td><input type="password" id="passwords" class="form-control" role="{required:true,custom:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/,errorText:'密码格式不正确，至少1个字母和数字且8-16个字符'}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>用户姓名</td>
+                                    <td><input type="text" name="userName"  class="form-control" role="{required:true,length:50,filterCN:true}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>角色</td>
+                                    <td>
+                                        <select name="roleId" id="roleId" class="form-control" role="{required:true}">
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>单位信息</td>
+                                    <td>
+                                        <input type="text" class="form-control" id="comId" role="{required:true}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>联系电话</td>
+                                    <td><input type="text" name="telePhone" class="form-control" role="{required:true,mobile_telephone:true}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label">办公电话</td>
+                                    <td><input type="text" name="officePhone" class="form-control" role="{telephone:true}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label">邮箱地址</td>
+                                    <td><input type="text" name="email"  class="form-control" role="{email:true,length:50}"/></td>
+                                </tr>
+                            </table>
+                            <div class="ui-form-submitbar">
+                                <button class="btn btn-info blue submit" id="requestSubmit"><i class="fa fa-check"></i><span>提交</span></button>
+                                <button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    require(["app/systemManage/userManage/userManageAdd"],function(app){
+        app.main();
+    });
+</script>

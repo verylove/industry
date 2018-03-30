@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fable.industry.bussiness.mapper.sysservicelog.SysServiceLogMapper">
+	<select id="queryServiceLogs" parameterType="ServiceLog"
+		resultType="ServiceLog">
+ 		SELECT
+			ID id,
+			SERVICE_NAME serviceName,
+			REQUEST_DETAILS requestDetail,
+			MAINTENANCE maintenance,
+			DATE_FORMAT(REQUEST_TIME,'%Y-%m-%d %H:%i:%s') requestTime,
+			DATE_FORMAT(RESPONSE_TIME,'%Y-%m-%d %H:%i:%s') responseTime,
+			RESULT result,
+			URL url,
+			NOTE note,
+			IP ip
+ 		FROM sys_service_log
+ 		where 1=1 
+ 		<if test="serviceName != null and serviceName != ''">
+ 			and SERVICE_NAME like concat("%",#{serviceName},"%")
+ 		</if>
+		<if test="createTimeStart != null and createTimeStart != ''and createTimeEnd != null and createTimeEnd != '' ">
+			and RESPONSE_TIME >= #{createTimeStart} and #{createTimeEnd} >= RESPONSE_TIME
+		</if>
+		<if test="result != null and result != ''">
+			and RESULT =#{result}
+		</if>
+		ORDER BY REQUEST_TIME DESC
+	</select>
+	
+	<insert id="insertServiceLog" parameterType="ServiceLog">
+		INSERT INTO sys_service_log (
+			`ID`,
+			`SERVICE_NAME`,
+			`REQUEST_DETAILS`,
+			`MAINTENANCE`,
+			`REQUEST_TIME`,
+			`RESPONSE_TIME`,
+			`RESULT`,
+			`URL`,
+			`NOTE`,
+			`IP`
+		) VALUES (
+			#{id},
+			#{serviceName},
+			#{requestDetail},
+			#{maintenance},
+			#{requestTime},
+			#{responseTime},
+			#{result},
+			#{url},
+			#{note},
+			#{ip}
+		)
+	</insert>
+</mapper>

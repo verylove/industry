@@ -1,0 +1,47 @@
+<div class="ui-content">
+    <div class="ui-content-header">
+        <div class="ui-content-controlbar">
+            <button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+        </div>
+    </div>
+    <div class="ui-content-body">
+        <div class="ui-content-aside" style="top:40px;">
+            <form id="dictionaryItem" class="ui-form" role="form">
+                <div class="ui-group">
+                    <div class="ui-group-header">修改</div>
+                    <div class="ui-group-body">
+                        <div class="ui-form-box">
+                            <table class="ui-form-grid wire">
+                                <tr>
+                                    <td type="label"><span class="required"></span>字典项类别名称</td>
+                                    <td><input type="text" id="dictionarId" class="form-control" role="{required:true}" disabled="disabled"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label"><span class="required"></span>字典项内容</td>
+                                    <td><input type="text" name="itemName" class="form-control" role="{required:true,length:50}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label">字典项别名</td>
+                                    <td><input type="text" name="itemAlias" class="form-control" role="{length:50}"/></td>
+                                </tr>
+                                <tr>
+                                    <td type="label">字典项描述</td>
+                                    <td><input type="text" name="itemContent" class="form-control" role="{length:200}"/></td>
+                                </tr>
+                            </table>
+                            <div class="ui-form-submitbar">
+                                <button class="btn btn-info blue submit" id="requestSubmit"><i class="fa fa-check"></i><span>提交</span></button>
+                                <button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    require(["app/metadataManage/dataDictionary/dictionaryItemEdit"],function(app){
+        app.main();
+    });
+</script>

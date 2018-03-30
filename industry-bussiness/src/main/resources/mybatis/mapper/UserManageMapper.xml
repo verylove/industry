@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fable.industry.bussiness.mapper.systemManage.UserManageMapper">
+    <resultMap id="userListMap" type="com.fable.industry.bussiness.model.bean.SysUserBean">
+        <id column="USER_ID" property="userId" jdbcType="INTEGER"></id>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"></result>
+        <result column="LOGIN" property="login" jdbcType="VARCHAR"></result>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"></result>
+        <result column="TELE_PHONE" property="telePhone" jdbcType="VARCHAR"></result>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP"></result>
+        <result column="LAST_LOGIN_IPADDR" property="lastLoginIP" jdbcType="VARCHAR"></result>
+        <result column="NOTE" property="note" jdbcType="VARCHAR"></result>
+        <result column="CREATOR_ID" property="creatorId" jdbcType="INTEGER"></result>
+        <result column="CREATED_TIME" property="createdTime" jdbcType="TIMESTAMP"></result>
+        <result column="UPDATE_ID" property="updateId" jdbcType="VARCHAR"></result>
+        <result column="UPDATED_TIME" property="updatedTime" jdbcType="TIMESTAMP"></result>
+        <result column="LOCK_STATUS" property="lockStatus" jdbcType="VARCHAR"></result>
+        <result column="LOCK_TIME" property="lockTime" jdbcType="TIMESTAMP"></result>
+        <result column="COM_ID" property="comId" jdbcType="INTEGER"></result>
+        <result column="DISTRIBUTION" property="disTribution" jdbcType="INTEGER"></result>
+        <result column="IS_ADMIN" property="isAdmin" jdbcType="INTEGER"></result>
+        <result column="OFFICE_PHONE" property="officePhone" jdbcType="VARCHAR"></result>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"></result>
+        <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR"></result>
+        <result column="ROLE_ID" property="roleId" jdbcType="INTEGER"></result>
+        <result column="COM_NAME" property="comName" jdbcType="VARCHAR"></result>
+    </resultMap>
+
+    <!--查询用户列表-->
+    <select id="findUserList" resultMap="userListMap"
+            parameterType="com.fable.industry.bussiness.model.bean.SysUserBean">
+        SELECT
+        s.USER_ID,
+        s.LOGIN,
+        s.USER_NAME,
+        sr.ROLE_NAME,
+        so.COM_NAME,
+        s.OFFICE_PHONE,
+        s.EMAIL,
+        s.LOCK_STATUS FROM sys_user s
+        LEFT JOIN sys_role sr ON sr.ROLE_ID =
+        (SELECT sur.ROLE_ID FROM sys_user_role sur WHERE sur.USER_ID =s.USER_ID)
+        LEFT JOIN sys_organization so ON so.COM_ID=s.COM_ID
+        WHERE 1=1
+        <if test="login!=null and login!=''">
+            and s.LOGIN LIKE concat("%",#{login},"%")
+        </if>
+        <if test="roleId!=null and roleId!=''">
+            AND s.USER_ID IN
+            (SELECT sur.USER_ID FROM sys_user_role sur WHERE sur.ROLE_ID=#{roleId})
+        </if>
+        <if test="comId!=null and comId!=''">
+            and s.COM_ID =#{comId}
+        </if>
+        <if test="userName!=null and userName!=''">
+            and s.USER_NAME LIKE concat("%",#{userName},"%")
+        </if>
+        <if test="lockStatus!=null and lockStatus!=''">
+            and s.LOCK_STATUS=#{lockStatus}
+        </if>
+    </select>
+
+    <!--新增用户-->
+    <insert id="addUser" parameterType="com.fable.industry.bussiness.model.bean.SysUserBean" useGeneratedKeys="true"
+            keyProperty="userId">
+        INSERT INTO sys_user(
+        USER_NAME,LOGIN,
+        PASSWORD,TELE_PHONE,
+        CREATOR_ID,CREATED_TIME,
+        LOCK_STATUS,COM_ID,
+        IS_ADMIN,OFFICE_PHONE,
+        EMAIL
+        ) VALUES(
+        #{userName},#{login},
+        #{password},#{telePhone},
+        #{creatorId},NOW(),
+        2,#{comId},
+        #{isAdmin},#{officePhone},
+        #{email}
+        );
+    </insert>
+
+    <!--新增用户与角色关系-->
+    <insert id="addUserRole">
+        INSERT INTO sys_user_role(USER_ID,ROLE_ID) VALUES (#{userId},#{roleId})
+    </insert>
+
+    <!--查看用户-->
+    <select id="queryUserById" parameterType="Integer" resultMap="userListMap">
+        SELECT s.*,sr.ROLE_ID,sr.ROLE_NAME,so.COM_NAME FROM sys_user s
+        LEFT JOIN sys_role sr ON sr.ROLE_ID =
+        (SELECT sur.ROLE_ID FROM sys_user_role sur WHERE sur.USER_ID =s.USER_ID)
+        LEFT JOIN sys_organization so ON so.COM_ID=s.COM_ID
+        WHERE s.USER_ID=#{userId}
+    </select>
+
+    <!--修改用户-->
+    <update id="updateUser" parameterType="com.fable.industry.bussiness.model.bean.SysUserBean">
+        UPDATE sys_user
+        SET LOGIN=#{login},USER_NAME=#{userName},PASSWORD=#{password},
+        TELE_PHONE=#{telePhone},COM_ID=#{comId},OFFICE_PHONE=#{officePhone},EMAIL=#{email},UPDATE_ID=#{updateId},UPDATED_TIME=NOW()
+        WHERE USER_ID=#{userId}
+    </update>
+
+    <!--修改用户和角色关系-->
+    <update id="updateUserRole" parameterType="com.fable.industry.bussiness.model.bean.SysUserBean">
+        UPDATE sys_user_role SET ROLE_ID=#{roleId} WHERE USER_ID=#{userId};
+    </update>
+
+    <!--删除用户-->
+    <delete id="deleteUser" parameterType="list">
+        DELETE FROM sys_user WHERE USER_ID IN
+        <foreach collection="userIds" item="userId" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <!--删除用户与角色关系-->
+    <delete id="deleteUserRole" parameterType="list">
+        DELETE FROM sys_user_role WHERE USER_ID IN
+        <foreach collection="userIds" item="userId" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <!--重置密码-->
+    <update id="resetPassword" parameterType="java.util.Map">
+        UPDATE sys_user SET PASSWORD=#{password} WHERE USER_ID=#{userId}
+    </update>
+
+    <!--登录名称的唯一性校验-->
+    <select id="checkLoginName" parameterType="String" resultType="Integer">
+        SELECT count(1) FROM sys_user WHERE LOGIN=#{login}
+    </select>
+
+    <!--根据公司Id查找用户-->
+    <select id="queryByComId" resultType="java.util.Map" parameterType="Integer">
+        SELECT USER_ID,USER_NAME FROM  sys_user WHERE COM_ID=#{comId}
+    </select>
+
+    <select id="queryRoleUserByComId" parameterType="map" resultMap="userListMap">
+        SELECT u.USER_ID,u.USER_NAME,u.TELE_PHONE FROM  sys_user u
+        LEFT JOIN SYS_USER_ROLE r ON r.USER_ID = u.USER_ID
+        WHERE r.ROLE_ID = #{roleId}
+        <if test="comId != null and comId != ''">
+        AND u.COM_ID = #{comId}
+        </if>
+    </select>
+
+    <!--修改用户登录时间-->
+    <update id="updateLoginTime" parameterType="com.fable.industry.bussiness.model.bean.SysUserBean">
+        UPDATE sys_user SET LAST_LOGIN_TIME=NOW() WHERE USER_ID=#{userId}
+    </update>
+
+    <!--根据用户名查找用户-->
+    <select id="queryUserByName" parameterType="string" resultMap="userListMap">
+        SELECT s.*,sr.ROLE_ID,sr.ROLE_NAME,so.COM_NAME FROM sys_user s
+        LEFT JOIN sys_role sr ON sr.ROLE_ID =
+        (SELECT sur.ROLE_ID FROM sys_user_role sur WHERE sur.USER_ID =s.USER_ID)
+        LEFT JOIN sys_organization so ON so.COM_ID=s.COM_ID
+        WHERE s.LOGIN=#{login}
+    </select>
+
+    <!--更改用户状态-->
+    <update id="updateStatus">
+        UPDATE sys_user SET LOCK_STATUS=#{lockStatus} WHERE USER_ID=#{userId}
+    </update>
+</mapper>

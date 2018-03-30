@@ -1,0 +1,87 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">请求方注册信息</div>
+					<div class="ui-group-body">
+						
+						<!--表单填写区-->
+						 <table class="ui-form-grid wire">
+						 	
+						 	<tr>
+						 		<td type="label"><span class="required"></span>请求方名称</td>
+						 		<td>
+						 			<input type="text" name="name" class="form-control" id="name" placeholder="请输入请求方名称" role="{required:true,length:50}"/>
+						 		</td>
+						 		
+						 		<td type="label"><span class="required"></span>管理单位名称</td>
+						 		<td>
+						 			<input type="text"  name="companyName" id="companyName"  class="form-control" role="{required:true}"/>
+						 		</td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label"><span class="required"></span>请求方IP地址/端口</td>
+						 		<td>
+						 			<input type="text" name="ip" class="form-control" placeholder="请填写“IP:端口号”，多个“;”分隔" role="{required:true,ips_port:true}"/>
+						 		</td>
+						 		<td type="label">请求方接口类型</td>
+						 		<td>
+						 			<input type="text"  name="type" id="type"  class="form-control" role="{required:true}"/>
+						 		</td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label"><span class="required"></span>联系人姓名</td>
+						 		<td>
+						 			<input type="text" name="linkName" class="form-control" placeholder="请输入联系人姓名" role="{required:true,length:[2,20],filterCN:true}"/>
+						 		</td>
+						 		
+						 		<td type="label"><span class="required"></span>联系人电话</td>
+						 		<td>
+						 			<input type="text" name="linkPhone" class="form-control" placeholder="请输入联系人电话" role="{required:true,mobile_telephone:true}"/>
+						 		</td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label"><span class="required"></span>联系人身份证</td>
+						 		<td>
+						 			<input type="text" name="linkCardId" class="form-control" placeholder="请输入联系人身份证" role="{required:true,identityCard:true}"/>
+						 		</td>
+						 		<td type="label"><span class="required"></span>联系人警号</td>
+						 		<td>
+						 			<input type="text" name="policeNumber" class="form-control" placeholder="请输入联系人警号" role="{required:true,number:true,length:[1,10]}"/>
+						 		</td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label">请求方描述</td>
+						 		<td colspan="3">
+						 			<textarea type="text" name="description" class="form-control" placeholder="请输入请求方描述" role="{length:200}"></textarea>
+						 		</td>
+						 	</tr>
+						</table>
+						
+					</div>
+				</div>
+				<div class="ui-form-submitbar">
+					<button class="btn btn-info blue submit" id="submit"><i class="fa fa-check"></i><span>提交</span></button>
+					<button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+				</div>
+			</form>
+			
+		</div>
+	</div>
+</div>
+<input type="hidden" class="company"/>
+<input type="hidden" class="interfaceType"/>
+<script>
+	require(["app/registerManage/requestRegisterApp"],function(app){
+		app.main();
+	});
+</script>

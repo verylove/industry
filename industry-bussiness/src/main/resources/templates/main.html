@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		<title>工业大数据核心元数据管理系统</title>
+		<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/ionicons.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/jquery.mCustomScrollbar.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/autoSelect.css" rel="stylesheet" type="text/css">
+		<link href="../css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+		<link href="../css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css">
+		<link href="../css/style.css" rel="stylesheet" type="text/css">
+		<link href="../css/dataStyle.css" rel="stylesheet" type="text/css">
+		<link href="../css/jquery.treetable.css" rel="stylesheet" type="text/css">
+		<link href="../css/fullcalendar.css" rel="stylesheet" type="text/css">
+		<link href="../css/fullcalendar.print.css" rel="stylesheet" type="text/css" media='print'>
+		<script src="../js/lib/require.js"></script>
+		<script src="../js/lib/config.js"></script>
+		<!--[if IE 7]>
+			<link rel="stylesheet" href="../css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if lte IE 6]>
+	      <link rel="stylesheet"ac type="text../css" href="../css/bootstrap-ie6-min.css">
+	      <![endif]-->
+		<!--[if lte IE 7]>
+	      <link rel="stylesheet" type="text../css" href="../css/ie.css">
+	      <![endif]-->
+		<!--[if lt IE 9]>
+	        <script src="../js/lib/html5shiv.min.js"></script>
+	        <script src="../js/lib/respond.min.js"></script>
+	    <![endif]-->
+		<!--[if lte IE 6]>
+	        <script type="text/javascript" src="../js/lib/bootstrap-ie.js"></script>
+	    <![endif]-->
+		<!--[if IE]>  
+	        <script type="text/javascript" src="../js/lib/excanvas.compiled.js"></script>  
+	    <![endif]-->
+	    <style>
+	    	.menuNum{
+	    		background: #0387db;
+                float: right;
+			    width: 20px;
+			    height: 14px;
+			    border-radius: 6px;
+	    	}
+	    	#menubar .panel-body > ul > li:hover .menuNum{
+	    		color:#fff;
+	    	}
+	    	.menuNum.orange{
+	    		background:#f48c05;
+	    	}
+	    	.menuNum.red{
+	    		background:red;
+	    	}
+	    	.menuNum.green{
+	    		background:#10dd01;
+	    	}
+	    	#menubar .panel-body > ul > .active .menuNum{
+	    		color:#fff;
+	    	}
+			.gray {
+				background-color:#c5c3c3 !important;
+			}
+			.ui-content-searchbar{
+				width:100%;
+			}
+            .ui-form-grid tr > td[type="label"]{
+                vertical-align: middle;
+                text-align: right;
+                padding-right:25px;
+            }
+	    </style>
+	</head>
+	<body>
+		<div class="ui-container">
+				<div class="ui-menubar">
+					<div class="ui-menu"></div>
+					<input type="hidden" name="mid" id="mid"/>
+				</div>
+				<div class="ui-header">
+					<div class="ui-logo-text">工业大数据核心元数据管理系统</div>
+					<div class="ui-navbar">
+						<ul>
+							<li class="user">
+								<div class="btn-group">
+									<a title="" class="dropdown-toggle" data-toggle="dropdown" style="cursor:auto"><i class="fa fa-user" style="font-size: 17px;"></i><span en="Account">${login}</span></a>
+							   </div>
+							</li>
+							<li class="user">
+								<div class="btn-group">
+									<a title="" class="dropdown-toggle" id="logout" data-toggle="dropdown"><i class="fa fa-power-off" style="font-size: 17px;"></i><span en="Account">退出</span></a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="ui-location">
+					<div class="ui-location-label"><i class="fa fa-map-marker"></i></div>
+					<ul></ul>
+				</div>
+				<div class="ui-article"></div>
+				<div class="ui-footer" en="Copyright © 2016-2017 by Fablesoft Co. Ltd. ">Copyright © 2016-2017 版权所有:江苏飞搏软件股份有限公司</div>
+				<!--用于判断按钮类型 1、修改-->
+				<input type="hidden" name="button_type" id="button_type" value="" />
+				
+				
+		</div>
+
+		<script  type="text/x-handlebars-template" id="menu-tpl">
+			<div class="panel-group" id="menubar">
+				{{#each this}}
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" {{#if this.items}}{{else}}mid="{{this.id}}"{{/if}}>
+								<a data-toggle="collapse" data-parent="#menubar" href="#collapse{{@index}}">
+									{{#if this.items}}
+										<i class="{{this.icon}}"></i><span>{{label}}</span>
+										<i attr="mt" class="fa fa-angle-down"></i>
+									{{else}}
+										<i class="{{this.icon}}"></i><span>{{label}}</span>
+									{{/if}}
+								</a>	
+							</h4>
+						</div>
+						{{#if this.items}}
+						<div id="collapse{{@index}}" class="panel-collapse collapse {{#if active}}in{{/if}}">
+							<div class="panel-body">
+								<ul>
+									{{#each this.items}}
+										<li url="{{this.url}}" {{#if active}}class='active'{{/if}} mid="{{this.id}}">{{this.label}}</li>
+									{{/each}}
+								</ul>
+							</div>
+						</div>
+						{{/if}}
+					</div>
+				{{/each}}
+			</div>
+		</script>
+		<script  type="text/x-handlebars-template" id="menu-tpl-en">
+			<div class="panel-group" id="menubar">
+				{{#each this}}
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" {{#if this.items}}{{else}}mid="{{this.id}}"{{/if}}>
+								<a data-toggle="collapse" data-parent="#menubar" href="#collapse{{@index}}">
+									{{#if this.items}}
+										<i class="{{this.icon}}"></i><span>{{labelEN}}</span>
+										<i attr="mt" class="fa fa-angle-down"></i>
+									{{else}}
+										<i class="{{this.icon}}"></i><span>{{labelEN}}</span>
+									{{/if}}
+								</a>	
+							</h4>
+						</div>
+						{{#if this.items}}
+						<div id="collapse{{@index}}" class="panel-collapse collapse {{#if active}}in{{/if}}">
+							<div class="panel-body">
+								<ul>
+									{{#each this.items}}
+										<li url="{{this.url}}" {{#if active}}class='active'{{/if}} mid="{{this.id}}">{{this.labelEN}}</li>
+									{{/each}}
+								</ul>
+							</div>
+						</div>
+						{{/if}}
+					</div>
+				{{/each}}
+			</div>
+		</script>
+		<script>
+			
+			var chartInterval= null;
+			var chartInterval2 = null;
+			var scopeMenuData = null;
+			require(["app/mainApp"],function(app){
+				app.main();
+			});
+		</script>
+	</body>
+</html>

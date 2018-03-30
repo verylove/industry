@@ -1,0 +1,39 @@
+<div class="ui-content dataStatisticalAnalysis">
+    <div class="pull-left ui-box-left ui-box-top industry-box" style="position: relative">
+        <div class="title">行业分类</div>
+        <div class="chart-box pull-left">
+            <div id="industryChart"></div>
+            <div id="hoverChart"></div>
+        </div>
+        <div class=" legend-box pull-right">
+            <div class="legend">
+                <ul operate="industry" id="industry"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="pull-right ui-box-right ui-box-top subject-box" style="position: relative">
+        <div class="title">主题分类</div>
+        <div class="chart-box pull-left">
+            <div id="subjectChart"></div>
+        </div>
+        <div class="legend-box pull-right" style="position:absolute;left:60%">
+            <div class="legend">
+                <ul operate="subject" id="subject"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="ui-warpper">
+        <div class=" ui-box-bottom">
+            <div class="title">元数据数量监测</div>
+            <div id="metaDataChart">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require(["app/statisticalAnalysis/dataStatisticalAnalysis"],function(app){
+        app.main();
+    })
+</script>

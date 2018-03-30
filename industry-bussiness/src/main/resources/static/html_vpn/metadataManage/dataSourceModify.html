@@ -1,0 +1,67 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">编辑数据源</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tbody>
+								<tr>
+									<td type="label" ><span class="required"></span>数据源名称</td>
+									<td>
+										<input type="text" name="name" class="form-control" placeholder="请输入数据源名称" role="{required:true,length:50}" id="name"/>
+									</td>
+									<td type="label" ><span class="required"></span>数据源类型</td>
+									<td>
+										<select class="form-control" name="type" role="{required:true}" id="type">
+									    	<option value="1">数据库</option>
+									    	<option value="2">文件</option>
+									    </select>
+									</td>
+								</tr>
+							</tbody>
+							<tbody class="tbody"></tbody>
+							<tbody>
+								<tr class="ftpHide">
+									<td type="label" ><span class="required"></span>服务器IP地址</td>
+									<td>
+										<input type="text" name="ip" class="form-control ip_address" placeholder="请输入服务器IP地址" role="{required:true,ip:true}"/>
+									</td>
+									<td type="label" class="title ftpHide" ><span class="required"></span>服务器端口</td>
+									<td class="ftpHide">
+										<input type="text" name="port" class="form-control port" placeholder="请输入服务器端口" role="{required:true,port:true}" />
+									</td>
+								</tr>
+								<tr>
+									<td type="label" ><span class="required"></span>用户名</td>
+									<td><input type="text" name="username" class="form-control" placeholder="请输入用户名" role="{required:true,length:50}"/></td>
+									<td type="label" ><span class="required"></span>密码</td>
+									<td type="label">
+										<input type="text" name="password" class="form-control" placeholder="请输入密码" role="{required:true,length:50}"/>
+									</td>
+								</tr>
+							</tbody>
+							<tbody class="tfoot"></tbody>
+						</table>
+					</div>
+				</div>
+				<div class="ui-form-submitbar">
+					<button class="btn btn-info blue testButton"><i class="fa fa-check"></i><span>测试连接</span></button>
+					<button class="btn btn-info blue submit" id="requestSubmit" disabled><i class="fa fa-check"></i><span>提交</span></button>
+					<button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/metadataManage/dataSourceModify"],function(app){
+		app.main();
+	});
+</script>

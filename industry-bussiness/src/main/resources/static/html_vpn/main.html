@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		<title>贵州公安VPN跨域安全交换平台</title>
+		<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/ionicons.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/jquery.mCustomScrollbar.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/autoSelect.css" rel="stylesheet" type="text/css">
+		<link href="../css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+		<link href="../css/zTreeStyle/zTreeStyle.css" rel="stylesheet" type="text/css">
+		<link href="../css/style.css" rel="stylesheet" type="text/css">
+		<link href="../css/jquery.treetable.css" rel="stylesheet" type="text/css">
+		<link href="../css/fullcalendar.css" rel="stylesheet" type="text/css">
+		<link href="../css/fullcalendar.print.css" rel="stylesheet" type="text/css" media='print'>
+		<script src="../js/lib/require.js"></script>
+		<script src="../js/lib/config.js"></script>
+		<!--[if IE 7]>
+			<link rel="stylesheet" href="../css/font-awesome-ie7.min.css">
+		<![endif]-->
+		<!--[if lte IE 6]>
+	      <link rel="stylesheet"ac type="text../css" href="../css/bootstrap-ie6-min.css">
+	      <![endif]-->
+		<!--[if lte IE 7]>
+	      <link rel="stylesheet" type="text../css" href="../css/ie.css">
+	      <![endif]-->
+		<!--[if lt IE 9]>
+	        <script src="../js/lib/html5shiv.min.js"></script>
+	        <script src="../js/lib/respond.min.js"></script>
+	    <![endif]-->
+		<!--[if lte IE 6]>
+	        <script type="text/javascript" src="../js/lib/bootstrap-ie.js"></script>
+	    <![endif]-->
+		<!--[if IE]>  
+	        <script type="text/javascript" src="../js/lib/excanvas.compiled.js"></script>  
+	    <![endif]-->
+	    <style>
+	    	.menuNum{
+	    		background: #0387db;
+                float: right;
+			    width: 20px;
+			    height: 14px;
+			    border-radius: 6px;
+	    	}
+	    	#menubar .panel-body > ul > li:hover .menuNum{
+	    		color:#fff;
+	    	}
+	    	.menuNum.orange{
+	    		background:#f48c05;
+	    	}
+	    	.menuNum.red{
+	    		background:red;
+	    	}
+	    	.menuNum.green{
+	    		background:#10dd01;
+	    	}
+	    	#menubar .panel-body > ul > .active .menuNum{
+	    		color:#fff;
+	    	}
+	    </style>
+	</head>
+	<body>
+		<!--<div style="width:959px;height:30px;background:red;position:absolute;z-index:2000;left:0;top:97px"></div>-->
+		<div class="ui-container">
+				<div class="ui-menubar">
+					<div class="ui-logo">
+						<img src="../images/logo1.png"/>
+						<input type="hidden" name="mid" id="mid"/>
+					</div>
+					<div class="ui-menu"></div>
+				</div>
+				<div class="ui-header">
+					<div class="ui-logo-text" en="VPN Security Swap Plantform">VPN跨域安全交换平台</div>
+					<div class="ui-navbar">
+						<ul>
+							<!--<li>
+								<div class="ui-searchInput">
+									<input id="searchInput" type="text" class="form-control"/>
+									<i class="fa fa-search" id="searchIcon"></i>
+								</div>
+							</li>-->
+							
+							<li class="message">
+								<div class="btn-group">
+									<a title="消息" class="dropdown-toggle messageNumber" data-toggle="dropdown">
+										<i class="fa fa-envelope-o"></i><span en="Message">消息</span>
+									</a>
+									<ul class="dropdown-menu messageMenu" role="menu" style="width: 252px;word-break: break-all;">
+								        <script  type="text/x-handlebars-template" id="message-tpl">
+								        	{{#each this.content}}
+								        	<li type={{type}} mid={{menuClassification}}>
+								            	<a href="javascript:void(0)"><i class="fa fa-envelope-o"></i><b>[{{mes}}]</b>
+								            		{{content}}<span>({{createTime}})</span></a>
+								        	</li>
+											{{/each}}
+											<li>
+								            	<a href="javascript:void(0)" class="text-right" en="More">查看更多</a>
+								        	</li>
+								        </script>
+								    </ul>
+							   </div>
+							</li>
+							
+							<li class="user">
+								<div class="btn-group">
+									<a title="个人中心" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" style="font-size: 17px;"></i><span en="Account">账号</span></a>
+									<ul class="dropdown-menu" role="menu">
+										<li style="padding:0 20px;font-size:12px;"><div><i class="fa fa-user" style="font-size:15px;margin-right:4px;"></i>欢迎，<span id="loginMan" style="color:#0090ff"></span></div></li>
+										<li class="divider" style="margin-top:0"></li>
+								        <!--<li>
+								            <a href="#">账户管理</a>
+								        </li>-->
+								        <li>
+								            <a href="#" class="modifyPassword" en="Modify">修改密码</a>
+								        </li>
+								        
+								        <li>
+								            <a href="#" class="authorization" en="Authorize">关于授权</a>
+								        </li>
+								       
+								        <li class="divider"></li>
+								        <li>
+								            <a href="#" id="logOut" en="Exit">退出</a>
+								        </li>
+								    </ul>
+							   </div>
+							</li>
+							
+							<!--<li class="help"><a title="帮助"><i class="fa fa-question"></i><span en="Help">帮助</span></a></li>-->
+						</ul>
+					</div>
+				</div>
+				<div class="ui-location">
+					<div class="ui-location-label"><i class="fa fa-map-marker"></i></div>
+					<ul></ul>
+				</div>
+				<div class="ui-article"></div>
+				<div class="ui-footer" en="Copyright © 2016-2017 by Fablesoft Co. Ltd. ">Copyright © 2016-2017 版权所有:江苏飞搏软件股份有限公司</div>
+				<!--用于判断按钮类型 1、修改-->
+				<input type="hidden" name="button_type" id="button_type" value="" />
+				
+				
+		</div>
+	<!--	<div style="position: absolute;top: 0;left: 0;height:44px;width: 500px;background: #fff;z-index: 99;">
+			<img src="../images/loginVPN/LOGO.png" alt="" style="margin-left: 6px;margin-top: 2px;transform: scale(0.8);"/>
+		</div>-->
+		<script  type="text/x-handlebars-template" id="menu-tpl">
+			<div class="panel-group" id="menubar">
+				{{#each this}}
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" {{#if this.items}}{{else}}mid="{{this.id}}"{{/if}}>
+								<a data-toggle="collapse" data-parent="#menubar" href="#collapse{{@index}}">
+									{{#if this.items}}
+										<i class="{{this.icon}}"></i><span>{{label}}</span>
+										<i attr="mt" class="fa fa-angle-down"></i>
+									{{else}}
+										<i class="{{this.icon}}"></i><span>{{label}}</span>
+									{{/if}}
+								</a>	
+							</h4>
+						</div>
+						{{#if this.items}}
+						<div id="collapse{{@index}}" class="panel-collapse collapse {{#if active}}in{{/if}}">
+							<div class="panel-body">
+								<ul>
+									{{#each this.items}}
+										<li url="{{this.url}}" {{#if active}}class='active'{{/if}} mid="{{this.id}}">{{this.label}}</li>
+									{{/each}}
+								</ul>
+							</div>
+						</div>
+						{{/if}}
+					</div>
+				{{/each}}
+			</div>
+		</script>
+		<script  type="text/x-handlebars-template" id="menu-tpl-en">
+			<div class="panel-group" id="menubar">
+				{{#each this}}
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title" {{#if this.items}}{{else}}mid="{{this.id}}"{{/if}}>
+								<a data-toggle="collapse" data-parent="#menubar" href="#collapse{{@index}}">
+									{{#if this.items}}
+										<i class="{{this.icon}}"></i><span>{{labelEN}}</span>
+										<i attr="mt" class="fa fa-angle-down"></i>
+									{{else}}
+										<i class="{{this.icon}}"></i><span>{{labelEN}}</span>
+									{{/if}}
+								</a>	
+							</h4>
+						</div>
+						{{#if this.items}}
+						<div id="collapse{{@index}}" class="panel-collapse collapse {{#if active}}in{{/if}}">
+							<div class="panel-body">
+								<ul>
+									{{#each this.items}}
+										<li url="{{this.url}}" {{#if active}}class='active'{{/if}} mid="{{this.id}}">{{this.labelEN}}</li>
+									{{/each}}
+								</ul>
+							</div>
+						</div>
+						{{/if}}
+					</div>
+				{{/each}}
+			</div>
+		</script>
+		<script>
+			
+			var chartInterval= null;
+			var chartInterval2 = null;
+			var scopeMenuData = null;
+			require(["app/mainApp"],function(app){
+				app.main();
+			});
+		</script>
+	</body>
+</html>

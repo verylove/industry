@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>六边形</title>
+    <style>
+        .wrap{margin:100px;margin-left: 300px;width:505px;}
+        .nav{
+          width:100px;height:50px;background:#339933;display:inline-block;position:relative;line-height:50px;
+            text-align:center;color:#ffffff;font-size:14px;text-decoration:none;float:left; margin-top:31px;margin-right:1px;
+            transition: font-size 300ms linear 0s;
+            }
+        .nav s{width:0;height:0;display:block;overflow:hidden;position:absolute;border-left:50px dotted transparent;border-right:50px dotted transparent;border-bottom:30px solid #339933;left:0px;top:-30px;}
+        .nav b{width:0;height:0;display:block;overflow:hidden;position:absolute;border-left:50px dotted transparent;border-right:50px dotted transparent;border-top:30px solid #339933;bottom:-30px;left:0px;}
+        .a0{margin-left:100px;}
+        .a1{margin-left:50px;}
+        .nav:hover{
+        	background:#8CBF26;color:#333333;font-size:48px;
+        }
+        .nav:hover s{border-bottom-color:#8CBF26;}
+        .nav:hover b{border-top-color:#8CBF26;}
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <!--第一层-->
+    <a class="nav a0" target="_blank" href="#"><s></s>1<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>2<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>3<b></b></a>
+    <!--第二层-->
+    <a class="nav a1" target="_blank" href="#"><s></s>4<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>5<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>6<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>7<b></b></a>
+    <!--第三层-->
+    <a class="nav " target="_blank" href="#"><s></s>8<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>9<b></b></a>
+    <a class="nav " target="_blank" href="#" style=""><s></s>10<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>11<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>12<b></b></a>
+    <!--第4层-->
+    <a class="nav a1" target="_blank" href="#"><s></s>4<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>5<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>6<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>7<b></b></a>
+    <!--第5层-->
+    <a class="nav a0" target="_blank" href="#"><s></s>1<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>2<b></b></a>
+    <a class="nav " target="_blank" href="#"><s></s>3<b></b></a>
+</div>
+</body>
+</html> 

@@ -1,0 +1,30 @@
+<style>
+	.ui-location{
+		display: none !important;
+	}
+	.ui-article {
+		top: 40px !important;
+		padding: 0;
+		bottom: 0;
+		box-shadow: 0 0px 23px rgba(0,0,0,0.3);
+	}
+	.ui-content {
+		left: 0 !important;
+		right: 0 !important;
+	}
+	.ui-footer{
+		background: transparent !important;
+	}
+</style>
+<div class="ui-content transparent" id="homePage">
+	<ul class="hover-box" style="display:none">
+	</ul>
+	<div class="ui-beehive-bg">
+		<div class="ui-beehive-container"></div>
+	</div>
+</div>
+<script>
+	require(["app/home/businessCatalogApp"],function(app){
+		app.main();
+	});
+</script>

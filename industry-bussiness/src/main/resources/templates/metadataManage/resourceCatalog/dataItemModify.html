@@ -1,0 +1,206 @@
+<div class="ui-content">
+    <div class="ui-content-header">
+        <div class="ui-content-controlbar">
+            <button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+        </div>
+    </div>
+    <div class="ui-content-body">
+        <div class="ui-content-aside" style="top:40px;">
+            <div class="ui-group">
+                <div class="ui-group-header">修改</div>
+                <div class="ui-group-body">
+                    <div class="ui-steps blue" id="ui-steps" style="width:1000px;"></div>
+                    <div id="content1" class="hidden">
+                        <form id="form1" class="ui-form" role="form">
+                            <div class="ui-form-box">
+                                <table class="ui-form-grid wire">
+                                    <tr>
+                                        <td type="label"><span class="required"></span>联系人</td>
+                                        <td>
+                                            <select name="userId" class="form-control link-user" style="width: 100%;">
+
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td type="label">联系电话</td>
+                                        <td>
+                                            <input type="text" name="telephone" class="form-control" placeholder="请输入" role="{mobile_telephone:true}"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="content2" class="hidden">
+                        <form id="form2" class="ui-form" role="form">
+                            <div class="ui-form-box">
+                                <table class="ui-form-grid wire">
+                                    <tr>
+                                        <td type="label"><span class="required"></span>资源名称</td>
+                                        <td><input type="text" name="resciName" class="form-control" placeholder="请输入" role="{required:true,length:50}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td type="label"><span class="required"></span>资源英文名称</td>
+                                        <td>
+                                            <input type="text" name="resciEname" class="form-control" placeholder="请输入" role="{required:true,length:50,filter:true}"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td type="label"><span class="required"></span>资源编码</td>
+                                        <td><input type="text" name="resciCode" class="form-control" placeholder="请输入" role="{required:true,length:50}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td type="label"><span class="required"></span>资源等级</td>
+                                        <td>
+                                            <select name="resciLevel" class="form-control dataSource" style="width: 100%;"  role="{required:true}">
+                                                <option value="0">完全共享</option>
+                                                <option value="1">部分共享</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td type="label"><span class="required"></span>资源图片</td>
+                                        <td id="imageUp">
+                                            <div style="float: left" class="txt"></div>
+                                            <input type="button" value="上传" style="float: right;width:50px;min-width:50px !important;background:#039ae6;border: 1px solid #929bbf;color: white;">
+                                            <input type="hidden" class="image" name="image">
+                                            <input type="hidden" class="imagePath" name="imagePath">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td type="label">资源摘要</td>
+                                        <td><textarea class="form-control" name="resciContent" role="{length:200}"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td type="label"><span class="required"></span>主题分类</td>
+                                        <td>
+                                            <select name="topicId" class="form-control" style="width: 100%;"  role="{required:true}">
+
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td type="label"><span class="required"></span>行业分类</td>
+                                        <td>
+                                            <select name="industryId" class="form-control" style="width: 100%;"  role="{required:true}">
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="content3" class="hidden">
+                        <form id="form3" class="ui-form" role="form">
+                            <div class="ui-form-box">
+                                <table class="ui-form-grid wire">
+                                    <tr>
+                                        <td type="label"><span class="required"></span>OID编目</td>
+                                        <td><input type="text" name="oid" class="form-control" placeholder="请输入" role="{required:true,length:50}"/></td>
+                                    </tr>
+                                    <button class="btn btn-info blue" id="getOid">获取OID</button>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="content4" class="hidden">
+                        <div class="part1 mb-25">
+                            <div>
+                                <div style="margin-bottom:10px;text-align:left;">
+                                    <button class="btn btn-info blue" id="addDataItem"><i class="fa fa-plus"></i><span>新增</span></button>
+                                    <button class="btn btn-info blue" id="relevanceBtn"><i class="fa fa-align-justify"></i><span>关联数据元</span></button>
+                                </div>
+                                <form class="inParamsForm">
+                                    <table class="ui-grid sensitive_word_filter inputParams" id="dataGrid">
+                                        <thead>
+                                        <tr>
+                                            <th>数据项名称</th>
+                                            <th>数据项英文名称</th>
+                                            <th>数据项类型</th>
+                                            <th>数据项长度</th>
+                                            <th>数据元标识符</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                    <input type="hidden" id="hidemodifyId">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="content5" class="hidden">
+                        <form id="form5" class="ui-form" role="form">
+                            <div class="ui-title">
+                                <span>元数据信息</span>
+                                <span></span>
+                            </div>
+                            <div class="ui-data-centent">
+                                <img src="../images/0.png" alt="">
+                                <div class="ui-data-table-box">
+                                    <h4 name="resciName"></h4>
+                                    <div name="resciContent"></div>
+                                    <div class="ui-form-box" style="margin:10px 0;width:570px;">
+                                        <table class="ui-form-grid wire">
+                                            <tr>
+                                                <td type="label">资源编码</td>
+                                                <td name="resciCode"></td>
+                                                <td type="label">资源英文名称</td>
+                                                <td name="resciEname"></td>
+                                            </tr>
+                                            <tr>
+                                                <td type="label">资源名称</td>
+                                                <td name="resciName"></td>
+                                                <td type="label">资源等级</td>
+                                                <td name="resciLevel"></td>
+                                            </tr>
+                                            <tr>
+                                                <td type="label">主题分类</td>
+                                                <td name="topicName"></td>
+                                                <td type="label">行业分类</td>
+                                                <td name="industryName"></td>
+                                            </tr>
+                                            <tr>
+                                                <td type="label">发布目录</td>
+                                                <td name="catalogName"></td>
+                                                <td type="label">OID标识</td>
+                                                <td name="oid"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui-title">
+                                <span>数据项信息</span>
+                                <span></span>
+                            </div>
+                            <table id="grid" class="ui-grid" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>数据项名称</th>
+                                    <th>数据项英文名称</th>
+                                    <th>数据项编码</th>
+                                    <th>数据项类型</th>
+                                    <th>数据项长度</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" class="company"/>
+    <input type="hidden" class="sqltables"/>
+    <script>
+        require(["app/metadataManage/resourceCatalog/dataItemModify"],function(app){
+            app.main();
+        });
+    </script>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fable.industry.bussiness.mapper.main.MainMapper">
+    <!--查询首页行业分类-->
+    <select id="queryClassify" resultType="java.util.Map">
+        SELECT
+            ID id,
+            `INDEX` indexId,
+            ITEM_NAME itemName,
+            ITEM_COMTENT itemComtent,
+            CLASS_ID classId,
+            ITEM_ALIAS itemAlias
+        FROM
+            sys_dictionary_item
+        WHERE
+            CLASS_ID = 4;
+    </select>
+
+    <!--查询行业分类下面的资源名称-->
+    <select id="queryResciById" resultType="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean" parameterType="java.lang.Integer">
+        SELECT
+            ID id,
+            USER_ID userId,
+            TELE_PHONE telephone,
+            DATA_SOURCES dataSource,
+            RESCI_TYPE resciType,
+            CATALOG_ID catalogId,
+            CATALOGUE_STATE catalogUEState,
+            RESCI_NAME resciName,
+            RESCI_ENAME resciEname,
+            RESCI_CODE resciCode,
+            RESCI_CONTENT resciContent,
+            IMAGE image,
+            IMAGE_PATH imagePath,
+            OID oid,
+            TOPIC_ID topicId,
+            INDUSTRY_ID industryId,
+            RESCI_LEVEL resciLevel,
+            RESCI_STATE resciState,
+            SUBMIT_TIME submitTime,
+            RELEASE_TIME releaseTime,
+            REVOKE_TIME revokeTime
+        FROM
+            sys_resci_catalogue
+        WHERE
+            INDUSTRY_ID = #{id}
+            AND RESCI_STATE=4
+    </select>
+
+    <!--首页左侧菜单查询-->
+    <select id="queryMenuByRoleId" parameterType="java.lang.Integer" resultType="java.util.Map">
+        SELECT
+            `NAME` label,
+            MENU_ID id,
+            PID pid,
+            URL url,
+            ICON icon
+        FROM
+            sys_menu
+        WHERE MENU_ID IN
+        (SELECT MENU_ID FROM sys_menu_role WHERE ROLE_ID=#{roleId})
+    </select>
+</mapper>

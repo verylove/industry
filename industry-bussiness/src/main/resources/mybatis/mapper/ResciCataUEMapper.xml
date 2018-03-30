@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fable.industry.bussiness.mapper.resci.ResciCataUEMapper">
+
+	<resultMap type="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean" id="BaseResultMap">
+		<id column="ID" property="id" jdbcType="INTEGER"/>
+		<result column="USER_ID" property="userId" jdbcType="INTEGER"/>
+		<result column="TELE_PHONE" property="telephone" jdbcType="VARCHAR"/>
+		<result column="DATA_SOURCES" property="dataSource" jdbcType="VARCHAR"/>
+		<result column="RESCI_TYPE" property="resciType" jdbcType="VARCHAR"/>
+		<result column="CATALOG_ID" property="catalogId" jdbcType="INTEGER"/>
+		<result column="CATALOGUE_STATE" property="catalogUEState" jdbcType="INTEGER"/>
+		<result column="RESCI_NAME" property="resciName" jdbcType="VARCHAR"/>
+		<result column="RESCI_ENAME" property="resciEname" jdbcType="VARCHAR"/>
+		<result column="RESCI_CODE" property="resciCode" jdbcType="VARCHAR"/>
+		<result column="RESCI_CONTENT" property="resciContent" jdbcType="VARCHAR"/>
+		<result column="IMAGE" property="image" jdbcType="VARCHAR"/>
+		<result column="IMAGE_PATH" property="imagePath" jdbcType="VARCHAR"/>
+		<result column="OID" property="oid" jdbcType="VARCHAR"/>
+		<result column="TOPIC_ID" property="topicId" jdbcType="INTEGER"/>
+		<result column="INDUSTRY_ID" property="industryId" jdbcType="INTEGER"/>
+		<result column="RESCI_LEVEL" property="resciLevel" jdbcType="VARCHAR"/>
+		<result column="RESCI_STATE" property="resciState" jdbcType="INTEGER"/>
+		<result column="SUBMIT_TIME" property="submitTime" jdbcType="TIMESTAMP"/>
+		<result column="RELEASE_TIME" property="releaseTime" jdbcType="TIMESTAMP"/>
+		<result column="REVOKE_TIME" property="revokeTime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+
+	<sql id="Base_Column_List" >
+		ID,
+		USER_ID,
+		TELE_PHONE,
+		DATA_SOURCES,
+		RESCI_TYPE,
+		CATALOG_ID,
+		CATALOGUE_STATE,
+		RESCI_NAME,
+		RESCI_ENAME,
+		RESCI_CODE,
+		RESCI_CONTENT,
+		IMAGE,
+		IMAGE_PATH,
+		OID,
+		TOPIC_ID,
+		INDUSTRY_ID,
+		RESCI_LEVEL,
+		RESCI_STATE,
+		SUBMIT_TIME,
+		RELEASE_TIME,
+		REVOKE_TIME
+	</sql>
+
+	<select id="catalogingTree" resultType="com.fable.industry.api.page.TreeRsult">
+		SELECT ID id,FIELD_NAME name,FPARENT_ID pid FROM SYS_RESCI_FIELD
+        UNION ALL
+        SELECT ID id,CATALOG_NAME name,FIELD_ID pid FROM SYS_RESCI_CATALOG
+	</select>
+
+	<select id="catalogingList" parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean" resultType="map">
+		SELECT cue.ID AS id,cue.RESCI_NAME AS resciName,cue.RESCI_CODE AS resciCode,cue.OID AS oid,cue.RESCI_STATE AS resciState,
+		CASE cue.RESCI_LEVEL WHEN 1 THEN '部分共享' WHEN 0 THEN '完全共享' END AS resciLevel,i1.ITEM_NAME AS topicName,i2.ITEM_NAME AS industryName,i3.ITEM_NAME AS resciType
+		FROM SYS_RESCI_CATALOGUE cue
+		LEFT JOIN SYS_RESCI_CATALOG c ON c.ID = cue.CATALOG_ID
+		LEFT JOIN sys_dictionary_item i1 ON i1.ID = cue.TOPIC_ID
+		LEFT JOIN sys_dictionary_item i2 ON i2.ID = cue.INDUSTRY_ID
+		LEFT JOIN sys_dictionary_item i3 ON i3.ID = cue.RESCI_STATE
+		LEFT JOIN sys_user u ON u.USER_ID = cue.USER_ID
+		LEFT JOIN sys_organization o ON o.COM_ID = u.COM_ID
+		WHERE 1 =1
+		<!--<if test="userId != 1">-->
+			<!--AND ((o.COM_ID = #{comId} AND cue.RESCI_LEVEL = 1) OR (cue.RESCI_LEVEL = 0))-->
+		<!--</if>-->
+		<if test="catalogId != '' and catalogId != null">
+			AND c.ID = #{catalogId}
+		</if>
+		<if test="resciName != null and resciName != ''">
+			AND cue.RESCI_NAME LIKE CONCAT('%',#{resciName},'%')
+		</if>
+		<if test="resciState != null">
+			AND cue.RESCI_STATE = #{resciState}
+		</if>
+		<if test="resciCode != null and resciCode != ''">
+			AND cue.RESCI_CODE LIKE CONCAT('%',#{resciCode},'%')
+		</if>
+		<if test="topicId != null and topicId != ''">
+			AND cue.TOPIC_ID = #{topicId}
+		</if>
+		<if test="industryId != null and industryId != ''">
+			AND cue.INDUSTRY_ID = #{industryId}
+		</if>
+		<if test="oid != null and oid != ''">
+			AND cue.OID LIKE CONCAT('%',#{oid},'%')
+		</if>
+		ORDER BY cue.ID DESC
+	</select>
+
+	<select id="examineCatalogList" parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean" resultType="map">
+		SELECT cue.ID AS id,cue.RESCI_NAME AS resciName,cue.RESCI_CODE AS resciCode,cue.OID AS oid,cue.RESCI_STATE AS resciState,
+		CASE cue.RESCI_LEVEL WHEN 1 THEN '部分共享' WHEN 0 THEN '完全共享' END AS resciLevel,i1.ITEM_NAME AS topicName,i2.ITEM_NAME AS industryName,i3.ITEM_NAME AS resciType
+		FROM SYS_RESCI_CATALOGUE cue
+		LEFT JOIN SYS_RESCI_CATALOG c ON c.ID = cue.CATALOG_ID
+		LEFT JOIN sys_dictionary_item i1 ON i1.ID = cue.TOPIC_ID
+		LEFT JOIN sys_dictionary_item i2 ON i2.ID = cue.INDUSTRY_ID
+		LEFT JOIN sys_dictionary_item i3 ON i3.ID = cue.RESCI_STATE
+		LEFT JOIN sys_user u ON u.USER_ID = cue.USER_ID
+		WHERE 1 = 1
+		<if test="roleId != 1">
+			AND u.USER_ID = #{userId}
+		</if>
+		<if test="catalogId != '' and catalogId != null">
+			AND c.ID = #{catalogId}
+		</if>
+		<if test="resciName != null and resciName != ''">
+			AND cue.RESCI_NAME LIKE CONCAT('%',#{resciName},'%')
+		</if>
+		<if test="resciState != null and resciState != ''">
+			AND cue.RESCI_STATE = #{resciState}
+		</if>
+		<if test="resciCode != null and resciCode != ''">
+			AND cue.RESCI_CODE LIKE CONCAT('%',#{resciCode},'%')
+		</if>
+		<if test="topicId != null and topicId != ''">
+			AND cue.TOPIC_ID = #{topicId}
+		</if>
+		<if test="industryId != null and industryId != ''">
+			AND cue.INDUSTRY_ID = #{industryId}
+		</if>
+		<if test="oid != null and oid != ''">
+			AND cue.OID LIKE CONCAT('%',#{oid},'%')
+		</if>
+	</select>
+
+	<insert id="insertResciCataUE" parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean" >
+		INSERT INTO SYS_RESCI_CATALOGUE (ID,USER_ID,TELE_PHONE,CATALOG_ID,RESCI_STATE,CATALOGUE_STATE)
+		VALUES (#{id},#{userId},#{telephone},#{catalogId},#{resciState},#{catalogUEState})
+	</insert>
+
+	<update id="updateResciCataUE" parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean">
+		UPDATE SYS_RESCI_CATALOGUE
+		<set>
+			<if test="userId != null and userId != '' ">
+				USER_ID = #{userId},
+			</if>
+			<if test="telephone != null and telephone != '' ">
+				TELE_PHONE = #{telephone},
+			</if>
+			<if test="dataSource != null and dataSource != ''">
+				DATA_SOURCES = #{dataSource},
+			</if>
+			<if test="catalogUEState != null and catalogUEState != ''">
+				CATALOGUE_STATE = #{catalogUEState},
+			</if>
+			<if test="resciName != null and resciName != ''">
+				RESCI_NAME = #{resciName},
+			</if>
+			<if test="resciEname != null and resciEname != ''">
+				RESCI_ENAME = #{resciEname},
+			</if>
+			<if test="resciCode != null and resciCode != ''">
+				RESCI_CODE = #{resciCode},
+			</if>
+			<if test="resciContent != null and resciContent != ''">
+				RESCI_CONTENT = #{resciContent},
+			</if>
+			<if test="image != null and image != ''">
+				IMAGE = #{image},
+			</if>
+			<if test="imagePath != null and imagePath != ''">
+				IMAGE_PATH = #{imagePath},
+			</if>
+			<if test="oid != null and oid != ''">
+				OID = #{oid},
+			</if>
+			<if test="topicId != null and topicId != ''">
+				TOPIC_ID = #{topicId},
+			</if>
+			<if test="industryId != null and industryId != ''">
+				INDUSTRY_ID = #{industryId},
+			</if>
+			<if test="resciLevel != null and resciLevel != ''">
+				RESCI_LEVEL = #{resciLevel},
+			</if>
+			<if test="resciState != null">
+				RESCI_STATE = #{resciState},
+			</if>
+			<if test="submitTime != null and submitTime != ''">
+				SUBMIT_TIME = #{submitTime},
+			</if>
+			<if test="releaseTime != null and releaseTime != ''">
+				RELEASE_TIME = #{releaseTime},
+			</if>
+			<if test="revokeTime != null and revokeTime != ''">
+				REVOKE_TIME = #{revokeTime},
+			</if>
+		</set>
+		WHERE ID = #{id}
+	</update>
+
+	<select id="queryResciCataUE" resultMap="BaseResultMap" parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM SYS_RESCI_CATALOGUE WHERE ID = #{id}
+	</select>
+
+	<select id="queryResciMap" resultType="map" parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean">
+		SELECT cue.RESCI_NAME AS resciName,cue.USER_ID AS userId,cue.IMAGE AS image,cue.CATALOGUE_STATE AS catalogUEState
+		,cue.IMAGE_PATH AS imagePath,cue.RESCI_CODE AS resciCode,cue.RESCI_ENAME AS resciEname,
+		cue.OID AS oid,cue.RESCI_CONTENT AS resciContent,DATE_FORMAT(cue.SUBMIT_TIME ,'%Y-%m-%d %H:%i:%s') AS submitTime
+		,DATE_FORMAT(cue.RELEASE_TIME ,'%Y-%m-%d %H:%i:%s') AS releaseTime,DATE_FORMAT(cue.REVOKE_TIME ,'%Y-%m-%d %H:%i:%s') AS revokeTime,
+		'数据' AS resciType,if(cue.RESCI_LEVEL=1,'部分共享','完全共享') AS resciLevel,cue.RESCI_LEVEL AS resciLevelId
+		,i1.ITEM_NAME AS topicName,i1.ID AS topicId,i2.ITEM_NAME AS industryName,i2.ID AS industryId,
+		c.CATALOG_NAME AS catalogName,u.USER_NAME AS userName,cue.TELE_PHONE AS telephone
+		FROM SYS_RESCI_CATALOGUE cue
+		LEFT JOIN SYS_RESCI_CATALOG c ON c.ID = cue.CATALOG_ID
+		LEFT JOIN sys_dictionary_item i1 ON i1.ID = cue.TOPIC_ID
+		LEFT JOIN sys_dictionary_item i2 ON i2.ID = cue.INDUSTRY_ID
+		LEFT JOIN sys_user u ON u.USER_ID = cue.USER_ID
+		WHERE cue.ID = #{id}
+	</select>
+	
+	<select id="queryDataByCUE" resultType="map" parameterType="int">
+		select citype.Id AS citypeId,citype.TableName AS tableName,attr.AttributeId AS attrId,attr.IsTableDisplay AS isTableDisplay,
+		attr.isQuery AS isQuery,attr.ColumnName AS columnName,i.ITEM_NAME AS dataType,
+		e.ID AS dataElementId,e.DATA_NAME AS dataName,e.DATA_ENAME AS dataEname,e.DATA_TYPEID AS dataTypeId,
+		e.DATA_LENGTH AS dataLength,e.CONSTRAINT AS `constraint`,e.DATA_CODE AS dataCode,e.ESTABLISH_TYPE AS establishType
+		FROM SYS_RESCI_CATALOGUE cue
+		LEFT JOIN ResCiTypeAttribute citype ON citype.CatalogueId = cue.ID
+		LEFT JOIN ResAttributes attr ON attr.AttributeId = citype.AttributeId
+		LEFT JOIN SYS_DATA_ELEMENT e ON e.ID = attr.elementId
+		LEFT JOIN SYS_DICTIONARY_ITEM i ON i.ID = e.DATA_TYPEID
+		WHERE cue.ID = #{id} ORDER BY citype.AttributeIndex
+	</select>
+
+	<select id="queryCataUeState" parameterType="java.lang.String" resultType="String">
+		SELECT RESCI_NAME FROM SYS_RESCI_CATALOGUE
+		WHERE RESCI_STATE = 4 AND ID IN (${ids})
+	</select>
+
+	<delete id="deleteCatalogUE" parameterType="java.lang.String">
+		DELETE FROM SYS_RESCI_CATALOGUE WHERE ID IN (${ids})
+	</delete>
+
+	<select id="queryDataExamine" resultType="int" parameterType="com.fable.industry.bussiness.model.bean.DataExamineBean">
+		SELECT COUNT(1) FROM SYS_DATA_EXAMINE WHERE CATAUE_ID = #{cataUEId}
+	</select>
+
+	<insert id="insertDataExamine" parameterType="com.fable.industry.bussiness.model.bean.DataExamineBean">
+		INSERT INTO SYS_DATA_EXAMINE (ID,EXAMINE_STEP,EXAMINE_STATE,USER_ID,EXAMINE_CONTENT,SAVE_STATE,UPDATE_TIME,CATAUE_ID)
+		VALUES (#{id},#{examineStep},#{examineState},#{userId},#{examineContent},#{saveState},#{updateTime},#{cataUEId})
+	</insert>
+
+	<update id="updateDataExamine" parameterType="com.fable.industry.bussiness.model.bean.DataExamineBean">
+		UPDATE SYS_DATA_EXAMINE
+		<set>
+			<if test="examineStep != null and examineStep != ''">
+				EXAMINE_STEP = #{examineStep},
+			</if>
+			<if test="examineState != null and examineState != ''">
+				EXAMINE_STATE = #{examineState},
+			</if>
+			<if test="examineContent != null and examineContent != ''">
+				EXAMINE_CONTENT = #{examineContent},
+			</if>
+			<if test="updateTime != null and updateTime != ''">
+				UPDATE_TIME = #{updateTime},
+			</if>
+		</set>
+		WHERE CATAUE_ID = #{cataUEId}
+	</update>
+
+	<select id="getDataExamine" parameterType="com.fable.industry.bussiness.model.bean.DataExamineBean" resultType="map">
+		SELECT u.USER_NAME AS userName,o.COM_NAME AS comName,e.EXAMINE_STATE AS examineState,e.EXAMINE_CONTENT AS examineContent
+		,DATE_FORMAT(e.UPDATE_TIME ,'%Y-%m-%d %H:%i:%s') AS updateTime
+		FROM sys_data_examine e
+		LEFT JOIN sys_user u ON e.USER_ID = u.USER_ID
+		LEFT JOIN sys_organization o ON u.COM_ID = o.COM_ID
+		WHERE e.CATAUE_ID = #{cataUEId}
+	</select>
+
+	<select id="checkOID" parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean" resultType="int">
+		SELECT COUNT(1) FROM oid_check
+		WHERE resciCode = #{resciCode}
+		AND oid = #{oid}
+	</select>
+
+	<select id="getoid" parameterType="com.fable.industry.bussiness.model.bean.ResciCatalogUEBean" resultType="map">
+		SELECT oid FROM oid_check
+		WHERE resciCode = #{resciCode}
+	</select>
+
+	<select id="getResciCode" parameterType="java.lang.String" resultType="int">
+		SELECT count(1) FROM SYS_RESCI_CATALOGUE WHERE RESCI_CODE = #{resciCode}
+	</select>
+
+</mapper>

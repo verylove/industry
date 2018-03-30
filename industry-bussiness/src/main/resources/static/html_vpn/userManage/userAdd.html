@@ -1,0 +1,79 @@
+<div class="ui-content">
+	<div class="ui-content-header">
+		<div class="ui-content-controlbar">
+			<button class="btn btn-link back" title="返回"><i class='ion-chevron-left'></i><span>返回</span></button>
+		</div>
+	</div>
+	<div class="ui-content-body">
+		<div class="ui-content-aside" style="top:40px;">
+			<form id="requestRegisterForm" class="ui-form" role="form">
+				<div class="ui-group">
+					<div class="ui-group-header">新增用户</div>
+					<div class="ui-group-body">
+						 <table class="ui-form-grid wire">
+						 	<tr>
+						 		<td type="label"><span class="required"></span>用户名</td>
+						 		<td><input type="text" class="form-control" name="loginName" id="loginName" role="{required:true,length:[2,20],custom:/^[a-zA-Z][a-zA-Z0-9_]*$/,errorText:'只允许数字、字母、下划线,并以字母开头'}"/></td>
+						 		<td type="label"><span class="required"></span>姓名</td>
+						 		<td><input type="text" class="form-control" name="userName" role="{required:true,length:[2,20],filterCN:true}"/></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label"><span class="required"></span>角色</td>
+						 		<td class="roleTd">
+						 			<!--<select id="" class="form-control" name="roleName" role="{required:true}">
+						 				<option value="1">中心超级管理员</option>
+						 			</select>-->
+						 		</td>
+						 		<td type="label"><span class="required"></span>所属单位</td>
+						 		<td>
+						 			<input id="companyName" class="form-control" />
+						 			<input type="hidden" id="companyId" name="companyId" value="" role="{required:true}"/>
+						 			<!--<input type="text" class="form-control" name="companyName" role="{required:true}"/>-->
+						 		</td>
+						 	</tr>
+						 	
+						 	<tr>
+						 		<td type="label"><span class="required"></span>身份证号</td>
+						 		<td><input type="text" class="form-control" name="idCard" role="{required:true,identityCard:true}"/></td>
+						 		<td type="label"><span class="required"></span>警号</td>
+						 		<td><input type="text" class="form-control" name="policeNumber" role="{required:true,number:true,length:[1,10]}"/></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label"><span class="required"></span>手机</td>
+						 		<td><input type="text" class="form-control" name="cellPhoneNumber" role="{required:true,mobile:true}"/></td>
+						 		<td type="label">办公电话</td>
+						 		<td><input type="text" class="form-control" name="telphone" role="{telephone:true}"/></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label">邮箱</td>
+						 		<td><input type="text" class="form-control" name="email" role="{email:true}"/></td>
+						 		<!--<td type="label"> <span class="required"></span>用户密码</td>
+						 		<td><input type="text" class="form-control" name="password" id="userPassword" role="{required:true}"/></td>
+						 	</tr>
+						 	<tr>
+						 		<td type="label"><span class="required"></span>重复用户密码</td>
+						 		<td><input type="text" class="form-control" id="userPasswordCheck" role="{required:true}"/></td>-->
+						 		<td type="label"><span class="required"></span>用户首次登录是否强制重设</td>
+						 		<td>
+						 			<select type="text" id="" class="form-control" name="loginState" style="width: 100%;" role="{required:true}">
+						 				<option value="1">是</option>
+						 				<option value="2">否</option>
+						 			</select>
+						 		</td>
+						 	</tr>
+						</table>
+					</div>
+				</div>
+				<div class="ui-form-submitbar">
+					<button class="btn btn-info blue submit" id="requestSubmit"><i class="fa fa-check"></i><span>提交</span></button>
+					<button class="btn btn-info orange cancel" id="cancel"><i class="fa fa-reply"></i><span>取消</span></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	require(["app/userManage/userAdd"],function(app){
+		app.main();
+	});
+</script>

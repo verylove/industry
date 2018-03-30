@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fable.industry.bussiness.mapper.resci.ResciFieldMapper">
+	<resultMap type="com.fable.industry.bussiness.model.bean.ResciFieldBean" id="BaseResultMap">
+		<id column="ID" property="id" jdbcType="INTEGER"/>
+		<result column="INDEX" property="index" jdbcType="INTEGER"/>
+		<result column="FIELD_NAME" property="fieldName" jdbcType="INTEGER"/>
+		<result column="USER_ID" property="userId" jdbcType="INTEGER"/>
+		<result column="FPARENT_ID" property="pid" jdbcType="INTEGER"/>
+		<result column="COM_ID" property="comId" jdbcType="INTEGER"/>
+		<result column="TELE_PHONE" property="telephone" jdbcType="VARCHAR"/>
+		<result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+		<result column="COM_NAME" property="comName" jdbcType="VARCHAR"/>
+		<result column="pidName" property="pidName" jdbcType="VARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List" >
+        ID,
+        `INDEX`,
+        FIELD_NAME,
+        USER_ID,
+        FPARENT_ID,
+        COM_ID,
+        TELE_PHONE
+    </sql>
+
+	<select id="findResciFieldList" parameterType="com.fable.industry.bussiness.model.bean.ResciFieldBean" resultMap="BaseResultMap">
+		SELECT
+		f.ID,f.FIELD_NAME,f.USER_ID,f.FPARENT_ID,f.COM_ID,f.TELE_PHONE,
+		u.USER_NAME,o.COM_NAME,ff.FIELD_NAME AS pidName
+		FROM sys_resci_field f
+		LEFT JOIN SYS_USER u ON u.USER_ID = f.USER_ID
+		LEFT JOIN SYS_ORGANIZATION o ON o.COM_ID = f.COM_ID
+		LEFT JOIN sys_resci_field ff ON ff.ID = f.FPARENT_ID
+		WHERE 1 = 1 AND f.ID != 0
+		<if test="comName != null and comName != ''">
+			AND o.COM_NAME LIKE CONCAT('%',#{comName},'%')
+		</if>
+		<if test="fieldName != null and fieldName != ''">
+		AND f.FIELD_NAME LIKE CONCAT('%',#{fieldName},'%')
+		</if>
+		<if test="userName != null and userName != ''">
+			AND u.USER_NAME LIKE CONCAT('%',#{userName},'%')
+		</if>
+		ORDER by f.ID
+	</select>
+
+	<insert id="insertResciField" parameterType="com.fable.industry.bussiness.model.bean.ResciFieldBean">
+		INSERT INTO sys_resci_field
+		VALUES (#{id},#{index},#{fieldName},#{userId},#{pid},#{comId},#{telephone})
+	</insert>
+
+	<update id="updateResciField" parameterType="com.fable.industry.bussiness.model.bean.ResciFieldBean">
+		UPDATE sys_resci_field SET
+		`INDEX` = #{index},
+		FIELD_NAME = #{fieldName},
+		USER_ID = #{userId},
+		FPARENT_ID = #{pid},
+		COM_ID = #{comId},
+		TELE_PHONE = #{telephone}
+		WHERE ID = #{id}
+	</update>
+
+	<select id="queryResciFieldById" parameterType="int" resultType="map">
+		SELECT
+		f.ID AS id,f.FIELD_NAME AS fieldName,f.USER_ID as userId,f.FPARENT_ID AS pid,f.COM_ID AS comId,
+		f.TELE_PHONE AS telephone,ff.FIELD_NAME AS pidName,
+		o.COM_NAME AS comName,u.USER_NAME AS userName FROM sys_resci_field f
+		LEFT JOIN sys_organization o ON f.COM_ID = o.COM_ID
+		LEFT JOIN sys_user u ON f.USER_ID = u.USER_ID
+		LEFT JOIN sys_resci_field ff ON ff.ID = f.FPARENT_ID
+		WHERE f.ID = #{resciFieldId}
+	</select>
+
+	<select id="getFieldByName" resultType="int" parameterType="java.lang.String">
+		SELECT COUNT(1) FROM sys_resci_field
+		WHERE FIELD_NAME = #{fieldName}
+	</select>
+
+	<select id="getFieldByIds" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT f.FIELD_NAME FROM sys_resci_field f
+		LEFT JOIN SYS_RESCI_CATALOG c ON f.ID = c.FIELD_ID
+		WHERE c.FIELD_ID IN (${resciFieldIds}) GROUP BY f.ID
+	</select>
+
+	<delete id="delResciField" parameterType="java.lang.String">
+		DELETE FROM sys_resci_field WHERE ID IN (${resciFieldIds});
+	</delete>
+
+	<select id="rootField" resultType="map">
+		SELECT FIELD_NAME FROM sys_resci_field WHERE ID = 1;
+	</select>
+
+</mapper>

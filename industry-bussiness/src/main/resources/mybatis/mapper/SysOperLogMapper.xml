@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fable.industry.bussiness.mapper.sysoperlog.SysOperLogMapper">
+
+	<select id="queryOperLogs" parameterType="com.fable.industry.bussiness.model.syslogs.SysOperLog" resultType="com.fable.industry.bussiness.model.syslogs.SysOperLog">
+ 		SELECT
+		s.ID id,
+		DATE_FORMAT(s.CREATE_TIME,'%Y-%m-%d %H:%i:%s') createTime,
+		s.IP ip,
+		s.RESULT result,
+		s.USER_NAME userName,
+		sm.MODULE_NAME moduleName
+ 		FROM SYS_OPERATION_LOG s
+		LEFT JOIN sys_module sm ON sm.ID=s.MODULE_ID
+ 		where 1=1 
+ 		<if test="userName != null and userName != ''">
+ 			and s.USER_NAME like concat("%",#{userName},"%")
+ 		</if>
+		<if test="createTimeStart != null and createTimeStart != ''and createTimeEnd != null and createTimeEnd != '' ">
+			and s.CREATE_TIME >= #{createTimeStart} and #{createTimeEnd} >= s.CREATE_TIME
+		</if>
+		<if test="result != null and result != ''">
+			and s.RESULT =#{result}
+		</if>
+		ORDER BY s.CREATE_TIME DESC
+	</select>
+	
+	<insert id="insertOperLog" parameterType="SysOperLog">
+		INSERT INTO SYS_OPERATION_LOG (
+			ID,
+			USER_ID,
+			CREATE_TIME,
+			IP,
+			RESULT,
+			MODULE_ID,
+			CLIENT_AGENT,
+			USER_NAME,
+			PAGE_NAME,
+			CLIENT_NAME
+		) VALUES (
+			#{id},
+			#{userId},
+			#{createTime},
+			#{ip},
+			#{result},
+			#{moduleId},
+			#{clientAgent},
+			#{userName},
+			#{moduleName},
+			#{clientName}
+		)
+	</insert>
+</mapper>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fable.industry.bussiness.mapper.organizationManage.OrganizationManageMapper">
+    <resultMap id="SysOrganizationBean" type="com.fable.industry.bussiness.model.bean.SysOrganizationBean">
+        <id column="COM_ID" property="comId" jdbcType="INTEGER"></id>
+        <result column="COM_CODE" property="comCode" jdbcType="VARCHAR"></result>
+        <result column="COM_NAME" property="comName" jdbcType="VARCHAR"></result>
+        <result column="PID" property="pid" jdbcType="INTEGER"></result>
+        <result column="PID_NAME" property="pidName" jdbcType="VARCHAR"></result>
+        <result column="IS_SUPPLIER" property="isSupplier" jdbcType="VARCHAR"></result>
+        <result column="CONTACT" property="contact" jdbcType="VARCHAR"></result>
+        <result column="CONTACT_PHONE" property="contactPhone" jdbcType="VARCHAR"></result>
+        <result column="NOTE" property="note" jdbcType="VARCHAR"></result>
+        <result column="ADDRESS" property="address" jdbcType="VARCHAR"></result>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"></result>
+        <result column="URL" property="url" jdbcType="VARCHAR"></result>
+    </resultMap>
+    <resultMap id="TreeResult" type="com.fable.industry.api.page.TreeRsult">
+        <id column="COM_ID" property="id" jdbcType="INTEGER"></id>
+        <result column="PID" property="pid" jdbcType="INTEGER"></result>
+        <result column="COM_NAME" property="name" jdbcType="VARCHAR"></result>
+    </resultMap>
+    <!--单位信息列表查询-->
+    <select id="findOrganization" resultMap="SysOrganizationBean"
+            parameterType="com.fable.industry.bussiness.model.bean.SysOrganizationBean">
+        SELECT
+        s.COM_ID,s.COM_CODE,s.COM_NAME,s.PID,s.IS_SUPPLIER,s.CONTACT,s.CONTACT_PHONE,s1.COM_NAME PID_NAME,
+        s.NOTE,s.ADDRESS,s.EMAIL,s.URL
+        FROM sys_organization s
+        LEFT JOIN (SELECT COM_NAME,COM_ID FROM sys_organization )s1 ON s1.COM_ID=s.PID
+        WHERE 1=1
+        <if test="comName!=null and comName!=''">
+            AND s.COM_NAME LIKE concat("%",#{comName},"%")
+        </if>
+        <if test="contact!=null and contact!=''">
+            AND s.CONTACT LIKE concat("%",#{contact},"%")
+        </if>
+        <if test="contactPhone!=null and contactPhone!=''">
+            AND s.CONTACT_PHONE LIKE concat("%",#{contactPhone},"%")
+        </if>
+        <if test="pid!=null and pid!=''">
+            AND s.PID=#{pid}
+        </if>
+        <if test="comId!=null and comId!=1 and comId!=''">
+            OR s.COM_ID=#{comId}
+        </if>
+    </select>
+
+    <!--单位树查询-->
+    <select id="findOrganizationTree" resultMap="TreeResult">
+      SELECT COM_ID,COM_NAME,PID FROM sys_organization
+    </select>
+
+    <!--新增单位-->
+    <insert id="addOrganization" parameterType="com.fable.industry.bussiness.model.bean.SysOrganizationBean">
+        INSERT INTO sys_organization
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="comName!=null and comName!=''">COM_NAME,</if>
+            <if test="pid!=null and pid!=''">PID,</if>
+            <if test="contact!=null and contact!=''">CONTACT,</if>
+            <if test="contactPhone!=null and contactPhone!=''">CONTACT_PHONE,</if>
+            <if test="note!=null and note!=''">NOTE,</if>
+            <if test="address!=null and address!=''">ADDRESS,</if>
+            <if test="email!=null and email!=''">EMAIL,</if>
+            <if test="url!=null and url!=''">URL,</if>
+        </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+            <if test="comName!=null and comName!=''">#{comName},</if>
+            <if test="pid!=null and pid!=''">#{pid},</if>
+            <if test="contact!=null and contact!=''">#{contact},</if>
+            <if test="contactPhone!=null and contactPhone!=''">#{contactPhone},</if>
+            <if test="note!=null and note!=''">#{note},</if>
+            <if test="address!=null and address!=''">#{address},</if>
+            <if test="email!=null and email!=''">#{email},</if>
+            <if test="url!=null and url!=''">#{url},</if>
+        </trim>
+    </insert>
+
+    <!--修改单位-->
+    <update id="updateOrganization" parameterType="com.fable.industry.bussiness.model.bean.SysOrganizationBean">
+        UPDATE sys_organization SET
+        COM_NAME=#{comName},
+        PID=#{pid},
+        CONTACT=#{contact},
+        CONTACT_PHONE=#{contactPhone},
+        NOTE=#{note},
+        ADDRESS=#{address},
+        EMAIL=#{email},
+        URL=#{url}
+        WHERE COM_ID=#{comId}
+    </update>
+
+    <!--删除单位-->
+    <delete id="deleteOrganization" parameterType="list">
+        DELETE FROM sys_organization WHERE COM_ID IN
+        <foreach collection="comIds" item="comId" open="(" separator="," close=")">
+            #{comId}
+        </foreach>
+    </delete>
+
+    <!--单位是否可删除校验(是否绑定用户)-->
+    <select id="checkdeleteOrganization" parameterType="list" resultType="Integer">
+        SELECT count(1) FROM sys_user WHERE COM_ID IN
+        <foreach collection="comIds" item="comId" open="(" separator="," close=")">
+            #{comId}
+        </foreach>
+    </select>
+
+    <!--单位是否可删除校验(是否有子单位)-->
+    <select id="checkdeleteOrganize" parameterType="list" resultType="Integer">
+        SELECT count(1) FROM sys_organization WHERE PID IN
+        <foreach collection="comIds" item="comId" open="(" separator="," close=")">
+            #{comId}
+        </foreach>
+    </select>
+
+    <!--单位唯一性校验-->
+    <select id="checkOrganization" parameterType="java.util.Map" resultType="Integer">
+        SELECT count(1) FROM  sys_organization WHERE COM_NAME=#{comName}
+    </select>
+
+    <!--查看单位-->
+    <select id="queryOrganizationById" parameterType="Integer" resultMap="SysOrganizationBean">
+        SELECT s.*,s1.COM_NAME PID_NAME FROM sys_organization s
+        LEFT JOIN (SELECT COM_NAME,COM_ID FROM sys_organization )s1 ON s1.COM_ID=s.PID
+         WHERE s.COM_ID=#{comId}
+    </select>
+
+    <!--单位下拉列表查询-->
+    <select id="findOrganizationComboBox" resultMap="TreeResult">
+      SELECT COM_ID,COM_NAME,PID FROM sys_organization
+      WHERE PID IN(-1,1)
+    </select>
+
+    <select id="queryAllCom" resultMap="SysOrganizationBean">
+        SELECT COM_ID,COM_NAME FROM sys_organization
+    </select>
+</mapper>

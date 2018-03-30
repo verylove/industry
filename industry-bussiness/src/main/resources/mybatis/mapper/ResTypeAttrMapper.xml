@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fable.industry.bussiness.mapper.dynamicform.restypeattr.ResTypeAttrMapper">
+
+	<insert id="insert" parameterType="resCiTypeAttributeBean">
+		INSERT INTO ResCiTypeAttribute (
+		Id,
+		CatalogueId,
+		AttributeId,
+		AttributeIndex,
+		TableName
+		) VALUES (
+		#{id},
+		#{catalogueId},
+		#{attributeId},
+		#{attributeIndex},
+		#{tableName}
+		)
+	</insert>
+
+	<delete id="deleteResCiTypeAttrByAttrId" parameterType="int">
+		DELETE FROM ResCiTypeAttribute WHERE AttributeId=#{attributeId}
+	</delete>
+
+	<select id="getCountsByTypeId" parameterType="int" resultType="int">
+		select count(1) as count from ResCiTypeAttribute where TypeId=#{0};
+	</select>
+
+	<select id="getBeanByAttrId" parameterType="resCiTypeAttributeBean"
+			resultType="resCiTypeAttributeBean">
+		SELECT  * FROM ResCiTypeAttribute WHERE AttributeId = #{0}
+	</select>
+
+	<update id="updateIndex" parameterType="String">
+		UPDATE ResCiTypeAttribute set attributeIndex = #{1}
+		where AttributeId= #{0}
+	</update>
+
+	<delete id="deleteBatchIds" parameterType="java.lang.StringBuilder">
+		DELETE FROM ResCiTypeAttribute WHERE Id in (${citypeIds})
+	</delete>
+
+	<select id="queryByCatalogueId" parameterType="int" resultType="int">
+		SELECT COUNT(1) AS `count` FROM rescitypeattribute WHERE CatalogueId = #{id}
+	</select>
+
+</mapper>

@@ -1,6 +1,6 @@
 package com.fable.industry.bussiness.service.idgenerate.impl;
 
-import com.fable.industry.api.utils.BeanLoader;
+import com.fable.industry.bussiness.config.BeanLoader;
 import com.fable.industry.bussiness.service.idgenerate.IdentifierGenerator;
 import com.fable.industry.bussiness.service.idgenerate.NumberGenerator;
 import com.fable.industry.bussiness.service.idgenerate.StringGenerator;

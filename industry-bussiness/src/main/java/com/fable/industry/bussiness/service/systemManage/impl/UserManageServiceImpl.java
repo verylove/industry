@@ -93,8 +93,8 @@ public class UserManageServiceImpl implements UserManageService {
     }
 
     @Override
-    public List<Map<String, String>> queryByComId(Integer comId) {
-        List<Map<String, String>> sysUser = userManageMapper.queryByComId(comId);
+    public List<Map<String, Object>> queryByComId(Integer comId) {
+        List<Map<String, Object>> sysUser = userManageMapper.queryByComId(comId);
         return sysUser;
     }
 

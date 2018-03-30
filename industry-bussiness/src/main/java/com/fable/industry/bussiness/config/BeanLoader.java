@@ -1,13 +1,16 @@
-package com.fable.industry.api.utils;
+package com.fable.industry.bussiness.config;
 
+import com.fable.industry.api.utils.AnnotationBeanNameGenerator;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
+@Component
 public final class BeanLoader implements ApplicationContextAware {
 
 	private static ApplicationContext applicationContext;
-	
+
 	public static Object getBean(String beanName){
 		if(beanName.indexOf(".") > 0){
 			return applicationContext.getBean(beanName);
@@ -19,7 +22,7 @@ public final class BeanLoader implements ApplicationContextAware {
 			return applicationContext.getBean(beanName);
 		}
 	}
-	
+
 	private static String getCallClassName(){
 		StackTraceElement[] stackElements =  new Throwable().getStackTrace();
 		return stackElements[2].getClassName();

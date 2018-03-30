@@ -66,7 +66,7 @@ public interface UserManageMapper {
     /**
      * 根据公司Id查找用户
      */
-    List<Map<String, String>> queryByComId(Integer comId);
+    List<Map<String, Object>> queryByComId(Integer comId);
 
     List<SysUserBean> queryRoleUserByComId(Map<String, Integer> map);
 

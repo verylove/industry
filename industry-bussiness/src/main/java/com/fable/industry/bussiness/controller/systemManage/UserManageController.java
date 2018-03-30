@@ -164,7 +164,7 @@ public class UserManageController {
      */
     @RequestMapping("/queryByComId")
     @ResponseBody
-    public List<Map<String, String>> queryByComId(@RequestBody Map<String, Object> map) {
+    public List<Map<String, Object>> queryByComId(@RequestBody Map<String, Object> map) {
         Integer comId = Integer.parseInt(map.get("comId").toString());
         return userManageService.queryByComId(comId);
     }

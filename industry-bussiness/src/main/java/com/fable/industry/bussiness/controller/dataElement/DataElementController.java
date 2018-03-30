@@ -47,7 +47,7 @@ public class DataElementController {
      */
     @RequestMapping("/dataElementAdd")
     public ModelAndView dataElementAdd() {
-        return new ModelAndView("../jsp/metadataManage/dataElementManage/dataElementAdd");
+        return new ModelAndView("metadataManage/dataElementManage/dataElementAdd");
     }
 
     /**
@@ -57,7 +57,7 @@ public class DataElementController {
      */
     @RequestMapping("/dataElementEdit")
     public ModelAndView dataElementEdit() {
-        return new ModelAndView("../jsp/metadataManage/dataElementManage/dataElementEdit");
+        return new ModelAndView("metadataManage/dataElementManage/dataElementEdit");
     }
 
     /**
@@ -67,7 +67,7 @@ public class DataElementController {
      */
     @RequestMapping("/dataElementView")
     public ModelAndView dataElementView() {
-        return new ModelAndView("../jsp/metadataManage/dataElementManage/dataElementView");
+        return new ModelAndView("metadataManage/dataElementManage/dataElementView");
     }
 
     /**
